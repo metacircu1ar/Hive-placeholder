@@ -1,0 +1,1244 @@
+{
+  "provider": "claude",
+  "entries": [
+    {
+      "key": "model",
+      "value_type": "model",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "flag",
+        "key": "--model"
+      },
+      "overlay_key": "model",
+      "default": null,
+      "models": "live_catalog",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "model_echo",
+      "reset": "relaunch",
+      "reset_value": null,
+      "description": "Model advertised by the selected login.",
+      "evidence": [
+        "https://code.claude.com/docs/en/model-config"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.285"
+    },
+    {
+      "key": "effort",
+      "value_type": "effort",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "flag",
+        "key": "--effort"
+      },
+      "overlay_key": "effortLevel",
+      "default": "high",
+      "models": "live_efforts",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "effort_echo",
+      "reset": "relaunch",
+      "reset_value": null,
+      "description": "Reasoning effort advertised by the selected model.",
+      "evidence": [
+        "https://code.claude.com/docs/en/model-config"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.285"
+    },
+    {
+      "key": "thinking",
+      "value_type": "thinking",
+      "values": [
+        "off",
+        "on"
+      ],
+      "minimum": 1024,
+      "maximum": 31000,
+      "scope": "session",
+      "mapping": {
+        "route": "claude_thinking",
+        "key": "alwaysThinkingEnabled"
+      },
+      "overlay_key": "alwaysThinkingEnabled",
+      "default": null,
+      "models": "claude_thinking",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "acknowledged",
+      "reset": "relaunch",
+      "reset_value": null,
+      "description": "Thinking on/off or a fixed budget on models that support it.",
+      "evidence": [
+        "https://code.claude.com/docs/en/model-config",
+        "https://code.claude.com/docs/en/env-vars"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.auto_compact_window",
+      "value_type": "integer",
+      "values": [],
+      "minimum": 100000,
+      "maximum": 1000000,
+      "scope": "session",
+      "mapping": {
+        "route": "setting",
+        "key": "autoCompactWindow"
+      },
+      "overlay_key": "autoCompactWindow",
+      "default": null,
+      "models": "any",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "acknowledged",
+      "reset": "relaunch",
+      "reset_value": null,
+      "description": "Requested compaction window; native model context caps still apply.",
+      "evidence": [
+        "https://code.claude.com/docs/en/model-config"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.max_output_tokens",
+      "value_type": "integer",
+      "values": [],
+      "minimum": 1024,
+      "maximum": 128000,
+      "scope": "session",
+      "mapping": {
+        "route": "environment",
+        "key": "CLAUDE_CODE_MAX_OUTPUT_TOKENS"
+      },
+      "overlay_key": null,
+      "default": null,
+      "models": "any",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "acknowledged",
+      "reset": "relaunch",
+      "reset_value": null,
+      "description": "Requested output token cap; native model caps still apply.",
+      "evidence": [
+        "https://code.claude.com/docs/en/env-vars"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.max_mcp_output_tokens",
+      "value_type": "integer",
+      "values": [],
+      "minimum": 128,
+      "maximum": 1000000,
+      "scope": "session",
+      "mapping": {
+        "route": "environment",
+        "key": "MAX_MCP_OUTPUT_TOKENS"
+      },
+      "overlay_key": null,
+      "default": null,
+      "models": "any",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "acknowledged",
+      "reset": "relaunch",
+      "reset_value": null,
+      "description": "Token cap for native MCP tool results; native character limits still apply.",
+      "evidence": [
+        "https://code.claude.com/docs/en/env-vars"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.skills",
+      "value_type": "boolean",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "flag",
+        "key": "--tools"
+      },
+      "overlay_key": null,
+      "default": null,
+      "models": "any",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "acknowledged",
+      "reset": "relaunch",
+      "reset_value": null,
+      "description": "Bundled Claude skills through the Skill tool; Hive tool policy still governs the tools a skill uses.",
+      "evidence": [
+        "https://code.claude.com/docs/en/skills"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.permissions",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "permissions"
+      },
+      "overlay_key": "permissions",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "sandbox and Hive approvals",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.sandbox",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "sandbox"
+      },
+      "overlay_key": "sandbox",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "sandbox",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.hooks",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "hooks"
+      },
+      "overlay_key": "hooks",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive hooks",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.mcpServers",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "mcpServers"
+      },
+      "overlay_key": "mcpServers",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "mcp_servers",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.allowedTools",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "allowedTools"
+      },
+      "overlay_key": "allowedTools",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "mcp_servers",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.disallowedTools",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "disallowedTools"
+      },
+      "overlay_key": "disallowedTools",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive tool policy",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.tools",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "tools"
+      },
+      "overlay_key": "tools",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive tool policy",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.env",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "env"
+      },
+      "overlay_key": "env",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "auth profiles or catalog options",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.apiKeyHelper",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "apiKeyHelper"
+      },
+      "overlay_key": "apiKeyHelper",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "auth profiles",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.awsAuthRefresh",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "awsAuthRefresh"
+      },
+      "overlay_key": "awsAuthRefresh",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "auth profiles",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.awsCredentialExport",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "awsCredentialExport"
+      },
+      "overlay_key": "awsCredentialExport",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "auth profiles",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.otelHeadersHelper",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "otelHeadersHelper"
+      },
+      "overlay_key": "otelHeadersHelper",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive logging",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.modelOverrides",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "modelOverrides"
+      },
+      "overlay_key": "modelOverrides",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "auth profiles",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.modelSettings",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "modelSettings"
+      },
+      "overlay_key": "modelSettings",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "set-options",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.modelPicker",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "modelPicker"
+      },
+      "overlay_key": "modelPicker",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "native model discovery",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.fallbackModel",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "fallbackModel"
+      },
+      "overlay_key": "fallbackModel",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "set-options",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.settingSources",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "settingSources"
+      },
+      "overlay_key": "settingSources",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive configuration",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.disableSlashCommands",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "disableSlashCommands"
+      },
+      "overlay_key": "disableSlashCommands",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive tool policy",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.bash",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "bash"
+      },
+      "overlay_key": "bash",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive shell guard",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.shell",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "shell"
+      },
+      "overlay_key": "shell",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive shell guard",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.sessionId",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "sessionId"
+      },
+      "overlay_key": "sessionId",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive agent identity",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.resume",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "resume"
+      },
+      "overlay_key": "resume",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "hivectl spawn --from",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.history",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "history"
+      },
+      "overlay_key": "history",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive state directory",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.cleanupPeriodDays",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "cleanupPeriodDays"
+      },
+      "overlay_key": "cleanupPeriodDays",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "hivectl gc",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.includeGitInstructions",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "includeGitInstructions"
+      },
+      "overlay_key": "includeGitInstructions",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "instructions",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.outputStyle",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "outputStyle"
+      },
+      "overlay_key": "outputStyle",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "instructions",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.agents",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "agents"
+      },
+      "overlay_key": "agents",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "hive_spawn",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.agent",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "agent"
+      },
+      "overlay_key": "agent",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "hive_spawn",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.plugins",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "plugins"
+      },
+      "overlay_key": "plugins",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "mcp_servers",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.enabledPlugins",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "enabledPlugins"
+      },
+      "overlay_key": "enabledPlugins",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "mcp_servers",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.extraKnownMarketplaces",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "extraKnownMarketplaces"
+      },
+      "overlay_key": "extraKnownMarketplaces",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "mcp_servers",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.disableAutoMemory",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "disableAutoMemory"
+      },
+      "overlay_key": "disableAutoMemory",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Comb",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.autoMemoryEnabled",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "autoMemoryEnabled"
+      },
+      "overlay_key": "autoMemoryEnabled",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Comb",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.skipDangerousModePermissionPrompt",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "skipDangerousModePermissionPrompt"
+      },
+      "overlay_key": "skipDangerousModePermissionPrompt",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive approvals",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    },
+    {
+      "key": "claude.statusLine",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "statusLine"
+      },
+      "overlay_key": "statusLine",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive status",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://code.claude.com/docs/en/settings"
+      ],
+      "verified_versions": [
+        "2.1.287"
+      ],
+      "minimum_version": "2.1.287"
+    }
+  ],
+  "model_rules": {
+    "thinking_budget": [
+      "claude-sonnet-4-6",
+      "claude-opus-4-6"
+    ],
+    "thinking_switch": [
+      "claude-sonnet-4-6",
+      "claude-opus-4-6"
+    ],
+    "thinking_always_on": [
+      "claude-sonnet-5-5",
+      "claude-opus-5-5",
+      "claude-haiku-5-5",
+      "claude-fable-5",
+      "claude-fable-5-1"
+    ]
+  }
+}

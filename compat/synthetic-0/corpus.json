@@ -1,0 +1,47 @@
+{
+  "kind": "synthetic",
+  "product_version": null,
+  "fixtures": {
+    "provider": {
+      "path": "tests/fixtures/runtime_provider.py",
+      "sha256": "21282372a82889f9bf27f3ffed92d1094927692afcc59bf93cd99e135f928501"
+    },
+    "provider_schema": {
+      "path": "tests/fixtures/codex-schema.json",
+      "sha256": "461d9b939e068849f4df7d57cf9fcd0db8bf5b169b3722290b32cf2dc0f788d8"
+    },
+    "provider_common": {
+      "path": "tests/fixtures/mock_common.py",
+      "sha256": "1a1595e3ffd21c56cf26cae518d07044cceb131a70cc0bf843ab189848ee8153"
+    },
+    "publication": {
+      "path": "scripts/release/files.py",
+      "sha256": "01112b00db0e725237279ae666f2ebf91346d8bc9fc77070a5d46276b58e51bb"
+    },
+    "embeddings": {
+      "path": "tests/fixtures/compatibility_embeddings.py",
+      "sha256": "adfee63c891cf8ac8167fc10cfcbcd03bf70f2d99b1a25c5a55d46f775f29e5e"
+    },
+    "transcripts": {
+      "path": "compat/synthetic-0/transcripts.json",
+      "sha256": "cdf5098662b40b9e1bbb8aefff66fc981ce8a184e56d5768af1fae27401a757a"
+    },
+    "scenario": {
+      "path": "compat/synthetic-0/scenario.json",
+      "sha256": "962ff242f9451be9736d8901cb3f0b249778aa8664a9dabe14441e6ff92e3283"
+    }
+  },
+  "checks": [
+    "native_bindings",
+    "branch",
+    "attachments",
+    "artifacts",
+    "outbox_once",
+    "trust",
+    "receipts",
+    "credentials",
+    "text",
+    "vector",
+    "hybrid"
+  ]
+}

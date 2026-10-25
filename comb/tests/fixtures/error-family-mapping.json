@@ -1,0 +1,1060 @@
+{
+  "description": "Explicit reviewed catalogue families, including setup/provision/service and release-versioning protocol, migration and recovery behavior. Token-normalized definitions, production arguments and configuration forwarders pin formatting, argument order and dynamic-code propagation. Emitted-byte goldens remain unchanged.",
+  "families": [
+    {
+      "original_family": 0,
+      "original": {
+        "code_expression": "\"comb_busy\"",
+        "message_expression": "format ! ( \"Comb {lane} capacity is unavailable.\" )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "busy"
+      ]
+    },
+    {
+      "original_family": 1,
+      "original": {
+        "code_expression": "\"embedding_asset_size\"",
+        "message_expression": "format ! ( \"Embedding asset exceeds its size limit: {}\" , path . display ( ) )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "embedding_asset_size"
+      ]
+    },
+    {
+      "original_family": 2,
+      "original": {
+        "code_expression": "\"embedding_input_rejected\"",
+        "message_expression": "format ! ( \"Embedding endpoint rejected input (HTTP {status}).\" )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "embedding_input_rejected"
+      ]
+    },
+    {
+      "original_family": 3,
+      "original": {
+        "code_expression": "\"embedding_input_too_large\"",
+        "message_expression": "format ! ( \"Input exceeds the local HTTP tokenizer limit of {} tokens.\" , check . limit )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "http_input_too_large"
+      ]
+    },
+    {
+      "original_family": 4,
+      "original": {
+        "code_expression": "\"embedding_model\"",
+        "message_expression": "format ! ( \"Cannot disable HTTP tokenizer truncation: {e}\" )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "http_tokenizer_truncation"
+      ]
+    },
+    {
+      "original_family": 5,
+      "original": {
+        "code_expression": "\"embedding_model\"",
+        "message_expression": "format ! ( \"Cannot load HTTP preflight tokenizer: {e}\" )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "http_tokenizer_load"
+      ]
+    },
+    {
+      "original_family": 6,
+      "original": {
+        "code_expression": "\"embedding_model\"",
+        "message_expression": "format ! ( \"Cannot tokenize HTTP input: {e}\" )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "http_tokenizer_encode"
+      ]
+    },
+    {
+      "original_family": 7,
+      "original": {
+        "code_expression": "\"embedding_transport\"",
+        "message_expression": "format ! ( \"Embedding endpoint returned HTTP {status}.\" )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "embedding_http_status"
+      ]
+    },
+    {
+      "original_family": 8,
+      "original": {
+        "code_expression": "\"index_error\"",
+        "message_expression": "e . to_string ( )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "index"
+      ]
+    },
+    {
+      "original_family": 9,
+      "original": {
+        "code_expression": "\"invalid_embedding\"",
+        "message_expression": "message"
+      },
+      "kind": "removed_adapter",
+      "adapter": "invalid_vector",
+      "literal_pairs": [
+        {
+          "code": "invalid_embedding",
+          "message": "Cached vector has the wrong size; discard the derived vector cache."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Cached vector is not finite/unit length; discard the derived vector cache."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Embedding indices must be unique and in range."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Embedding response count does not match inputs."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Embedding response exceeds 8 MiB."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Embedding result count does not match input count."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Embedding result count does not match inputs."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Expected 1..32 embedding inputs."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Malformed embedding response."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Missing embedding index."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Missing query result."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Query batch must contain 1..32 inputs."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Query result count differs from input count."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Vector must have a finite nonzero norm."
+        },
+        {
+          "code": "invalid_embedding",
+          "message": "Vector must have the configured dimensions and finite components."
+        }
+      ],
+      "dynamic_families": [],
+      "note": "The message-taking adapter was removed; every original argument is accounted for by these literal pairs and dynamic families."
+    },
+    {
+      "original_family": 10,
+      "original": {
+        "code_expression": "\"invalid_frontmatter\"",
+        "message_expression": "e . to_string ( )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "frontmatter"
+      ]
+    },
+    {
+      "original_family": 11,
+      "original": {
+        "code_expression": "\"invalid_json\"",
+        "message_expression": "e . to_string ( )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "json"
+      ]
+    },
+    {
+      "original_family": 12,
+      "original": {
+        "code_expression": "\"io_error\"",
+        "message_expression": "e . to_string ( )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "io",
+        "io_open"
+      ]
+    },
+    {
+      "original_family": 13,
+      "original": {
+        "code_expression": "\"unsupported_index\"",
+        "message_expression": "format ! ( \"Unsupported index structure at {}. Rebuild index.sqlite with sync --rebuild; an unsupported vectors.sqlite cache may be removed for recomputation.\" , path . display ( ) )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "unsupported_index"
+      ]
+    },
+    {
+      "original_family": 14,
+      "original": {
+        "code_expression": "& error . code",
+        "message_expression": "if error . code == \"embedding_input_too_large\" { \"Composed input exceeds its byte or tokenizer limit.\" } else { \"Embedding endpoint rejected this individual input; inspect content and model configuration, then retry failed inputs.\" }"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "individual_input_rejected"
+      ]
+    },
+    {
+      "original_family": 15,
+      "original": {
+        "code_expression": "e . code . as_str ( )",
+        "message_expression": "format ! ( \"Credential {id} was issued, but its file could not be saved. Revoke it with credential revoke {id}: {}\" , e . message )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "credential_save_failed",
+        "credential_publication_uncertain"
+      ]
+    },
+    {
+      "original_family": 16,
+      "original": {
+        "code_expression": "ErrorCode :: InvalidEmbeddingConfig",
+        "message_expression": "message"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "setup_configuration"
+      ]
+    },
+    {
+      "original_family": 17,
+      "original": {
+        "code_expression": "ErrorCode :: InvalidEmbeddingConfig",
+        "message_expression": "message"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "provision_configuration"
+      ]
+    },
+    {
+      "original_family": 18,
+      "original": {
+        "code_expression": "crate :: ErrorCode :: InvalidArguments",
+        "message_expression": "message"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "maintenance_configuration"
+      ]
+    },
+    {
+      "original_family": 19,
+      "original": {
+        "code_expression": "ErrorCode :: IoError",
+        "message_expression": "e . to_string ( )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "service_io"
+      ]
+    },
+    {
+      "original_family": 20,
+      "original": {
+        "code_expression": "result . code",
+        "message_expression": "format ! ( \"{}; service restart failed: {}\" , result . message , restart . restart )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "service_restart_failed"
+      ]
+    },
+    {
+      "original_family": 21,
+      "original": {
+        "code_expression": "comb :: ErrorCode :: InvalidEmbeddingConfig",
+        "message_expression": "format ! ( \"Service environment is missing: {}\" , missing . join ( \", \" ) )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "service_environment_missing"
+      ]
+    },
+    {
+      "original_family": 22,
+      "original": {
+        "code_expression": "ErrorCode :: InvalidArguments",
+        "message_expression": "format ! ( \"Service needs --service-environment containing: {}\" , missing . join ( \", \" ) )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "service_environment_required"
+      ]
+    },
+    {
+      "original_family": 23,
+      "original": {
+        "code_expression": "ErrorCode :: InvalidArguments",
+        "message_expression": "format ! ( \"Owned service environment file needs: {}. No model change was made.\" , missing . join ( \", \" ) )"
+      },
+      "kind": "constructors",
+      "constructors": [
+        "service_model_environment_missing"
+      ]
+    }
+  ],
+  "contracts": {
+    "code_macro": "macro_rules ! codes { ( $ ( $ ( # [ $ attr : meta ] ) * $ variant : ident => $ wire : literal ) , + $ ( , ) ? ) => { # [ derive ( Debug , Clone , Copy , PartialEq , Eq ) ] pub enum ErrorCode { $ ( $ ( # [ $ attr ] ) * $ variant ) , + , Input ( hive_input :: Code ) } impl ErrorCode { pub const fn as_str ( self ) -> & ' static str { match self { $ ( $ ( # [ $ attr ] ) * Self :: $ variant => $ wire ) , + , Self :: Input ( code ) => code . as_str ( ) } } } impl < ' de > Deserialize < ' de > for ErrorCode { fn deserialize < D : serde :: Deserializer < ' de > > ( d : D ) -> Result < Self , D :: Error > { let name = String :: deserialize ( d ) ? ; match name . as_str ( ) { $ ( $ ( # [ $ attr ] ) * $ wire => Ok ( Self :: $ variant ) , ) + value => hive_input :: Code :: deserialize ( serde :: de :: value :: StrDeserializer :: < D :: Error > :: new ( value ) ) . map ( Self :: Input ) , } } } } ; }",
+    "code_declarations": "codes ! { IncompatibleProtocol => \"incompatible_protocol\" , UnknownError => \"unknown_error\" , CombBusy => \"comb_busy\" , CombUnavailable => \"comb_unavailable\" , ChunkLimit => \"chunk_limit\" , Conflict => \"conflict\" , ConnectionLost => \"connection_lost\" , ConsolidationConflict => \"consolidation_conflict\" , ConsolidationLimit => \"consolidation_limit\" , CredentialExists => \"credential_exists\" , CredentialLimit => \"credential_limit\" , InvalidEmbeddingAsset => \"invalid_embedding_asset\" , EmbeddingAssetSize => \"embedding_asset_size\" , EmbeddingCredentials => \"embedding_credentials\" , EmbeddingEndpointRejected => \"embedding_endpoint_rejected\" , EmbeddingInputRejected => \"embedding_input_rejected\" , EmbeddingInputTooLarge => \"embedding_input_too_large\" , EmbeddingModel => \"embedding_model\" , EmbeddingReplaceRequired => \"embedding_replace_required\" , EmbeddingSpaceChanged => \"embedding_space_changed\" , EmbeddingTransport => \"embedding_transport\" , EmbeddingsBusy => \"embeddings_busy\" , EmbeddingsUnavailable => \"embeddings_unavailable\" , # [ cfg ( any ( test , feature = \"test-support\" ) ) ] FixtureUnavailable => \"fixture_unavailable\" , Forbidden => \"forbidden\" , GraphLimit => \"graph_limit\" , ImmutableTimeline => \"immutable_timeline\" , ImportCollision => \"import_collision\" , ImportLimit => \"import_limit\" , IndexError => \"index_error\" , InternalError => \"internal_error\" , InvalidActor => \"invalid_actor\" , InvalidArguments => \"invalid_arguments\" , InvalidCacheBudget => \"invalid_cache_budget\" , InvalidCapture => \"invalid_capture\" , InvalidConsolidation => \"invalid_consolidation\" , InvalidCredential => \"invalid_credential\" , InvalidDecision => \"invalid_decision\" , InvalidDepth => \"invalid_depth\" , InvalidEmbedding => \"invalid_embedding\" , InvalidEmbeddingBatch => \"invalid_embedding_batch\" , InvalidEmbeddingConfig => \"invalid_embedding_config\" , InvalidEmbeddingState => \"invalid_embedding_state\" , InvalidEvidence => \"invalid_evidence\" , InvalidFrame => \"invalid_frame\" , InvalidFrontmatter => \"invalid_frontmatter\" , InvalidIdentity => \"invalid_identity\" , InvalidImport => \"invalid_import\" , InvalidJson => \"invalid_json\" , InvalidLimit => \"invalid_limit\" , InvalidOperation => \"invalid_operation\" , InvalidPage => \"invalid_page\" , InvalidRequest => \"invalid_request\" , InvalidRequestId => \"invalid_request_id\" , InvalidSearch => \"invalid_search\" , InvalidSlug => \"invalid_slug\" , InvalidSocket => \"invalid_socket\" , InvalidState => \"invalid_state\" , InvalidTimeline => \"invalid_timeline\" , IoError => \"io_error\" , NotFound => \"not_found\" , PageLimit => \"page_limit\" , RecoveryRequired => \"recovery_required\" , RequestConflict => \"request_conflict\" , ResultRemoved => \"result_removed\" , ServerEmbeddingConfig => \"server_embedding_config\" , SizeLimit => \"size_limit\" , SocketPathTooLong => \"socket_path_too_long\" , # [ cfg ( any ( test , feature = \"test-support\" ) ) ] TestInterrupted => \"test_interrupted\" , Timeout => \"timeout\" , Uncertain => \"uncertain\" , UnknownTool => \"unknown_tool\" , UnsafeCredential => \"unsafe_credential\" , UnsafePath => \"unsafe_path\" , UnsafeSocket => \"unsafe_socket\" , UnsupportedIndex => \"unsupported_index\" , UnsupportedFormat => \"unsupported_format\" , NewerFormat => \"newer_format\" , WorkerFailed => \"worker_failed\" , }",
+    "static_macro": "macro_rules ! messages { ( $ ( $ name : ident : $ code : ident => $ message : literal ) , + $ ( , ) ? ) => { impl Error { $ ( pub fn $ name ( ) -> Self { Self :: new ( ErrorCode :: $ code , $ message ) } ) + } } ; }",
+    "constructors": {
+      "busy": {
+        "definition": "fn busy ( lane : & str ) -> Self { Self :: new ( ErrorCode :: CombBusy , format ! ( \"Comb {lane} capacity is unavailable.\" ) , ) }",
+        "uses": [
+          {
+            "path": "src/service/dispatch.rs",
+            "function": "admit",
+            "arguments": "\"read\""
+          },
+          {
+            "path": "src/service/dispatch.rs",
+            "function": "admit",
+            "arguments": "\"write\""
+          }
+        ]
+      },
+      "credential_publication_uncertain": {
+        "definition": "fn credential_publication_uncertain ( id : impl std :: fmt :: Display , error : Self ) -> Self { Self :: new ( error . code , format ! ( \"Credential {id} was published, but its durability or output path is uncertain. It remains active; inspect the file before retrying.\" ) ) . committed ( ) . caused_by ( error ) }",
+        "uses": [
+          {
+            "path": "src/cli/plan/credential.rs",
+            "function": "publication_result",
+            "arguments": "id , error"
+          }
+        ]
+      },
+      "credential_save_failed": {
+        "definition": "fn credential_save_failed ( id : impl std :: fmt :: Display , error : Self , revoked : bool ) -> Self { let message = if revoked { format ! ( \"Credential {id} could not be saved and has been revoked.\" ) } else { format ! ( \"Credential {id} could not be saved; revocation is unconfirmed. Inspect credential list and revoke it with credential revoke {id}.\" ) } ; Self :: new ( error . code , message ) . caused_by ( error ) }",
+        "uses": [
+          {
+            "path": "src/cli/plan/credential.rs",
+            "function": "publication_result",
+            "arguments": "id , error , revoked . is_ok ( )"
+          }
+        ]
+      },
+      "embedding_asset_size": {
+        "definition": "fn embedding_asset_size ( path : & std :: path :: Path ) -> Self { Self :: new ( ErrorCode :: EmbeddingAssetSize , format ! ( \"Embedding asset exceeds its size limit: {}\" , path . display ( ) ) , ) }",
+        "uses": [
+          {
+            "path": "src/embedding/backend.rs",
+            "function": "read_bounded",
+            "arguments": "path"
+          },
+          {
+            "path": "src/embedding/backend.rs",
+            "function": "read_bounded",
+            "arguments": "path"
+          }
+        ]
+      },
+      "embedding_http_status": {
+        "definition": "fn embedding_http_status ( status : u16 ) -> Self { Self :: new ( ErrorCode :: EmbeddingTransport , format ! ( \"Embedding endpoint returned HTTP {status}.\" ) , ) }",
+        "uses": [
+          {
+            "path": "src/embedding/backend/http/transport.rs",
+            "function": "status",
+            "arguments": "status"
+          }
+        ]
+      },
+      "embedding_input_rejected": {
+        "definition": "fn embedding_input_rejected ( status : u16 ) -> Self { Self :: new ( ErrorCode :: EmbeddingInputRejected , format ! ( \"Embedding endpoint rejected input (HTTP {status}).\" ) , ) }",
+        "uses": [
+          {
+            "path": "src/embedding/backend/http/transport.rs",
+            "function": "status",
+            "arguments": "status"
+          }
+        ]
+      },
+      "frontmatter": {
+        "definition": "fn frontmatter ( e : serde_yaml_ng :: Error ) -> Self { let message = e . location ( ) . map_or_else ( | | \"Invalid YAML.\" . to_owned ( ) , | at | format ! ( \"Invalid YAML (line {}, column {}).\" , at . line ( ) , at . column ( ) ) , ) ; Self :: new ( ErrorCode :: InvalidFrontmatter , message ) . caused_by ( e ) }",
+        "uses": [
+          {
+            "path": "protocol/src/error.rs",
+            "function": "from",
+            "arguments": "e"
+          }
+        ]
+      },
+      "http_input_too_large": {
+        "definition": "fn http_input_too_large ( limit : usize ) -> Self { Self :: new ( ErrorCode :: EmbeddingInputTooLarge , format ! ( \"Input exceeds the local HTTP tokenizer limit of {limit} tokens.\" ) , ) }",
+        "uses": [
+          {
+            "path": "src/embedding/backend.rs",
+            "function": "embed",
+            "arguments": "check . limit"
+          }
+        ]
+      },
+      "http_tokenizer_encode": {
+        "definition": "fn http_tokenizer_encode ( e : Box < dyn std :: error :: Error + Send + Sync > ) -> Self { Self :: new ( ErrorCode :: EmbeddingModel , format ! ( \"Cannot tokenize HTTP input: {e}\" ) , ) . caused_by_boxed ( e ) }",
+        "uses": [
+          {
+            "path": "src/embedding/tokenizer.rs",
+            "function": "accepts",
+            "arguments": null
+          }
+        ]
+      },
+      "http_tokenizer_load": {
+        "definition": "fn http_tokenizer_load ( e : Box < dyn std :: error :: Error + Send + Sync > ) -> Self { Self :: new ( ErrorCode :: EmbeddingModel , format ! ( \"Cannot load HTTP preflight tokenizer: {e}\" ) , ) . caused_by_boxed ( e ) }",
+        "uses": [
+          {
+            "path": "src/embedding/tokenizer.rs",
+            "function": "load",
+            "arguments": null
+          }
+        ]
+      },
+      "http_tokenizer_truncation": {
+        "definition": "fn http_tokenizer_truncation ( e : Box < dyn std :: error :: Error + Send + Sync > ) -> Self { Self :: new ( ErrorCode :: EmbeddingModel , format ! ( \"Cannot disable HTTP tokenizer truncation: {e}\" ) , ) . caused_by_boxed ( e ) }",
+        "uses": [
+          {
+            "path": "src/embedding/tokenizer.rs",
+            "function": "load",
+            "arguments": null
+          }
+        ]
+      },
+      "index": {
+        "definition": "fn index ( e : rusqlite :: Error ) -> Self { let message = e . sqlite_error ( ) . map_or_else ( | | \"Index operation failed (database wrapper error).\" . to_owned ( ) , | cause | { format ! ( \"Index operation failed (SQLite primary code {}).\" , cause . extended_code & 255 ) } , ) ; Self :: new ( ErrorCode :: IndexError , message ) . caused_by ( e ) }",
+        "uses": [
+          {
+            "path": "protocol/src/error.rs",
+            "function": "from",
+            "arguments": "e"
+          }
+        ]
+      },
+      "individual_input_rejected": {
+        "definition": "fn individual_input_rejected ( error : Self ) -> Self { Self :: new ( error . code , if error . code == ErrorCode :: EmbeddingInputTooLarge { \"Composed input exceeds its byte or tokenizer limit.\" } else { \"Embedding endpoint rejected this individual input; inspect content and model configuration, then retry failed inputs.\" } ) . caused_by ( error ) }",
+        "uses": [
+          {
+            "path": "src/embedding/store.rs",
+            "function": "apply_embeddings",
+            "arguments": "error"
+          }
+        ]
+      },
+      "io": {
+        "definition": "fn io ( e : std :: io :: Error ) -> Self { Self :: new ( ErrorCode :: IoError , format ! ( \"I/O operation failed ({:?}).\" , e . kind ( ) ) , ) . caused_by ( e ) }",
+        "uses": [
+          {
+            "path": "protocol/src/error.rs",
+            "function": "from",
+            "arguments": "e"
+          }
+        ]
+      },
+      "io_open": {
+        "definition": "fn io_open ( e : std :: io :: Error ) -> Self { Self :: new ( ErrorCode :: IoError , format ! ( \"I/O operation failed ({:?}).\" , e . kind ( ) ) , ) . caused_by ( super :: OpeningFile ( e ) ) }",
+        "uses": [
+          {
+            "path": "protocol/src/error.rs",
+            "function": "opening_file",
+            "arguments": "error"
+          }
+        ]
+      },
+      "json": {
+        "definition": "fn json ( e : serde_json :: Error ) -> Self { Self :: new ( ErrorCode :: InvalidJson , format ! ( \"Invalid JSON ({:?}, line {}, column {}).\" , e . classify ( ) , e . line ( ) , e . column ( ) ) , ) . caused_by ( e ) }",
+        "uses": [
+          {
+            "path": "protocol/src/error.rs",
+            "function": "from",
+            "arguments": "e"
+          }
+        ]
+      },
+      "maintenance_configuration": {
+        "definition": "fn maintenance_configuration ( message : impl Into < std :: borrow :: Cow < ' static , str > > ) -> Self { Self :: new ( ErrorCode :: InvalidArguments , message ) }",
+        "uses": [
+          {
+            "path": "src/maintenance.rs",
+            "function": "invalid",
+            "arguments": "message"
+          }
+        ]
+      },
+      "provision_configuration": {
+        "definition": "fn provision_configuration ( message : impl Into < std :: borrow :: Cow < ' static , str > > ) -> Self { Self :: new ( ErrorCode :: InvalidEmbeddingConfig , message ) }",
+        "uses": [
+          {
+            "path": "src/provision/mod.rs",
+            "function": "invalid",
+            "arguments": "message"
+          }
+        ]
+      },
+      "service_environment_missing": {
+        "definition": "fn service_environment_missing ( missing : & [ String ] ) -> Self { Self :: new ( ErrorCode :: InvalidEmbeddingConfig , format ! ( \"Service environment is missing: {}\" , missing . join ( \", \" ) ) , ) }",
+        "uses": [
+          {
+            "path": "src/cli/managed.rs",
+            "function": "environment",
+            "arguments": "& missing"
+          }
+        ]
+      },
+      "service_environment_required": {
+        "definition": "fn service_environment_required ( missing : & [ String ] ) -> Self { Self :: new ( ErrorCode :: InvalidArguments , format ! ( \"Service needs --service-environment containing: {}\" , missing . join ( \", \" ) ) , ) }",
+        "uses": [
+          {
+            "path": "src/services/setup.rs",
+            "function": "preflight_service",
+            "arguments": "& missing"
+          }
+        ]
+      },
+      "service_io": {
+        "definition": "fn service_io ( error : & std :: io :: Error ) -> Self { Self :: new ( ErrorCode :: IoError , error . to_string ( ) ) }",
+        "uses": [
+          {
+            "path": "src/services.rs",
+            "function": "error",
+            "arguments": "operation"
+          },
+          {
+            "path": "src/services.rs",
+            "function": "error",
+            "arguments": "& e"
+          }
+        ]
+      },
+      "service_model_environment_missing": {
+        "definition": "fn service_model_environment_missing ( missing : & [ String ] ) -> Self { Self :: new ( ErrorCode :: InvalidArguments , format ! ( \"Owned service environment file needs: {}. No model change was made.\" , missing . join ( \", \" ) ) , ) }",
+        "uses": [
+          {
+            "path": "src/services.rs",
+            "function": "validate_environment",
+            "arguments": "& missing"
+          }
+        ]
+      },
+      "service_restart_failed": {
+        "definition": "fn service_restart_failed ( mut error : Self , restart : & std :: io :: Error ) -> Self { error . message = format ! ( \"{}; service restart failed: {}\" , error . message , restart ) . into ( ) ; error }",
+        "uses": [
+          {
+            "path": "src/services.rs",
+            "function": "error",
+            "arguments": "result , & restart . restart"
+          }
+        ]
+      },
+      "setup_configuration": {
+        "definition": "fn setup_configuration ( message : impl Into < std :: borrow :: Cow < ' static , str > > ) -> Self { Self :: new ( ErrorCode :: InvalidEmbeddingConfig , message ) }",
+        "uses": [
+          {
+            "path": "src/setup.rs",
+            "function": "invalid",
+            "arguments": "message"
+          }
+        ]
+      },
+      "unsupported_index": {
+        "definition": "fn unsupported_index ( path : & std :: path :: Path ) -> Self { Self :: new ( ErrorCode :: UnsupportedIndex , format ! ( \"Unsupported index structure at {}. Rebuild index.sqlite with sync --rebuild; an unsupported vectors.sqlite cache may be removed for recomputation.\" , path . display ( ) ) , ) }",
+        "uses": [
+          {
+            "path": "src/index/schema.rs",
+            "function": "check_schema",
+            "arguments": "path"
+          },
+          {
+            "path": "src/index/schema.rs",
+            "function": "check_admission_files",
+            "arguments": "path"
+          },
+          {
+            "path": "src/index/schema.rs",
+            "function": "check_admission_files",
+            "arguments": "path"
+          },
+          {
+            "path": "src/index/schema.rs",
+            "function": "attach_vectors",
+            "arguments": "path"
+          },
+          {
+            "path": "src/index/schema/rebuilding.rs",
+            "function": "selection",
+            "arguments": "path"
+          }
+        ]
+      }
+    },
+    "replaced_literal_uses": {
+      "9": [
+        {
+          "path": "src/embedding/backend.rs",
+          "function": "embed",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Expected 1..32 embedding inputs."
+        },
+        {
+          "path": "src/embedding/backend.rs",
+          "function": "embed",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Embedding result count does not match inputs."
+        },
+        {
+          "path": "src/embedding/backend/http.rs",
+          "function": "request",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Embedding response exceeds 8 MiB."
+        },
+        {
+          "path": "src/embedding/backend/http.rs",
+          "function": "request",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Embedding response exceeds 8 MiB."
+        },
+        {
+          "path": "src/embedding/backend/http.rs",
+          "function": "parse_reply",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Malformed embedding response."
+        },
+        {
+          "path": "src/embedding/backend/http.rs",
+          "function": "parse_reply",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Embedding response count does not match inputs."
+        },
+        {
+          "path": "src/embedding/backend/http.rs",
+          "function": "parse_reply",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Embedding indices must be unique and in range."
+        },
+        {
+          "path": "src/embedding/backend/http.rs",
+          "function": "parse_reply",
+          "arguments": null,
+          "code": "invalid_embedding",
+          "message": "Missing embedding index."
+        },
+        {
+          "path": "src/embedding/mod.rs",
+          "function": "run_batch",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Embedding result count does not match input count."
+        },
+        {
+          "path": "src/embedding/mod.rs",
+          "function": "run_query",
+          "arguments": null,
+          "code": "invalid_embedding",
+          "message": "Missing query result."
+        },
+        {
+          "path": "src/embedding/mod.rs",
+          "function": "run_queries",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Query batch must contain 1..32 inputs."
+        },
+        {
+          "path": "src/embedding/mod.rs",
+          "function": "run_queries",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Query result count differs from input count."
+        },
+        {
+          "path": "src/embedding/mod.rs",
+          "function": "normalize",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Vector must have the configured dimensions and finite components."
+        },
+        {
+          "path": "src/embedding/mod.rs",
+          "function": "normalize",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Vector must have a finite nonzero norm."
+        },
+        {
+          "path": "src/embedding/mod.rs",
+          "function": "decode",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Cached vector has the wrong size; discard the derived vector cache."
+        },
+        {
+          "path": "src/embedding/mod.rs",
+          "function": "decode",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Cached vector is not finite/unit length; discard the derived vector cache."
+        },
+        {
+          "path": "src/embedding/pieces.rs",
+          "function": "embed",
+          "arguments": "",
+          "code": "invalid_embedding",
+          "message": "Embedding result count does not match input count."
+        }
+      ]
+    },
+    "forwarders": {
+      "setup_configuration": {
+        "definition": "fn invalid ( message : impl Into < std :: borrow :: Cow < ' static , str > > ) -> Error { Error :: setup_configuration ( message ) }",
+        "uses": [
+          {
+            "path": "src/setup.rs",
+            "function": "apply",
+            "arguments": "\"No server settings; pass --embedding-config or select text search.\""
+          },
+          {
+            "path": "src/setup.rs",
+            "function": "prepare_socket",
+            "arguments": "\"Socket needs a parent directory.\""
+          },
+          {
+            "path": "src/setup/bridge.rs",
+            "function": "inspect",
+            "arguments": "\"Existing bridge belongs to another root; choose --bridge-file or inspect it before setup.\" ,"
+          },
+          {
+            "path": "src/setup/bridge.rs",
+            "function": "inspect",
+            "arguments": "\"Existing bridge has another socket; it will not be overwritten.\" ,"
+          },
+          {
+            "path": "src/setup/bridge.rs",
+            "function": "inspect",
+            "arguments": "\"Existing bridge is foreign, revoked, broken, or has different reviewer roles; it will not be overwritten.\""
+          },
+          {
+            "path": "src/setup/bridge.rs",
+            "function": "apply",
+            "arguments": "\"Bridge file needs a parent directory.\""
+          },
+          {
+            "path": "src/setup/bridge.rs",
+            "function": "publish",
+            "arguments": "format ! ( \"Bridge {id} was created but saving {} failed. Inspect that file and the registry; use credential revoke {id} before retrying if no valid file was saved.\" , path . display ( ) )"
+          },
+          {
+            "path": "src/setup/intent.rs",
+            "function": "check",
+            "arguments": "\"Another fresh setup choice is pending; retry with omitted selection flags.\" ,"
+          },
+          {
+            "path": "src/setup/intent.rs",
+            "function": "read",
+            "arguments": "\"Invalid fresh-root setup intent; inspect .comb-setup.json.\" ,"
+          },
+          {
+            "path": "src/setup/intent.rs",
+            "function": "publish",
+            "arguments": "\"Root was initialized during setup; retry to inspect its current settings.\" ,"
+          },
+          {
+            "path": "src/setup/intent.rs",
+            "function": "publish",
+            "arguments": "\"Another fresh-root setup choice is pending; inspect .comb-setup.json.\" ,"
+          },
+          {
+            "path": "src/setup/paths.rs",
+            "function": "home",
+            "arguments": "\"Set an absolute HOME or pass --root.\""
+          },
+          {
+            "path": "src/setup/paths.rs",
+            "function": "bridge",
+            "arguments": "\"XDG_CONFIG_HOME must be absolute; or pass --bridge-file.\" ,"
+          },
+          {
+            "path": "src/setup/paths.rs",
+            "function": "absolute",
+            "arguments": "\"Setup paths must not contain '..'.\""
+          },
+          {
+            "path": "src/setup/paths.rs",
+            "function": "absolute",
+            "arguments": "\"Setup refuses a symbolic link at a managed path.\""
+          },
+          {
+            "path": "src/setup/paths.rs",
+            "function": "absolute",
+            "arguments": "\"Invalid setup filename.\""
+          },
+          {
+            "path": "src/setup/paths.rs",
+            "function": "absolute",
+            "arguments": "\"Invalid setup path.\""
+          },
+          {
+            "path": "src/setup/plan.rs",
+            "function": "inspect_prepared",
+            "arguments": "\"Existing serve.json uses another socket; omit --socket to preserve it.\" ,"
+          },
+          {
+            "path": "src/setup/plan.rs",
+            "function": "inspect_prepared",
+            "arguments": "\"Existing root has no managed serving settings. Select text search with comb model use none, or pass --embedding-config.\" ,"
+          },
+          {
+            "path": "src/setup/plan.rs",
+            "function": "socket_path",
+            "arguments": "\"Comb socket path exceeds 103 bytes; pass --socket with a shorter absolute path.\" ,"
+          },
+          {
+            "path": "src/setup/validate.rs",
+            "function": "paths",
+            "arguments": "\"Knowledge root and socket must have separate, nonconflicting paths.\" ,"
+          },
+          {
+            "path": "src/setup/validate.rs",
+            "function": "paths",
+            "arguments": "\"Socket needs a parent.\""
+          },
+          {
+            "path": "src/setup/validate.rs",
+            "function": "paths",
+            "arguments": "\"Socket is serving a live instance; stop it before setup.\" ,"
+          },
+          {
+            "path": "src/setup/validate.rs",
+            "function": "paths",
+            "arguments": "\"Bridge file conflicts with the socket or knowledge administration.\" ,"
+          },
+          {
+            "path": "src/setup/validate.rs",
+            "function": "paths",
+            "arguments": "\"Bridge needs a parent.\""
+          }
+        ]
+      },
+      "provision_configuration": {
+        "definition": "fn invalid ( message : impl Into < std :: borrow :: Cow < ' static , str > > ) -> Error { Error :: provision_configuration ( message ) }",
+        "uses": [
+          {
+            "path": "src/provision/files.rs",
+            "function": "owned_metadata",
+            "arguments": "format ! ( \"Refusing unowned, writable or linked managed path: {}\" , path . display ( ) )"
+          },
+          {
+            "path": "src/provision/files.rs",
+            "function": "read",
+            "arguments": "\"Asset size overflow.\""
+          },
+          {
+            "path": "src/provision/files.rs",
+            "function": "read",
+            "arguments": "\"Managed record exceeds its size bound.\""
+          },
+          {
+            "path": "src/provision/files/publication.rs",
+            "function": "encode_record",
+            "arguments": "\"Model file exceeds its size bound.\""
+          },
+          {
+            "path": "src/provision/files/publication.rs",
+            "function": "publish",
+            "arguments": "\"Model file exceeds its size bound.\""
+          },
+          {
+            "path": "src/provision/files/publication.rs",
+            "function": "publish",
+            "arguments": "\"Missing model directory.\""
+          },
+          {
+            "path": "src/provision/files/publication.rs",
+            "function": "resync",
+            "arguments": "\"Missing model directory.\""
+          },
+          {
+            "path": "src/provision/files/publication.rs",
+            "function": "resync",
+            "arguments": "\"Setup intent changed during publication retry.\""
+          },
+          {
+            "path": "src/provision/input.rs",
+            "function": "choice",
+            "arguments": "\"Only `none` (text search) can be selected by name; use `model use-http` for embeddings.\" ,"
+          },
+          {
+            "path": "src/provision/selection.rs",
+            "function": "validate",
+            "arguments": "\"Invalid managed Comb server settings.\""
+          },
+          {
+            "path": "src/provision/selection.rs",
+            "function": "read",
+            "arguments": "format ! ( \"Malformed managed {name}; inspect the root's server settings before restarting.\" )"
+          },
+          {
+            "path": "src/provision/selection.rs",
+            "function": "read",
+            "arguments": "\"Managed server settings belong to another root.\""
+          },
+          {
+            "path": "src/provision/selection.rs",
+            "function": "reconcile_for_setup",
+            "arguments": "\"No managed settings; select text search or an HTTP embedding configuration.\""
+          },
+          {
+            "path": "src/provision/selection.rs",
+            "function": "change_with_hook",
+            "arguments": "\"Root socket differs from requested setup; inspect serve.json.\" ,"
+          },
+          {
+            "path": "src/provision/selection.rs",
+            "function": "validated_engine",
+            "arguments": "\"Embedding identity differs from its configuration.\" ,"
+          },
+          {
+            "path": "src/provision/selection.rs",
+            "function": "probe_engine",
+            "arguments": "\"Embedding probe returned the wrong vector count.\""
+          }
+        ]
+      },
+      "maintenance_configuration": {
+        "definition": "fn invalid ( message : impl Into < std :: borrow :: Cow < ' static , str > > ) -> Error { Error :: maintenance_configuration ( message ) }",
+        "uses": [
+          {
+            "path": "src/maintenance.rs",
+            "function": "prepare",
+            "arguments": "\"--purge-comb-root must equal the selected root and requires removing Comb.\" ,"
+          },
+          {
+            "path": "src/maintenance.rs",
+            "function": "prepare",
+            "arguments": "\"Refusing an unrecognized knowledge root.\""
+          },
+          {
+            "path": "src/maintenance.rs",
+            "function": "apply",
+            "arguments": "\"Missing knowledge scope.\""
+          },
+          {
+            "path": "src/maintenance.rs",
+            "function": "apply",
+            "arguments": "format ! ( \"Finish fresh-root setup with `comb --root '{}' setup` before purge.\" , root . display ( ) )"
+          },
+          {
+            "path": "src/maintenance.rs",
+            "function": "apply",
+            "arguments": "\"Knowledge root identity changed.\""
+          },
+          {
+            "path": "src/maintenance.rs",
+            "function": "apply",
+            "arguments": "format ! ( \"Finish accepted activation with `comb --root '{}' serve` (and its required environment) before purge\" , root . display ( ) )"
+          },
+          {
+            "path": "src/maintenance.rs",
+            "function": "check_detached",
+            "arguments": "\"Knowledge setup was resumed after purge admission; refusing its cleanup.\" ,"
+          },
+          {
+            "path": "src/maintenance.rs",
+            "function": "validate_receipt",
+            "arguments": "\"Invalid retained Comb scope.\""
+          },
+          {
+            "path": "src/maintenance.rs",
+            "function": "validate_receipt",
+            "arguments": "\"Purge action is outside native Comb ownership.\""
+          },
+          {
+            "path": "src/maintenance/bridge.rs",
+            "function": "inspect",
+            "arguments": "format ! ( \"Retain bridge {}: cannot prove the exact setup grant. Inspect `comb --root '{}' credential revoke {}`\" , path . display ( ) , root . display ( ) , connection . credential . id )"
+          },
+          {
+            "path": "src/maintenance/bridge.rs",
+            "function": "revoke",
+            "arguments": "\"Missing bridge root.\""
+          },
+          {
+            "path": "src/maintenance/bridge.rs",
+            "function": "revoke",
+            "arguments": "\"Missing bridge action.\""
+          },
+          {
+            "path": "src/maintenance/bridge.rs",
+            "function": "revoke",
+            "arguments": "\"Bridge action scope mismatch.\""
+          },
+          {
+            "path": "src/maintenance/bridge.rs",
+            "function": "revoke",
+            "arguments": "\"Bridge credential changed after revocation; retaining the new secret.\" ,"
+          },
+          {
+            "path": "src/maintenance/bridge.rs",
+            "function": "revoke",
+            "arguments": "\"Admitted bridge disappeared before revocation.\""
+          },
+          {
+            "path": "src/maintenance/bridge.rs",
+            "function": "revoke",
+            "arguments": "\"Bridge credential changed since admission.\""
+          },
+          {
+            "path": "src/maintenance/bridge.rs",
+            "function": "revoke",
+            "arguments": "format ! ( \"Bridge retained at {}. Revoke the exact credential with `comb --root '{}' credential revoke {}` before retrying purge\" , path . display ( ) , root . display ( ) , connection . credential . id )"
+          }
+        ]
+      }
+    },
+    "input_transport": {
+      "protocol/src/error.rs:from": "fn from ( input : hive_input :: InputError ) -> Self { let mut error = Self :: new ( input . code ( ) . into ( ) , input . message ( ) . to_owned ( ) ) ; error . input = Some ( Box :: new ( input ) ) ; error }",
+      "protocol/src/error/wire.rs:error": "fn error < E : de :: Error > ( self ) -> Result < Error , E > { let ( code , raw_code ) = match external_code :: < E > ( & self . code ) ? { Some ( code ) => ( code , None ) , None => ( ErrorCode :: UnknownError , Some ( self . code ) ) , } ; let raw_code = match self . raw_code { Some ( raw ) if code == ErrorCode :: UnknownError & & raw_code . is_none ( ) => { if external_code :: < E > ( & raw ) ? . is_some ( ) { return Err ( E :: custom ( \"Raw error code must be unknown\" ) ) ; } Some ( raw ) } Some ( _ ) => return Err ( E :: custom ( \"Raw error code requires unknown_error\" ) ) , None => raw_code , } ; if let Some ( id ) = & self . request_id { crate :: values :: RequestId :: try_from ( id . clone ( ) ) . map_err ( E :: custom ) ? ; } let mut error = match ( self . field , self . expected , self . examples ) { ( None , None , None ) if ! matches ! ( code , ErrorCode :: Input ( _ ) ) => { Error :: new ( code , self . message ) } ( Some ( field ) , Some ( expected ) , Some ( examples ) ) => { let code = Code :: deserialize ( de :: value :: StrDeserializer :: < E > :: new ( code . as_str ( ) ) ) ? ; InputError :: new ( code , self . message , field , expected , examples ) . map ( Error :: from ) . map_err ( E :: custom ) ? } _ => return Err ( E :: custom ( \"input-error metadata must be complete\" ) ) , } ; error . file_committed = self . file_committed ; error . request_id = self . request_id ; error . import_progress = self . import_progress ; error . raw_code = raw_code ; Ok ( error ) }",
+      "protocol/src/error/wire.rs:external_code": "fn external_code < E : de :: Error > ( code : & str ) -> Result < Option < ErrorCode > , E > { if code . is_empty ( ) | | code . len ( ) > 128 | | ! code . bytes ( ) . all ( | b | b . is_ascii_lowercase ( ) | | b . is_ascii_digit ( ) | | b == b'_' ) { return Err ( E :: custom ( \"Invalid error code\" ) ) ; } match ErrorCode :: deserialize ( de :: value :: StrDeserializer :: < de :: value :: Error > :: new ( code ) ) { Ok ( code ) => Ok ( Some ( code ) ) , Err ( _ ) => Ok ( None ) , } }"
+    }
+  }
+}

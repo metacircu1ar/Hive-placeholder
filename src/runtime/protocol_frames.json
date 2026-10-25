@@ -1,0 +1,1566 @@
+[
+  {
+    "name": "initialize",
+    "frame": {
+      "id": 1,
+      "result": {}
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "account",
+    "frame": {
+      "id": 1,
+      "result": {
+        "requiresOpenaiAuth": true,
+        "account": {
+          "type": "chatgpt"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "scale_models",
+    "frame": {
+      "id": 1,
+      "result": {
+        "data": [
+          {
+            "model": "gpt-5.6-luna",
+            "supportedReasoningEfforts": [
+              {
+                "reasoningEffort": "low"
+              }
+            ]
+          }
+        ],
+        "nextCursor": null
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "runtime_models",
+    "frame": {
+      "id": 1,
+      "result": {
+        "data": [
+          {
+            "model": "gpt-5.6-terra",
+            "supportedReasoningEfforts": [
+              {
+                "reasoningEffort": "high"
+              },
+              {
+                "reasoningEffort": "medium"
+              }
+            ]
+          },
+          {
+            "model": "gpt-5.6-sol",
+            "supportedReasoningEfforts": [
+              {
+                "reasoningEffort": "high"
+              },
+              {
+                "reasoningEffort": "medium"
+              }
+            ]
+          },
+          {
+            "model": "gpt-5.6-luna",
+            "supportedReasoningEfforts": [
+              {
+                "reasoningEffort": "high"
+              },
+              {
+                "reasoningEffort": "medium"
+              }
+            ]
+          }
+        ],
+        "nextCursor": null
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "scale_thread",
+    "frame": {
+      "id": 1,
+      "result": {
+        "thread": {
+          "id": "thread"
+        },
+        "model": "gpt-5.6-luna",
+        "reasoningEffort": "low",
+        "sandbox": {
+          "type": "readOnly"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "runtime_thread",
+    "frame": {
+      "id": 1,
+      "result": {
+        "thread": {
+          "id": "thread"
+        },
+        "model": "gpt-5.6-luna",
+        "reasoningEffort": "high",
+        "sandbox": {
+          "type": "workspaceWrite"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "ack_turn",
+    "frame": {
+      "id": 1,
+      "result": {
+        "turn": {
+          "id": "turn"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "missing_turn_ack",
+    "frame": {
+      "id": 1,
+      "result": {
+        "turn": {}
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "empty_terminal",
+    "frame": {
+      "id": 1,
+      "result": {
+        "data": [],
+        "nextCursor": null
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "omitted_terminal_cursor",
+    "frame": {
+      "id": 1,
+      "result": {
+        "data": []
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "exiting_terminal",
+    "frame": {
+      "id": 1,
+      "result": {
+        "data": [
+          {
+            "id": "exiting"
+          }
+        ]
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "unsubscribe",
+    "frame": {
+      "id": 1,
+      "result": {
+        "status": "unsubscribed"
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "explicit_null_result",
+    "frame": {
+      "id": 1,
+      "result": null
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "opaque_result",
+    "frame": {
+      "id": 1,
+      "result": {
+        "extra": [
+          null,
+          false,
+          1,
+          {
+            "raw": "kept"
+          }
+        ]
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "resume_rejected",
+    "frame": {
+      "id": 1,
+      "error": {
+        "code": -1,
+        "message": "resume rejected"
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "turn_rejected",
+    "frame": {
+      "id": 1,
+      "error": {
+        "code": -1,
+        "message": "turn rejected"
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "interrupt_rejected",
+    "frame": {
+      "id": 1,
+      "error": {
+        "code": -1,
+        "message": "already ending"
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "cleanup_refused",
+    "frame": {
+      "id": 1,
+      "error": {
+        "code": -1,
+        "message": "cleanup refused"
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "unsupported",
+    "frame": {
+      "id": 1,
+      "error": {
+        "code": -32601,
+        "message": "unsupported"
+      }
+    },
+    "active": "turn",
+    "route": "response"
+  },
+  {
+    "name": "completion_inProgress",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": {
+          "id": "turn",
+          "status": "inProgress"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "completion_completed",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": {
+          "id": "turn",
+          "status": "completed"
+        }
+      }
+    },
+    "active": null,
+    "route": "owner"
+  },
+  {
+    "name": "completion_failed",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": {
+          "id": "turn",
+          "status": "failed"
+        }
+      }
+    },
+    "active": null,
+    "route": "owner"
+  },
+  {
+    "name": "completion_interrupted",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": {
+          "id": "turn",
+          "status": "interrupted"
+        }
+      }
+    },
+    "active": null,
+    "route": "owner"
+  },
+  {
+    "name": "completion_future-terminal",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": {
+          "id": "turn",
+          "status": "future-terminal"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "completion_None",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": {
+          "id": "turn",
+          "status": null
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "completion_5",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": {
+          "id": "turn",
+          "status": 5
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "completion_{}",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": {
+          "id": "turn",
+          "status": {}
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "completion_True",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": {
+          "id": "turn",
+          "status": true
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "started",
+    "frame": {
+      "method": "turn/started",
+      "params": {
+        "threadId": "thread",
+        "turn": {
+          "id": "turn",
+          "status": "inProgress"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "wrong_completion",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": {
+          "id": "wrong-turn",
+          "status": "interrupted"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "tool_hive_spawn_30",
+    "frame": {
+      "id": "tool-turn",
+      "method": "item/tool/call",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "callId": "call-turn",
+        "tool": "hive_spawn",
+        "arguments": {
+          "role": "ping",
+          "body": "Send ping to your parent now.",
+          "request_id": "ping-1"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "completed_hive_spawn_31",
+    "frame": {
+      "method": "item/completed",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "item": {
+          "type": "dynamicToolCall",
+          "tool": "hive_spawn",
+          "arguments": {
+            "role": "ping",
+            "body": "Send ping to your parent now.",
+            "request_id": "ping-1"
+          },
+          "status": "completed",
+          "success": true,
+          "contentItems": [
+            {
+              "type": "inputText",
+              "text": "{}"
+            }
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "tool_hive_send_32",
+    "frame": {
+      "id": "tool-turn",
+      "method": "item/tool/call",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "callId": "call-turn",
+        "tool": "hive_send",
+        "arguments": {
+          "target": "parent",
+          "body": "ping",
+          "request_id": "initial-ping"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "completed_hive_send_33",
+    "frame": {
+      "method": "item/completed",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "item": {
+          "type": "dynamicToolCall",
+          "tool": "hive_send",
+          "arguments": {
+            "target": "parent",
+            "body": "ping",
+            "request_id": "initial-ping"
+          },
+          "status": "completed",
+          "success": true,
+          "contentItems": [
+            {
+              "type": "inputText",
+              "text": "{}"
+            }
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "tool_hive_complete_34",
+    "frame": {
+      "id": "tool-turn",
+      "method": "item/tool/call",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "callId": "call-turn",
+        "tool": "hive_complete",
+        "arguments": {
+          "body": "reviewed and tested",
+          "request_id": "complete"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "completed_hive_complete_35",
+    "frame": {
+      "method": "item/completed",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "item": {
+          "type": "dynamicToolCall",
+          "tool": "hive_complete",
+          "arguments": {
+            "body": "reviewed and tested",
+            "request_id": "complete"
+          },
+          "status": "completed",
+          "success": true,
+          "contentItems": [
+            {
+              "type": "inputText",
+              "text": "{}"
+            }
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "tool_hive_terminate_36",
+    "frame": {
+      "id": "tool-turn",
+      "method": "item/tool/call",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "callId": "call-turn",
+        "tool": "hive_terminate",
+        "arguments": {
+          "target": "child",
+          "request_id": "terminate-child"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "completed_hive_terminate_37",
+    "frame": {
+      "method": "item/completed",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "item": {
+          "type": "dynamicToolCall",
+          "tool": "hive_terminate",
+          "arguments": {
+            "target": "child",
+            "request_id": "terminate-child"
+          },
+          "status": "completed",
+          "success": true,
+          "contentItems": [
+            {
+              "type": "inputText",
+              "text": "{}"
+            }
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "tool_hive_batch_38",
+    "frame": {
+      "id": "tool-turn",
+      "method": "item/tool/call",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "callId": "call-turn",
+        "tool": "hive_batch",
+        "arguments": {
+          "request_id": "spawn-0",
+          "operations": [
+            {
+              "op": "spawn",
+              "role": "ping",
+              "body": "work",
+              "request_id": "child"
+            }
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "completed_hive_batch_39",
+    "frame": {
+      "method": "item/completed",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "item": {
+          "type": "dynamicToolCall",
+          "tool": "hive_batch",
+          "arguments": {
+            "request_id": "spawn-0",
+            "operations": [
+              {
+                "op": "spawn",
+                "role": "ping",
+                "body": "work",
+                "request_id": "child"
+              }
+            ]
+          },
+          "status": "completed",
+          "success": true,
+          "contentItems": [
+            {
+              "type": "inputText",
+              "text": "{}"
+            }
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "tool_hive_agents_40",
+    "frame": {
+      "id": "tool-turn",
+      "method": "item/tool/call",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "callId": "call-turn",
+        "tool": "hive_agents",
+        "arguments": []
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "completed_hive_agents_41",
+    "frame": {
+      "method": "item/completed",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "item": {
+          "type": "dynamicToolCall",
+          "tool": "hive_agents",
+          "arguments": [],
+          "status": "completed",
+          "success": true,
+          "contentItems": [
+            {
+              "type": "inputText",
+              "text": "{}"
+            }
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "tool_hive_complete_42",
+    "frame": {
+      "id": "tool-turn",
+      "method": "item/tool/call",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "callId": "call-turn",
+        "tool": "hive_complete",
+        "arguments": {
+          "body": "wrong",
+          "request_id": "wrong",
+          "target": "someone-else"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "completed_hive_complete_43",
+    "frame": {
+      "method": "item/completed",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "item": {
+          "type": "dynamicToolCall",
+          "tool": "hive_complete",
+          "arguments": {
+            "body": "wrong",
+            "request_id": "wrong",
+            "target": "someone-else"
+          },
+          "status": "completed",
+          "success": true,
+          "contentItems": [
+            {
+              "type": "inputText",
+              "text": "{}"
+            }
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "input_required",
+    "frame": {
+      "id": "unsupported",
+      "method": "item/tool/requestUserInput",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn"
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "item/agentMessage/delta",
+    "frame": {
+      "method": "item/agentMessage/delta",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "delta": "opaque",
+        "extra": {
+          "raw": [
+            1,
+            null
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "item/reasoning/textDelta",
+    "frame": {
+      "method": "item/reasoning/textDelta",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "delta": "opaque",
+        "extra": {
+          "raw": [
+            1,
+            null
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "item/reasoning/summaryTextDelta",
+    "frame": {
+      "method": "item/reasoning/summaryTextDelta",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "delta": "opaque",
+        "extra": {
+          "raw": [
+            1,
+            null
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "item/commandExecution/outputDelta",
+    "frame": {
+      "method": "item/commandExecution/outputDelta",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "delta": "opaque",
+        "extra": {
+          "raw": [
+            1,
+            null
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "item/future/delta",
+    "frame": {
+      "method": "item/future/delta",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "delta": "opaque",
+        "extra": {
+          "raw": [
+            1,
+            null
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "item/started",
+    "frame": {
+      "method": "item/started",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "delta": "opaque",
+        "extra": {
+          "raw": [
+            1,
+            null
+          ]
+        }
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "unowned_account/updated",
+    "frame": {
+      "method": "account/updated",
+      "params": {
+        "secrets": [
+          "never persist"
+        ]
+      }
+    },
+    "active": "turn",
+    "route": {"notice": "account_updated"}
+  },
+  {
+    "name": "unowned_account/rateLimits/updated",
+    "frame": {
+      "method": "account/rateLimits/updated",
+      "params": {
+        "secrets": [
+          "never persist"
+        ]
+      }
+    },
+    "active": "turn",
+    "route": {"notice": "rate_limits_updated"}
+  },
+  {
+    "name": "unowned_configWarning",
+    "frame": {
+      "method": "configWarning",
+      "params": {
+        "secrets": [
+          "never persist"
+        ]
+      }
+    },
+    "active": "turn",
+    "route": {"notice": "configuration_warning"}
+  },
+  {
+    "name": "unowned_error",
+    "frame": {
+      "method": "error",
+      "params": {
+        "secrets": [
+          "never persist"
+        ]
+      }
+    },
+    "active": "turn",
+    "route": {"notice": "provider_error"}
+  },
+  {
+    "name": "unowned_thread/started",
+    "frame": {
+      "method": "thread/started",
+      "params": {
+        "secrets": [
+          "never persist"
+        ]
+      }
+    },
+    "active": "turn",
+    "route": {"notice": "thread_metadata"}
+  },
+  {
+    "name": "unowned_thread/status/changed",
+    "frame": {
+      "method": "thread/status/changed",
+      "params": {
+        "secrets": [
+          "never persist"
+        ]
+      }
+    },
+    "active": "turn",
+    "route": {"notice": "thread_metadata"}
+  },
+  {
+    "name": "unowned_thread/closed",
+    "frame": {
+      "method": "thread/closed",
+      "params": {
+        "secrets": [
+          "never persist"
+        ]
+      }
+    },
+    "active": "turn",
+    "route": {"notice": "thread_metadata"}
+  },
+  {
+    "name": "unowned_future/method",
+    "frame": {
+      "method": "future/method",
+      "params": {
+        "secrets": [
+          "never persist"
+        ]
+      }
+    },
+    "active": "turn",
+    "route": {"notice": "connection_notification"}
+  },
+  {
+    "name": "unowned_",
+    "frame": {
+      "method": "",
+      "params": {
+        "secrets": [
+          "never persist"
+        ]
+      }
+    },
+    "active": "turn",
+    "route": {"notice": "connection_notification"}
+  },
+  {
+    "name": "unowned_None",
+    "frame": {
+      "method": null,
+      "params": {
+        "secrets": [
+          "never persist"
+        ]
+      }
+    },
+    "active": "turn",
+    "route": {"notice": "connection_notification"}
+  },
+  {
+    "name": "unowned_42",
+    "frame": {
+      "method": 42,
+      "params": {
+        "secrets": [
+          "never persist"
+        ]
+      }
+    },
+    "active": "turn",
+    "route": {"notice": "connection_notification"}
+  },
+  {
+    "name": "unowned_{}",
+    "frame": {
+      "method": {},
+      "params": {
+        "secrets": [
+          "never persist"
+        ]
+      }
+    },
+    "active": "turn",
+    "route": {"notice": "connection_notification"}
+  },
+  {
+    "name": "owned_None",
+    "frame": {
+      "method": null,
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "extra": 123
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "owned_False",
+    "frame": {
+      "method": false,
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "extra": 123
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "owned_{}",
+    "frame": {
+      "method": {},
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "extra": 123
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "owned_future/method",
+    "frame": {
+      "method": "future/method",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "extra": 123
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "owned_",
+    "frame": {
+      "method": "",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "extra": 123
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "threadId_None",
+    "frame": {
+      "method": "item/future/delta",
+      "params": {
+        "threadId": null,
+        "turnId": "turn"
+      }
+    },
+    "active": "turn",
+    "route": "global_failure"
+  },
+  {
+    "name": "threadId_42",
+    "frame": {
+      "method": "item/future/delta",
+      "params": {
+        "threadId": 42,
+        "turnId": "turn"
+      }
+    },
+    "active": "turn",
+    "route": "global_failure"
+  },
+  {
+    "name": "threadId_False",
+    "frame": {
+      "method": "item/future/delta",
+      "params": {
+        "threadId": false,
+        "turnId": "turn"
+      }
+    },
+    "active": "turn",
+    "route": "global_failure"
+  },
+  {
+    "name": "threadId_[]",
+    "frame": {
+      "method": "item/future/delta",
+      "params": {
+        "threadId": [],
+        "turnId": "turn"
+      }
+    },
+    "active": "turn",
+    "route": "global_failure"
+  },
+  {
+    "name": "threadId_{}",
+    "frame": {
+      "method": "item/future/delta",
+      "params": {
+        "threadId": {},
+        "turnId": "turn"
+      }
+    },
+    "active": "turn",
+    "route": "global_failure"
+  },
+  {
+    "name": "turnId_None",
+    "frame": {
+      "method": "item/future/delta",
+      "params": {
+        "threadId": "thread",
+        "turnId": null
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "turnId_42",
+    "frame": {
+      "method": "item/future/delta",
+      "params": {
+        "threadId": "thread",
+        "turnId": 42
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "turnId_False",
+    "frame": {
+      "method": "item/future/delta",
+      "params": {
+        "threadId": "thread",
+        "turnId": false
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "turnId_[]",
+    "frame": {
+      "method": "item/future/delta",
+      "params": {
+        "threadId": "thread",
+        "turnId": []
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "turnId_{}",
+    "frame": {
+      "method": "item/future/delta",
+      "params": {
+        "threadId": "thread",
+        "turnId": {}
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "null_params",
+    "frame": {
+      "method": "turn/completed",
+      "params": null
+    },
+    "active": "turn",
+    "route": "global_failure"
+  },
+  {
+    "name": "unknown_thread",
+    "frame": {
+      "method": "item/tool/call",
+      "params": {
+        "threadId": "alien",
+        "turnId": "turn"
+      }
+    },
+    "active": "turn",
+    "route": "global_failure"
+  },
+  {
+    "name": "unowned_id_None",
+    "frame": {
+      "id": null,
+      "method": null,
+      "params": null
+    },
+    "active": "turn",
+    "route": "unsupported"
+  },
+  {
+    "name": "unowned_id_raw-id",
+    "frame": {
+      "id": "raw-id",
+      "method": null,
+      "params": null
+    },
+    "active": "turn",
+    "route": "unsupported"
+  },
+  {
+    "name": "unowned_id_1.5",
+    "frame": {
+      "id": 1.5,
+      "method": null,
+      "params": null
+    },
+    "active": "turn",
+    "route": "unsupported"
+  },
+  {
+    "name": "unowned_id_-1",
+    "frame": {
+      "id": -1,
+      "method": null,
+      "params": null
+    },
+    "active": "turn",
+    "route": "unsupported"
+  },
+  {
+    "name": "unowned_id_False",
+    "frame": {
+      "id": false,
+      "method": null,
+      "params": null
+    },
+    "active": "turn",
+    "route": "unsupported"
+  },
+  {
+    "name": "unowned_id_[]",
+    "frame": {
+      "id": [],
+      "method": null,
+      "params": null
+    },
+    "active": "turn",
+    "route": "unsupported"
+  },
+  {
+    "name": "unowned_id_{}",
+    "frame": {
+      "id": {},
+      "method": null,
+      "params": null
+    },
+    "active": "turn",
+    "route": "unsupported"
+  },
+  {
+    "name": "fallback_thread",
+    "frame": {
+      "method": "future/method",
+      "params": {
+        "thread": {
+          "id": "thread"
+        },
+        "turnId": "turn"
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "fallback_conversationId",
+    "frame": {
+      "method": "future/method",
+      "params": {
+        "conversationId": "thread",
+        "turnId": "turn"
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "extra_fields",
+    "frame": {
+      "method": "item/completed",
+      "params": {
+        "threadId": "thread",
+        "turnId": "turn",
+        "item": {
+          "type": "agentMessage",
+          "text": {
+            "raw": "object"
+          }
+        },
+        "extra": [
+          1,
+          2
+        ]
+      },
+      "extra": {
+        "opaque": null
+      }
+    },
+    "active": "turn",
+    "route": "owner"
+  },
+  {
+    "name": "missing_or_wrong_params_90",
+    "frame": {
+      "method": "turn/completed",
+      "params": false
+    },
+    "active": "turn",
+    "route": "global_failure"
+  },
+  {
+    "name": "missing_or_wrong_params_91",
+    "frame": {
+      "method": "turn/completed",
+      "params": 17
+    },
+    "active": "turn",
+    "route": "global_failure"
+  },
+  {
+    "name": "missing_or_wrong_params_92",
+    "frame": {
+      "method": "turn/completed",
+      "params": "wrong"
+    },
+    "active": "turn",
+    "route": "global_failure"
+  },
+  {
+    "name": "missing_or_wrong_params_93",
+    "frame": {
+      "method": "turn/completed",
+      "params": []
+    },
+    "active": "turn",
+    "route": "global_failure"
+  },
+  {
+    "name": "missing_or_wrong_params_94",
+    "frame": {
+      "method": "turn/completed",
+      "params": {}
+    },
+    "active": "turn",
+    "route": "global_failure"
+  },
+  {
+    "name": "missing_or_wrong_params_95",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "turn": {
+          "id": "turn"
+        }
+      }
+    },
+    "active": "turn",
+    "route": "global_failure"
+  },
+  {
+    "name": "missing_or_wrong_turn_96",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": null
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "missing_or_wrong_turn_97",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": false
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "missing_or_wrong_turn_98",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": 17
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "missing_or_wrong_turn_99",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": "wrong"
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "missing_or_wrong_turn_100",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": []
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "missing_or_wrong_turn_101",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread",
+        "turn": {}
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "missing_turn",
+    "frame": {
+      "method": "turn/completed",
+      "params": {
+        "threadId": "thread"
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "missing_turn_id",
+    "frame": {
+      "method": "item/future/delta",
+      "params": {
+        "threadId": "thread"
+      }
+    },
+    "active": "turn",
+    "route": "owner_failure"
+  },
+  {
+    "name": "missing_params",
+    "frame": {
+      "method": "turn/completed"
+    },
+    "active": "turn",
+    "route": "global_failure"
+  }
+]

@@ -1,0 +1,37 @@
+[package]
+name = "comb-protocol"
+version.workspace = true
+edition = "2024"
+license = "MIT"
+rust-version = "1.89"
+description = "Shared Comb wire types, validated inputs and clients"
+publish = false
+
+[features]
+# Internal fixtures shared with the server's unit tests, never a shipping variant.
+test-support = []
+
+[dependencies]
+hive-input = { path = "../input" }
+tracing = { version = "0.1.44", default-features = false, features = ["std"] }
+clap = { version = "4.5", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["raw_value"] }
+serde_yaml_ng = "0.10"
+schemars = "1"
+thiserror = "2"
+uuid = { version = "1", features = ["v4", "serde"] }
+chrono = { version = "0.4", default-features = false, features = ["clock", "serde"] }
+sha2 = "0.10.9"
+rusqlite = { version = "0.38", features = ["bundled"] }
+libc = "0.2"
+rustix = { version = "1.1.5", features = ["fs", "process"] }
+tokio = { version = "1", features = ["rt-multi-thread", "net", "io-util", "io-std", "sync", "time", "macros"] }
+
+[dev-dependencies]
+hive-log = { path = "../logging" }
+tempfile = "3"
+tracing-subscriber = { version = "0.3.23", default-features = false, features = ["registry", "std"] }
+
+[lints]
+workspace = true

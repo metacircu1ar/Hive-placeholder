@@ -1,0 +1,51 @@
+[
+  {
+    "principal": "[\"client\",\"12345678-1234-4234-8234-123456789abc\"]",
+    "request_id": "append",
+    "fingerprint": "71d59a29624dae3e5f3df51aeb15ee4c63e1c7073d6f5e62c4b078f8ac015386",
+    "operation": "append",
+    "slug": "concepts/new"
+  },
+  {
+    "principal": "[\"client\",\"12345678-1234-4234-8234-123456789abc\"]",
+    "request_id": "capture",
+    "fingerprint": "e35f247b7a22f97ac18b2bb7ea0807857eff45489a0406af9fa298339639287c",
+    "operation": "put",
+    "slug": "inbox/ac36f393d64ebc7d9fe3d4ff0be99a91ee545940a294df727977423a08ad3aa7"
+  },
+  {
+    "principal": "[\"client\",\"12345678-1234-4234-8234-123456789abc\"]",
+    "request_id": "consolidate",
+    "fingerprint": "40a8646e07ad39c655d305866a0ce066b40c689731e3d617ab79868e00f23d11",
+    "operation": "consolidate",
+    "slug": "concepts/target"
+  },
+  {
+    "principal": "[\"client\",\"12345678-1234-4234-8234-123456789abc\"]",
+    "request_id": "decide",
+    "fingerprint": "1e49fcc8a775b373d327fa47164b2136e8ff7d4e261254ccab059b2853ff1510",
+    "operation": "decide",
+    "slug": "review/proposal"
+  },
+  {
+    "principal": "[\"client\",\"12345678-1234-4234-8234-123456789abc\"]",
+    "request_id": "fc244af6503a263ac32e106a88ff1caa53fb55ab08b4644369bf7892837e5c3d",
+    "fingerprint": "77fcfc7f17b1d79d1382b67702686c14c83f0b5e99e07097429349b92d3fc0c9",
+    "operation": "consolidation-source",
+    "slug": "inbox/note"
+  },
+  {
+    "principal": "[\"client\",\"12345678-1234-4234-8234-123456789abc\"]",
+    "request_id": "promote",
+    "fingerprint": "7e306768aa1ff1b06602390cdb65950eb562ca595dd49e5e3ac19443c35d2b8c",
+    "operation": "promote",
+    "slug": "concepts/page"
+  },
+  {
+    "principal": "[\"client\",\"12345678-1234-4234-8234-123456789abc\"]",
+    "request_id": "put",
+    "fingerprint": "eead8b5bdd10982a44838b5f7dba9f6bbf696a53c45c614d1efbe2778ce83d3c",
+    "operation": "put",
+    "slug": "concepts/new"
+  }
+]

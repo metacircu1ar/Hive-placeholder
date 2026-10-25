@@ -1,0 +1,7 @@
+{
+  "identity": ["agent_id", "execution_id", "request_id", "provider_id", "shard_id", "credential_id", "profile_id", "task_id"],
+  "code": ["code", "decision", "method", "provider", "phase", "thread", "payload", "version", "features", "checkpoint"],
+  "number": ["count", "sequence", "duration_ms", "elapsed_ms", "bytes", "queued", "dropped", "errno", "sqlite_code", "attempt", "pid", "turns", "agents", "exit_code", "signal", "duration_ns", "start_ns", "end_ns", "cpu_ns", "jobs", "queue_wait_ns", "max_queue_wait_ns", "apply_ns", "commit_ns", "checkpoint_ns", "frames"],
+  "flag": ["confirmed", "quiescent", "success", "retry", "partial", "directory"],
+  "error": ["error", "primary", "secondary"]
+}

@@ -1,0 +1,14 @@
+{
+  "format": 1,
+  "scope": {"product": "hive", "paths": ["/config.yaml", "/state"]},
+  "platform": "systemd",
+  "program": "/prefix/bin/hivectl",
+  "arguments": ["--config", "/config.yaml", "--state-dir", "/state", "daemon", "run"],
+  "environment_file": "/private/environment",
+  "required_environment": ["TOKEN_SOURCE"],
+  "environment": {"HOME": "/home/fixture", "PATH": "/usr/bin"},
+  "descriptor": "/private/descriptor.json",
+  "unit": "/private/hive.service",
+  "log": "/private/hive.log",
+  "unit_contents": "fixture unit"
+}

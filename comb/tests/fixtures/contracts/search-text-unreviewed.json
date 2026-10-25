@@ -1,0 +1,27 @@
+{
+  "results": [
+    {
+      "slug": "concepts/promoted",
+      "title": "Promoted writer",
+      "type": "note",
+      "score": 0.01639344262295082,
+      "matched_by": "text",
+      "snippet": "newproof: an unreviewed writer observation.",
+      "highlights": [
+        [
+          0,
+          8
+        ]
+      ],
+      "heading": "",
+      "zone": "timeline",
+      "evidence": "keyword_exact",
+      "create_safety": "probable",
+      "unverified": true,
+      "page_unverified": false
+    }
+  ],
+  "mode": "text",
+  "fallback": null,
+  "coverage": null
+}

@@ -1,0 +1,1010 @@
+[
+  {
+    "prefix": "inbox",
+    "age_days": -1,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581946313714291616
+  },
+  {
+    "prefix": "inbox",
+    "age_days": -1,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "inbox",
+    "age_days": -1,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "inbox",
+    "age_days": -1,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "inbox",
+    "age_days": -1,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "inbox",
+    "age_days": -1,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 0,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581946313714291616
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 0,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 0,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 0,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 0,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 0,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 7,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581660445882206721
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 7,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 7,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 7,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 7,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 7,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 90,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581415837324855728
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 90,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 90,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 90,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 90,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "inbox",
+    "age_days": 90,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "reports",
+    "age_days": -1,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581946313714291616
+  },
+  {
+    "prefix": "reports",
+    "age_days": -1,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "reports",
+    "age_days": -1,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "reports",
+    "age_days": -1,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "reports",
+    "age_days": -1,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "reports",
+    "age_days": -1,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "reports",
+    "age_days": 0,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581946313714291616
+  },
+  {
+    "prefix": "reports",
+    "age_days": 0,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "reports",
+    "age_days": 0,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "reports",
+    "age_days": 0,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "reports",
+    "age_days": 0,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "reports",
+    "age_days": 0,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "reports",
+    "age_days": 7,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581660445882206721
+  },
+  {
+    "prefix": "reports",
+    "age_days": 7,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "reports",
+    "age_days": 7,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "reports",
+    "age_days": 7,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "reports",
+    "age_days": 7,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "reports",
+    "age_days": 7,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "reports",
+    "age_days": 90,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581415837324855728
+  },
+  {
+    "prefix": "reports",
+    "age_days": 90,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "reports",
+    "age_days": 90,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "reports",
+    "age_days": 90,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "reports",
+    "age_days": 90,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "reports",
+    "age_days": 90,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "components",
+    "age_days": -1,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581946313714291616
+  },
+  {
+    "prefix": "components",
+    "age_days": -1,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "components",
+    "age_days": -1,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "components",
+    "age_days": -1,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "components",
+    "age_days": -1,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "components",
+    "age_days": -1,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "components",
+    "age_days": 0,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581946313714291616
+  },
+  {
+    "prefix": "components",
+    "age_days": 0,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "components",
+    "age_days": 0,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "components",
+    "age_days": 0,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "components",
+    "age_days": 0,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "components",
+    "age_days": 0,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "components",
+    "age_days": 7,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581905054439557713
+  },
+  {
+    "prefix": "components",
+    "age_days": 7,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "components",
+    "age_days": 7,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "components",
+    "age_days": 7,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "components",
+    "age_days": 7,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "components",
+    "age_days": 7,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "components",
+    "age_days": 90,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581660445882206721
+  },
+  {
+    "prefix": "components",
+    "age_days": 90,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "components",
+    "age_days": 90,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "components",
+    "age_days": 90,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "components",
+    "age_days": 90,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "components",
+    "age_days": 90,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "concepts",
+    "age_days": -1,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "concepts",
+    "age_days": -1,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "concepts",
+    "age_days": -1,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "concepts",
+    "age_days": -1,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "concepts",
+    "age_days": -1,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "concepts",
+    "age_days": -1,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 0,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 0,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 0,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 0,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 0,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 0,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 7,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 7,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 7,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 7,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 7,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 7,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 90,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 90,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 90,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 90,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 90,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "concepts",
+    "age_days": 90,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "decisions",
+    "age_days": -1,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "decisions",
+    "age_days": -1,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "decisions",
+    "age_days": -1,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "decisions",
+    "age_days": -1,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "decisions",
+    "age_days": -1,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "decisions",
+    "age_days": -1,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 0,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 0,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 0,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 0,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 0,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 0,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 7,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 7,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 7,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 7,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 7,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 7,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 90,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 90,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 90,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 90,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 90,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "decisions",
+    "age_days": 90,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "operations",
+    "age_days": -1,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "operations",
+    "age_days": -1,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "operations",
+    "age_days": -1,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "operations",
+    "age_days": -1,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "operations",
+    "age_days": -1,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "operations",
+    "age_days": -1,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "operations",
+    "age_days": 0,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "operations",
+    "age_days": 0,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "operations",
+    "age_days": 0,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "operations",
+    "age_days": 0,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "operations",
+    "age_days": 0,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "operations",
+    "age_days": 0,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "operations",
+    "age_days": 7,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "operations",
+    "age_days": 7,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "operations",
+    "age_days": 7,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "operations",
+    "age_days": 7,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "operations",
+    "age_days": 7,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "operations",
+    "age_days": 7,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "operations",
+    "age_days": 90,
+    "filter": "none",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "operations",
+    "age_days": 90,
+    "filter": "none",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "operations",
+    "age_days": 90,
+    "filter": "after",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "operations",
+    "age_days": 90,
+    "filter": "after",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  },
+  {
+    "prefix": "operations",
+    "age_days": 90,
+    "filter": "before",
+    "verified": true,
+    "score_bits": 4581374578050121826
+  },
+  {
+    "prefix": "operations",
+    "age_days": 90,
+    "filter": "before",
+    "verified": false,
+    "score_bits": 4580382309542058555
+  }
+]

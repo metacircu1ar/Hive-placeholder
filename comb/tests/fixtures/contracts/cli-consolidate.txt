@@ -1,0 +1,2 @@
+exit=0
+{"note":{"hash":"<hash>","replayed":false,"request_id":"fc244af6503a263ac32e106a88ff1caa53fb55ab08b4644369bf7892837e5c3d","slug":"inbox/note"},"request_id":"consolidate","target":{"hash":"<hash>","replayed":false,"request_id":"consolidate","slug":"concepts/target"}}

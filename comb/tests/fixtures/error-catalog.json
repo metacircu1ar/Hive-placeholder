@@ -1,0 +1,986 @@
+{
+  "literal_pairs": [
+    {
+      "code": "comb_busy",
+      "message": "Comb is already open; use its serving process."
+    },
+    {
+      "code": "comb_busy",
+      "message": "The socket already exists. Confirm its service is stopped before removing it, or choose another --socket path."
+    },
+    {
+      "code": "comb_unavailable",
+      "message": "Comb service is not listening; start comb serve."
+    },
+    {
+      "code": "comb_unavailable",
+      "message": "Cannot connect to Comb service."
+    },
+    {
+      "code": "chunk_limit",
+      "message": "Too many chunks in one page."
+    },
+    {
+      "code": "conflict",
+      "message": "Page changed or already exists; get its current hash before updating."
+    },
+    {
+      "code": "conflict",
+      "message": "File changed while it was being read; retry the operation."
+    },
+    {
+      "code": "connection_lost",
+      "message": "Comb closed before replying."
+    },
+    {
+      "code": "consolidation_conflict",
+      "message": "Missing prior coverage evidence."
+    },
+    {
+      "code": "consolidation_conflict",
+      "message": "No authenticated coverage survives the external edits. Inspect the history and use recopy for an explicit full copy."
+    },
+    {
+      "code": "consolidation_conflict",
+      "message": "Previously copied evidence no longer matches its coverage witness. Inspect the history and use recopy for an explicit full copy."
+    },
+    {
+      "code": "consolidation_conflict",
+      "message": "Target does not cover the current source note."
+    },
+    {
+      "code": "consolidation_conflict",
+      "message": "Target no longer contains authenticated source coverage."
+    },
+    {
+      "code": "consolidation_conflict",
+      "message": "Target no longer contains the checkpoint's copied evidence. Inspect the history and use recopy for an explicit full copy."
+    },
+    {
+      "code": "consolidation_limit",
+      "message": "An inbox note supports at most 128 consolidation targets."
+    },
+    {
+      "code": "credential_exists",
+      "message": "Credential name already exists."
+    },
+    {
+      "code": "credential_exists",
+      "message": "Refusing to overwrite an existing credential file."
+    },
+    {
+      "code": "credential_limit",
+      "message": "Credential registry exceeds 1 MiB; revoke unused entries."
+    },
+    {
+      "code": "credential_limit",
+      "message": "Revoke unused credentials first."
+    },
+    {
+      "code": "embedding_credentials",
+      "message": "The configured embedding credential variable is not set."
+    },
+    {
+      "code": "embedding_endpoint_rejected",
+      "message": "Embedding endpoint also rejects a minimal input; check its model and request configuration."
+    },
+    {
+      "code": "embedding_input_too_large",
+      "message": "Composed input exceeds its 65536-byte limit."
+    },
+    {
+      "code": "embedding_replace_required",
+      "message": "Changing the active embedding space requires --replace."
+    },
+    {
+      "code": "embedding_space_changed",
+      "message": "Embedding activation changed while work was in flight."
+    },
+    {
+      "code": "embedding_space_changed",
+      "message": "Query configuration differs from the active embedding space."
+    },
+    {
+      "code": "embedding_space_changed",
+      "message": "The embedder does not match the active space."
+    },
+    {
+      "code": "embedding_transport",
+      "message": "Cannot initialize HTTP embedding transport."
+    },
+    {
+      "code": "embedding_transport",
+      "message": "Embedding batch deadline reached."
+    },
+    {
+      "code": "embedding_transport",
+      "message": "Embedding reply was incomplete or timed out."
+    },
+    {
+      "code": "embedding_transport",
+      "message": "Embedding request failed or timed out."
+    },
+    {
+      "code": "embeddings_busy",
+      "message": "Embedding query queue is full or its one-second start deadline expired."
+    },
+    {
+      "code": "embeddings_unavailable",
+      "message": "No embedding space is active."
+    },
+    {
+      "code": "embeddings_unavailable",
+      "message": "No embedding space is active; run embed first."
+    },
+    {
+      "code": "embeddings_unavailable",
+      "message": "No query embedding model is configured."
+    },
+    {
+      "code": "embeddings_unavailable",
+      "message": "No vectors are available for the filtered corpus."
+    },
+    {
+      "code": "forbidden",
+      "message": "Collectors may only capture evidence."
+    },
+    {
+      "code": "forbidden",
+      "message": "External files are admitted through sync, not mutation calls."
+    },
+    {
+      "code": "forbidden",
+      "message": "Invalid credential, claim or capability."
+    },
+    {
+      "code": "forbidden",
+      "message": "Only the human administration CLI deletes pages."
+    },
+    {
+      "code": "forbidden",
+      "message": "Promotion requires a configured reviewer."
+    },
+    {
+      "code": "forbidden",
+      "message": "Promotion requires a human or configured reviewer."
+    },
+    {
+      "code": "forbidden",
+      "message": "Proposal decisions require a human or configured reviewer."
+    },
+    {
+      "code": "graph_limit",
+      "message": "Graph exceeds 1000 pages; reduce depth."
+    },
+    {
+      "code": "immutable_timeline",
+      "message": "Existing evidence cannot be changed or removed; append a correction."
+    },
+    {
+      "code": "import_collision",
+      "message": "Multiple input files map to the same lowercase slug; rename them before importing."
+    },
+    {
+      "code": "import_limit",
+      "message": "Import at most 1000 pages at a time; select a smaller directory."
+    },
+    {
+      "code": "import_limit",
+      "message": "Import at most 16 MiB at a time; select a smaller directory."
+    },
+    {
+      "code": "internal_error",
+      "message": "Cannot encode internal data."
+    },
+    {
+      "code": "invalid_actor",
+      "message": "Actor fields must contain 1 to 512 bytes without control characters."
+    },
+    {
+      "code": "invalid_arguments",
+      "message": "Consolidation needs a run name."
+    },
+    {
+      "code": "invalid_arguments",
+      "message": "Do not supply incoming."
+    },
+    {
+      "code": "invalid_arguments",
+      "message": "Do not supply op."
+    },
+    {
+      "code": "invalid_arguments",
+      "message": "Missing request identity."
+    },
+    {
+      "code": "invalid_arguments",
+      "message": "Tool arguments must be an object."
+    },
+    {
+      "code": "invalid_cache_budget",
+      "message": "Vector cache budget is too large."
+    },
+    {
+      "code": "invalid_cache_budget",
+      "message": "Vector cache budget must be 1..8192 MiB."
+    },
+    {
+      "code": "invalid_cache_budget",
+      "message": "Vector cache must fit at least one vector."
+    },
+    {
+      "code": "invalid_capture",
+      "message": "Capture requires bounded nonempty text."
+    },
+    {
+      "code": "invalid_consolidation",
+      "message": "Consolidation needs an inbox note, an ordinary target page, a summary and a run name."
+    },
+    {
+      "code": "invalid_consolidation",
+      "message": "Consolidation requires --run NAME."
+    },
+    {
+      "code": "invalid_credential",
+      "message": "At most 64 reviewer roles are allowed."
+    },
+    {
+      "code": "invalid_credential",
+      "message": "Invalid credential record identity."
+    },
+    {
+      "code": "invalid_credential",
+      "message": "Names must be 1..512 bytes without controls."
+    },
+    {
+      "code": "invalid_credential",
+      "message": "Too many credential records."
+    },
+    {
+      "code": "invalid_decision",
+      "message": "Decide a review page with a nonempty reason of at most 4096 bytes."
+    },
+    {
+      "code": "invalid_depth",
+      "message": "Graph depth is bounded to 8."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Cached vector has the wrong size; discard the derived vector cache."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Cached vector is not finite/unit length; discard the derived vector cache."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Embedding indices must be unique and in range."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Embedding response count does not match inputs."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Embedding response exceeds 8 MiB."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Embedding result count does not match input count."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Embedding result count does not match inputs."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Expected 1..32 embedding inputs."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Malformed embedding response."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Missing embedding index."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Missing query result."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Query batch must contain 1..32 inputs."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Query result count differs from input count."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Vector must have a finite nonzero norm."
+    },
+    {
+      "code": "invalid_embedding",
+      "message": "Vector must have the configured dimensions and finite components."
+    },
+    {
+      "code": "invalid_embedding_batch",
+      "message": "Batch limit must be 1..32."
+    },
+    {
+      "code": "invalid_embedding_batch",
+      "message": "Batch must contain 1..32 jobs."
+    },
+    {
+      "code": "invalid_embedding_batch",
+      "message": "Invalid completed batch."
+    },
+    {
+      "code": "invalid_embedding_config",
+      "message": "Use a valid embedding configuration of at most 16384 bytes."
+    },
+    {
+      "code": "invalid_embedding_config",
+      "message": "Embedding asset paths must not be empty."
+    },
+    {
+      "code": "invalid_embedding_config",
+      "message": "Use absolute asset paths when reading embedding configuration from a pipe."
+    },
+    {
+      "code": "invalid_embedding_config",
+      "message": "HTTP tokenizer and max_tokens must be configured together."
+    },
+    {
+      "code": "invalid_embedding_config",
+      "message": "HTTP tokenizer max_tokens must be 16..8192."
+    },
+    {
+      "code": "invalid_embedding_config",
+      "message": "Invalid embedding space or dimensions (1..4096)."
+    },
+    {
+      "code": "invalid_embedding_config",
+      "message": "Invalid embeddings URL."
+    },
+    {
+      "code": "invalid_embedding_config",
+      "message": "Use HTTPS (or loopback HTTP), no URL credentials/query/fragment, and a 1..120 second timeout."
+    },
+    {
+      "code": "invalid_embedding_state",
+      "message": "Invalid active embedding space; rebuild the derived index."
+    },
+    {
+      "code": "invalid_embedding_state",
+      "message": "Missing vector source."
+    },
+    {
+      "code": "invalid_evidence",
+      "message": "Evidence needs bounded text and a source."
+    },
+    {
+      "code": "invalid_frame",
+      "message": "Invalid Comb capabilities reply."
+    },
+    {
+      "code": "invalid_frame",
+      "message": "Comb returned an input diagnostic that does not match the submitted command."
+    },
+    {
+      "code": "invalid_frame",
+      "message": "Incomplete JSON frame."
+    },
+    {
+      "code": "invalid_identity",
+      "message": "Invalid authority key."
+    },
+    {
+      "code": "invalid_import",
+      "message": "Import source must be a directory."
+    },
+    {
+      "code": "invalid_limit",
+      "message": "Link page limit must be 1..1000."
+    },
+    {
+      "code": "invalid_limit",
+      "message": "List limit is too large."
+    },
+    {
+      "code": "invalid_limit",
+      "message": "List limit must be 1 to 1000."
+    },
+    {
+      "code": "invalid_operation",
+      "message": "Expected a read operation."
+    },
+    {
+      "code": "invalid_operation",
+      "message": "Expected a write or administration operation."
+    },
+    {
+      "code": "invalid_page",
+      "message": "Imported page is not UTF-8."
+    },
+    {
+      "code": "invalid_page",
+      "message": "Invalid title, type, tags or aliases."
+    },
+    {
+      "code": "invalid_page",
+      "message": "Markdown does not preserve the page structure; close fences and keep evidence markers reserved."
+    },
+    {
+      "code": "invalid_page",
+      "message": "Page does not round-trip through its Markdown representation."
+    },
+    {
+      "code": "invalid_page",
+      "message": "Page exceeds its limit or contains NUL."
+    },
+    {
+      "code": "invalid_page",
+      "message": "Page is not UTF-8."
+    },
+    {
+      "code": "invalid_page",
+      "message": "Page needs YAML frontmatter."
+    },
+    {
+      "code": "invalid_page",
+      "message": "Page timestamps must be RFC3339."
+    },
+    {
+      "code": "invalid_page",
+      "message": "Unclosed frontmatter."
+    },
+    {
+      "code": "invalid_request",
+      "message": "Content hash must be 64 lowercase hexadecimal characters."
+    },
+    {
+      "code": "invalid_request",
+      "message": "Invalid request ID or run attribution."
+    },
+    {
+      "code": "invalid_request_id",
+      "message": "Request ID must contain 1 to 128 bytes without control characters."
+    },
+    {
+      "code": "invalid_search",
+      "message": "Date filters require RFC3339 timestamps."
+    },
+    {
+      "code": "invalid_search",
+      "message": "Query must contain 1..4096 bytes."
+    },
+    {
+      "code": "invalid_search",
+      "message": "Search needs a bounded query and limit from 1 to 100."
+    },
+    {
+      "code": "invalid_slug",
+      "message": "Imported paths must be UTF-8."
+    },
+    {
+      "code": "invalid_slug",
+      "message": "Non-UTF-8 page path."
+    },
+    {
+      "code": "invalid_slug",
+      "message": "Use slash-separated lowercase ASCII names containing letters, digits, - or _."
+    },
+    {
+      "code": "invalid_socket",
+      "message": "Credential socket path must be absolute."
+    },
+    {
+      "code": "invalid_socket",
+      "message": "Socket requires a filename."
+    },
+    {
+      "code": "invalid_socket",
+      "message": "Socket requires a parent directory."
+    },
+    {
+      "code": "invalid_state",
+      "message": "Conflicting durable replay receipt."
+    },
+    {
+      "code": "invalid_state",
+      "message": "Invalid authentication key."
+    },
+    {
+      "code": "invalid_state",
+      "message": "Invalid content digest in Comb administration state."
+    },
+    {
+      "code": "invalid_state",
+      "message": "Invalid index population marker."
+    },
+    {
+      "code": "invalid_state",
+      "message": "Invalid seal."
+    },
+    {
+      "code": "invalid_state",
+      "message": "Pending receipt belongs to another page."
+    },
+    {
+      "code": "invalid_state",
+      "message": "Pending receipt conflicts with saved authority."
+    },
+    {
+      "code": "invalid_state",
+      "message": "Receipt identity disagrees with its filename."
+    },
+    {
+      "code": "invalid_state",
+      "message": "Receipt slug disagrees with its file."
+    },
+    {
+      "code": "invalid_timeline",
+      "message": "Duplicate evidence ID."
+    },
+    {
+      "code": "invalid_timeline",
+      "message": "Evidence IDs must be UUIDs."
+    },
+    {
+      "code": "invalid_timeline",
+      "message": "Evidence needs a bounded source."
+    },
+    {
+      "code": "invalid_timeline",
+      "message": "Invalid evidence marker."
+    },
+    {
+      "code": "invalid_timeline",
+      "message": "Invalid evidence timestamp."
+    },
+    {
+      "code": "invalid_timeline",
+      "message": "Timeline entries need structured evidence markers; use append."
+    },
+    {
+      "code": "not_found",
+      "message": "Credential does not exist."
+    },
+    {
+      "code": "not_found",
+      "message": "Page does not exist."
+    },
+    {
+      "code": "page_limit",
+      "message": "Page exceeds 1 MiB."
+    },
+    {
+      "code": "recovery_required",
+      "message": "Page changed outside the interrupted mutation; preserve it and resolve manually."
+    },
+    {
+      "code": "recovery_required",
+      "message": "Pending page does not have a valid seal."
+    },
+    {
+      "code": "recovery_required",
+      "message": "Shared Comb state was poisoned; restart Comb."
+    },
+    {
+      "code": "recovery_required",
+      "message": "Reopen Comb before reading pending state."
+    },
+    {
+      "code": "recovery_required",
+      "message": "Reopen Comb before using the pending index."
+    },
+    {
+      "code": "recovery_required",
+      "message": "Reopen Comb to reconcile the pending file mutation."
+    },
+    {
+      "code": "recovery_required",
+      "message": "Restart Comb after an uncertain credential registry update."
+    },
+    {
+      "code": "request_conflict",
+      "message": "Request ID already belongs to different input or actor."
+    },
+    {
+      "code": "result_removed",
+      "message": "This request succeeded previously, but its page has since been removed."
+    },
+    {
+      "code": "server_embedding_config",
+      "message": "The running service owns its embedding configuration; omit --embedding-config or stop it for offline inference."
+    },
+    {
+      "code": "size_limit",
+      "message": "File exceeds its size limit."
+    },
+    {
+      "code": "size_limit",
+      "message": "Input exceeds 1 MiB."
+    },
+    {
+      "code": "size_limit",
+      "message": "JSON frame exceeds its size limit."
+    },
+    {
+      "code": "size_limit",
+      "message": "JSON output exceeds its size limit."
+    },
+    {
+      "code": "size_limit",
+      "message": "Mutation recovery record exceeds 16 KiB; no intent was written."
+    },
+    {
+      "code": "socket_path_too_long",
+      "message": "Use --socket with a shorter absolute path."
+    },
+    {
+      "code": "timeout",
+      "message": "Comb reply was not received before the connection or deadline ended."
+    },
+    {
+      "code": "timeout",
+      "message": "Connecting to Comb timed out; nothing was submitted."
+    },
+    {
+      "code": "timeout",
+      "message": "MCP output is blocked."
+    },
+    {
+      "code": "timeout",
+      "message": "Request frame timed out."
+    },
+    {
+      "code": "uncertain",
+      "message": "Comb reply was not received. Work may have committed; inspect the affected state before retrying."
+    },
+    {
+      "code": "uncertain",
+      "message": "Comb reply was not received. Work may have committed; retry with the same request ID."
+    },
+    {
+      "code": "unknown_tool",
+      "message": "Unknown Comb tool."
+    },
+    {
+      "code": "unsafe_credential",
+      "message": "Credential files must be private (0600)."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Comb administration directory must be private (0700)."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Comb administration directory must be private."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Comb content and private state must share one filesystem; nested mounts are unsupported."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Comb scan refuses symlinks."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Expected an owned directory without symlinks or shared write access."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Expected an owned regular file without shared write access or hard links."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Import path escaped root."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Import refuses symlinks."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Index path must be UTF-8."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Missing parent directory."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Missing parent."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Noncanonical on-disk filename."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "On-disk path spelling differs from the requested name; normalize it before use."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Refusing to clean Comb preparations with unsafe or changed ownership."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Refusing to remove unsafe index files."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Unsafe ownership lock."
+    },
+    {
+      "code": "unsafe_socket",
+      "message": "Expected a private, owned Unix socket."
+    },
+    {
+      "code": "worker_failed",
+      "message": "Comb worker failed; restart the serving process."
+    },
+    {
+      "code": "worker_failed",
+      "message": "Embedding query worker stopped."
+    },
+    {
+      "code": "invalid_request",
+      "message": "Managed execution is only valid for serve."
+    },
+    {
+      "code": "invalid_arguments",
+      "message": "Existing service uses another environment file; uninstall it before changing service settings."
+    },
+    {
+      "code": "invalid_embedding_config",
+      "message": "Managed service has no root."
+    },
+    {
+      "code": "recovery_required",
+      "message": "Model activation intent is durable; configuration/index publication is pending. Retry model use none or model use-http with the same --root, or serve that root to recover."
+    },
+    {
+      "code": "invalid_embedding_config",
+      "message": "Serving embedding identity differs from the saved selection; rerun setup or model use-http for this root."
+    },
+    {
+      "code": "io_error",
+      "message": "Root operation committed."
+    },
+    {
+      "code": "invalid_embedding_config",
+      "message": "An unmanaged instance is serving this root; stop it first."
+    },
+    {
+      "code": "invalid_embedding_config",
+      "message": "Run comb setup before installing its service."
+    },
+    {
+      "code": "io_error",
+      "message": "Cannot resolve invoked executable."
+    },
+    {
+      "code": "invalid_arguments",
+      "message": "Existing service uses another PATH; uninstall it before changing service settings."
+    },
+    {
+      "code": "invalid_state",
+      "message": "Service disappeared."
+    },
+    {
+      "code": "invalid_search",
+      "message": "The after timestamp must not be later than before."
+    },
+    {
+      "code": "invalid_credential",
+      "message": "Reviewer roles must be unique."
+    },
+    {
+      "code": "comb_busy",
+      "message": "The selected embedding model changed during startup; retry serve with the current selection."
+    },
+    {
+      "code": "embedding_replace_required",
+      "message": "Changing the served embedding space requires --replace-embeddings."
+    },
+    {
+      "code": "invalid_embedding_asset",
+      "message": "Embedding assets must be readable regular files."
+    },
+    {
+      "code": "index_error",
+      "message": "Cannot verify vector cache integrity; the cache was preserved. Check storage health. To discard cached embeddings, stop Comb, remove only <root>/.comb/vectors.sqlite and its -wal, -shm and -journal files, then run comb sync --rebuild with that root."
+    },
+    {
+      "code": "invalid_state",
+      "message": "Invalid consolidation recovery record; preserve it for inspection."
+    },
+    {
+      "code": "recovery_required",
+      "message": "Consolidation receipts are incomplete without a recovery intent; preserve state and resolve manually."
+    },
+    {
+      "code": "conflict",
+      "message": "An unfinished import target changed. Keep the edit and use comb import --status and comb import --abandon BATCH_ID before starting a new import."
+    },
+    {
+      "code": "conflict",
+      "message": "Import source changed or is unavailable. Restore its original input, or use comb import --status and comb import --abandon BATCH_ID."
+    },
+    {
+      "code": "conflict",
+      "message": "That import batch is not current. Use comb import --status; no batch was abandoned."
+    },
+    {
+      "code": "invalid_import",
+      "message": "Import batch ID must be a canonical UUID from comb import --status."
+    },
+    {
+      "code": "invalid_import",
+      "message": "Import destinations must be outside the source directory tree."
+    },
+    {
+      "code": "invalid_state",
+      "message": "Invalid import journal; preserve it for inspection."
+    },
+    {
+      "code": "invalid_state",
+      "message": "Invalid import progress record."
+    },
+    {
+      "code": "recovery_required",
+      "message": "An import is pending. Resume with its unchanged source, or inspect comb import --status and explicitly abandon it with comb import --abandon BATCH_ID."
+    },
+    {
+      "code": "unsafe_path",
+      "message": "Socket requires a private, owned directory beneath safe ancestors; use a mode-0700 directory."
+    },
+    {
+      "code": "unsupported_format",
+      "message": "Unsupported development format. Keep the original data and use a fresh root; no data was modified."
+    },
+    {
+      "code": "newer_format",
+      "message": "This data uses a newer format. The required product release is unknown to this build; keep the data unchanged and use its producing build or a newer supported build."
+    },
+    {
+      "code": "incompatible_protocol",
+      "message": "Unsupported Comb protocol; this build supports protocol 1. Update the Comb client or server to a compatible build."
+    },
+    {
+      "code": "index_error",
+      "message": "Migration index integrity check failed; the original files were retained."
+    },
+    {
+      "code": "recovery_required",
+      "message": "An interrupted upgrade needs its registered released-format reader; retain the root and backups, and run comb upgrade with the matching build."
+    },
+    {
+      "code": "invalid_json",
+      "message": "Request must be an object."
+    }
+  ],
+  "dynamic_families": [
+    {
+      "code_expression": "\"comb_busy\"",
+      "message_expression": "format ! ( \"Comb {lane} capacity is unavailable.\" )"
+    },
+    {
+      "code_expression": "\"embedding_asset_size\"",
+      "message_expression": "format ! ( \"Embedding asset exceeds its size limit: {}\" , path . display ( ) )"
+    },
+    {
+      "code_expression": "\"embedding_input_rejected\"",
+      "message_expression": "format ! ( \"Embedding endpoint rejected input (HTTP {status}).\" )"
+    },
+    {
+      "code_expression": "\"embedding_input_too_large\"",
+      "message_expression": "format ! ( \"Input exceeds the local HTTP tokenizer limit of {} tokens.\" , check . limit )"
+    },
+    {
+      "code_expression": "\"embedding_model\"",
+      "message_expression": "format ! ( \"Cannot disable HTTP tokenizer truncation: {e}\" )"
+    },
+    {
+      "code_expression": "\"embedding_model\"",
+      "message_expression": "format ! ( \"Cannot load HTTP preflight tokenizer: {e}\" )"
+    },
+    {
+      "code_expression": "\"embedding_model\"",
+      "message_expression": "format ! ( \"Cannot tokenize HTTP input: {e}\" )"
+    },
+    {
+      "code_expression": "\"embedding_transport\"",
+      "message_expression": "format ! ( \"Embedding endpoint returned HTTP {status}.\" )"
+    },
+    {
+      "code_expression": "\"index_error\"",
+      "message_expression": "e . to_string ( )"
+    },
+    {
+      "code_expression": "\"invalid_embedding\"",
+      "message_expression": "message"
+    },
+    {
+      "code_expression": "\"invalid_frontmatter\"",
+      "message_expression": "e . to_string ( )"
+    },
+    {
+      "code_expression": "\"invalid_json\"",
+      "message_expression": "e . to_string ( )"
+    },
+    {
+      "code_expression": "\"io_error\"",
+      "message_expression": "e . to_string ( )"
+    },
+    {
+      "code_expression": "\"unsupported_index\"",
+      "message_expression": "format ! ( \"Unsupported index structure at {}. Rebuild index.sqlite with sync --rebuild; an unsupported vectors.sqlite cache may be removed for recomputation.\" , path . display ( ) )"
+    },
+    {
+      "code_expression": "& error . code",
+      "message_expression": "if error . code == \"embedding_input_too_large\" { \"Composed input exceeds its byte or tokenizer limit.\" } else { \"Embedding endpoint rejected this individual input; inspect content and model configuration, then retry failed inputs.\" }"
+    },
+    {
+      "code_expression": "e . code . as_str ( )",
+      "message_expression": "format ! ( \"Credential {id} was issued, but its file could not be saved. Revoke it with credential revoke {id}: {}\" , e . message )"
+    },
+    {
+      "code_expression": "ErrorCode :: InvalidEmbeddingConfig",
+      "message_expression": "message"
+    },
+    {
+      "code_expression": "ErrorCode :: InvalidEmbeddingConfig",
+      "message_expression": "message"
+    },
+    {
+      "code_expression": "crate :: ErrorCode :: InvalidArguments",
+      "message_expression": "message"
+    },
+    {
+      "code_expression": "ErrorCode :: IoError",
+      "message_expression": "e . to_string ( )"
+    },
+    {
+      "code_expression": "result . code",
+      "message_expression": "format ! ( \"{}; service restart failed: {}\" , result . message , restart . restart )"
+    },
+    {
+      "code_expression": "comb :: ErrorCode :: InvalidEmbeddingConfig",
+      "message_expression": "format ! ( \"Service environment is missing: {}\" , missing . join ( \", \" ) )"
+    },
+    {
+      "code_expression": "ErrorCode :: InvalidArguments",
+      "message_expression": "format ! ( \"Service needs --service-environment containing: {}\" , missing . join ( \", \" ) )"
+    },
+    {
+      "code_expression": "ErrorCode :: InvalidArguments",
+      "message_expression": "format ! ( \"Owned service environment file needs: {}. No model change was made.\" , missing . join ( \", \" ) )"
+    }
+  ]
+}

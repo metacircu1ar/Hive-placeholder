@@ -1,0 +1,12 @@
+[
+  [
+    "concepts/approval",
+    "concepts/writer",
+    "slug"
+  ],
+  [
+    "concepts/writer",
+    "concepts/approval",
+    "markdown"
+  ]
+]

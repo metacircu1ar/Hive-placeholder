@@ -1,0 +1,86 @@
+{
+  "results": [
+    {
+      "slug": "concepts/promoted",
+      "title": "Promoted writer",
+      "type": "note",
+      "score": 0.019836065573770496,
+      "matched_by": "text",
+      "snippet": "The writer has a reviewed summary.",
+      "highlights": [
+        [
+          4,
+          10
+        ]
+      ],
+      "heading": "",
+      "zone": "compiled",
+      "evidence": "exact_title",
+      "create_safety": "exists",
+      "unverified": false,
+      "page_unverified": false
+    },
+    {
+      "slug": "concepts/pending",
+      "title": "Pending writer",
+      "type": "note",
+      "score": 0.017741935483870968,
+      "matched_by": "text",
+      "snippet": "writer queued text-only.",
+      "highlights": [
+        [
+          0,
+          6
+        ]
+      ],
+      "heading": "",
+      "zone": "compiled",
+      "evidence": "keyword_exact",
+      "create_safety": "probable",
+      "unverified": false,
+      "page_unverified": false
+    },
+    {
+      "slug": "concepts/approval",
+      "title": "approval",
+      "type": "concept",
+      "score": 0.015873015873015872,
+      "matched_by": "text",
+      "snippet": "An approval wakes an agent. [[concepts/writer|Writer]]",
+      "highlights": [
+        [
+          39,
+          45
+        ],
+        [
+          46,
+          52
+        ]
+      ],
+      "heading": "Human approval",
+      "zone": "compiled",
+      "evidence": "keyword_exact",
+      "create_safety": "probable",
+      "unverified": true,
+      "page_unverified": true
+    },
+    {
+      "slug": "concepts/writer",
+      "title": "writer",
+      "type": "concept",
+      "score": 0.015625,
+      "matched_by": "text",
+      "snippet": "word671 word672 word673 word674 word675. word676 word677 word678 word679 word680 word681 word682 word683 word684 word685 word686 word687 word688 word689 word690 word691 word692 word693 word694 word695 word696 word697 word698 word699 word700 word701 word702 word703 word704 word705 word706 word707 word708 word709 word710 word711 word712 word713 word714 word715 word716 word717 word718 word719 word720. word721 word722 word723 word724 word725 word726 word727 word728 word729 word73",
+      "highlights": [],
+      "heading": "Durable writer",
+      "zone": "compiled",
+      "evidence": "keyword_exact",
+      "create_safety": "probable",
+      "unverified": true,
+      "page_unverified": true
+    }
+  ],
+  "mode": "text",
+  "fallback": null,
+  "coverage": null
+}

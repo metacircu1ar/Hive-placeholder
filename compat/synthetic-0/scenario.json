@@ -1,0 +1,53 @@
+{
+  "model": "gpt-5.6-luna",
+  "effort": "medium",
+  "output": {
+    "text": "x",
+    "repetitions": 32768
+  },
+  "branch_body": "reply:branch seed",
+  "attachment": "Private synthetic attachment, retained after source deletion.",
+  "queued": [
+    "reply:queued upgrade input one",
+    "reply:queued upgrade input two",
+    "reply:queued upgrade input three"
+  ],
+  "pages": {
+    "trusted": {
+      "slug": "concepts/compat",
+      "markdown": "---\ntitle: Compatibility trusted\n---\nwriter transcript trusted stores durable evidence.",
+      "unverified": false
+    },
+    "untrusted": {
+      "slug": "concepts/unverified",
+      "markdown": "---\ntitle: Compatibility untrusted\n---\nwriter transcript untrusted stores durable evidence.",
+      "unverified": true
+    },
+    "note": {
+      "slug": "inbox/note",
+      "markdown": "---\ntitle: Compatibility note\n---\nwriter transcript note stores durable evidence.",
+      "unverified": false
+    },
+    "proposal": {
+      "slug": "review/proposal",
+      "markdown": "---\ntitle: Compatibility proposal\n---\nwriter transcript proposal stores durable evidence.",
+      "unverified": false
+    }
+  },
+  "summary": "The writer retains messages. [evidence:new]",
+  "reason": "Needs evidence",
+  "capture": "writer capture",
+  "collector": "compat collector note",
+  "queries": [
+    "writer",
+    "evidence"
+  ],
+  "embedding": {
+    "backend": "http",
+    "model": "deterministic-compat",
+    "revision": "sha256-first-eight-positive-bytes",
+    "dimensions": 8,
+    "query_prefix": "",
+    "document_prefix": ""
+  }
+}

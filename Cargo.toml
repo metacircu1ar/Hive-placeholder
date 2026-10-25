@@ -1,0 +1,87 @@
+[package]
+name = "hive"
+version.workspace = true
+edition = "2024"
+license = "MIT"
+rust-version = "1.89"
+description = "Persistent Codex and Claude agents with shared coordination"
+publish = false
+default-run = "hivectl"
+autobins = false
+
+[[bin]]
+name = "hivectl"
+path = "src/main.rs"
+
+[[bin]]
+name = "hive-daemon"
+path = "src/bin/hive_daemon.rs"
+
+[workspace]
+members = [".", "comb", "comb-protocol", "installer", "setup-support", "logging", "input"]
+default-members = [".", "comb", "comb-protocol"]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+
+[features]
+default = ["comb"]
+comb = ["dep:comb-protocol"]
+# Measurement builds only: HIVE_BARRIER_DELAY_MS delays each ledger barrier.
+barrier-delay = []
+
+[dependencies]
+atomic-fs = "0.1"
+hive-input = { path = "input", features = ["clap"] }
+hive-log = { path = "logging" }
+tracing = { version = "0.1.44", default-features = false, features = ["std"] }
+hive-setup-support = { path = "setup-support" }
+comb-protocol = { path = "comb-protocol", optional = true }
+clap = { version = "4.5", features = ["derive"] }
+libc = "0.2"
+rustix = { version = "1.1.5", features = ["fs", "process", "event"] }
+serde = { version = "1", features = ["derive", "rc"] }
+serde_json = "1"
+toml = { version = "1.1.8", default-features = false, features = ["std", "serde", "parse"] }
+semver = "1"
+serde_yaml_ng = "0.10"
+signal-hook = "0.3"
+tempfile = "3"
+uuid = { version = "1", features = ["v4", "serde"] }
+yaml-rust2 = "0.11"
+rusqlite = { version = "0.38", features = ["bundled", "serialize", "trace", "hooks"] }
+tokio = { version = "1", features = ["rt-multi-thread", "net", "io-util", "io-std", "sync", "time", "macros", "signal"] }
+thiserror = "2"
+schemars = "1"
+sha2 = "0.10.9"
+unicode-normalization = "0.1.24"
+image = { version = "0.25.10", default-features = false, features = ["png", "jpeg", "gif", "webp"] }
+base64 = "0.23.1"
+pulldown-cmark = "0.13"
+ratatui = { version = "0.30.2", default-features = false, features = ["crossterm_0_29", "layout-cache"] }
+unicode-width = "0.2"
+regex = "1"
+percent-encoding = "2"
+
+[build-dependencies]
+cc = "1"
+
+[dev-dependencies]
+comb = { path = "comb", default-features = false }
+
+[lints]
+workspace = true
+
+[workspace.lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+unwrap_used = "deny"
+expect_used = "deny"
+undocumented_unsafe_blocks = "deny"
+too_many_lines = "warn"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+module_name_repetitions = "allow"
+must_use_candidate = "allow"
+# Owned parameters mark ownership transfer and drop points throughout the runtime.
+needless_pass_by_value = "allow"

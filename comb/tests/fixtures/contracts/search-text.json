@@ -1,0 +1,91 @@
+{
+  "results": [
+    {
+      "slug": "concepts/pending",
+      "title": "Pending writer",
+      "type": "note",
+      "score": 0.019836065573770496,
+      "matched_by": "text",
+      "snippet": "writer queued text-only.",
+      "highlights": [
+        [
+          0,
+          6
+        ]
+      ],
+      "heading": "",
+      "zone": "compiled",
+      "evidence": "keyword_exact",
+      "create_safety": "probable",
+      "unverified": false,
+      "page_unverified": false
+    },
+    {
+      "slug": "concepts/promoted",
+      "title": "Promoted writer",
+      "type": "note",
+      "score": 0.017741935483870968,
+      "matched_by": "text",
+      "snippet": "reviewedproof: measured writer durability.",
+      "highlights": [
+        [
+          24,
+          30
+        ]
+      ],
+      "heading": "",
+      "zone": "timeline",
+      "evidence": "keyword_exact",
+      "create_safety": "probable",
+      "unverified": false,
+      "page_unverified": false
+    },
+    {
+      "slug": "concepts/writer",
+      "title": "writer",
+      "type": "concept",
+      "score": 0.01639344262295082,
+      "matched_by": "text",
+      "snippet": "The writer retains messages. [approval](approval.md). word0. word1 word2 word3 word4 word5 word6 word7 word8 word9 word10 word11 word12 word13 word14 word15 word16 word17 word18 word19 word20 word21 word22 word23 word24 word25 word26 word27 word28 word29 word30 word31 word32 word33 word34 word35 word36 word37 word38 word39 word40 word41 word42 word43 word44 word45. word46 word47 word48 word49 word50 word51 word52 word53 word54 word55 word56 word57 word58 word59 word60 word61 ",
+      "highlights": [
+        [
+          4,
+          10
+        ]
+      ],
+      "heading": "Durable writer",
+      "zone": "compiled",
+      "evidence": "exact_title",
+      "create_safety": "exists",
+      "unverified": true,
+      "page_unverified": true
+    },
+    {
+      "slug": "concepts/approval",
+      "title": "approval",
+      "type": "concept",
+      "score": 0.015873015873015872,
+      "matched_by": "text",
+      "snippet": "An approval wakes an agent. [[concepts/writer|Writer]]",
+      "highlights": [
+        [
+          39,
+          45
+        ],
+        [
+          46,
+          52
+        ]
+      ],
+      "heading": "Human approval",
+      "zone": "compiled",
+      "evidence": "keyword_exact",
+      "create_safety": "probable",
+      "unverified": true,
+      "page_unverified": true
+    }
+  ],
+  "mode": "text",
+  "fallback": null,
+  "coverage": null
+}

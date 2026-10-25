@@ -1,0 +1,348 @@
+{
+  "registries": [
+    {
+      "crate": "hive",
+      "path": "src/compatibility/registry.json",
+      "test": "compatibility::compatibility_registry_matches_contract_inventory"
+    },
+    {
+      "crate": "comb",
+      "path": "comb/src/compatibility/registry.json",
+      "test": "compatibility::compatibility_registry_matches_contract_inventory"
+    },
+    {
+      "crate": "comb-protocol",
+      "path": "comb-protocol/src/compatibility/registry.json",
+      "test": "compatibility::compatibility_registry_matches_contract_inventory"
+    },
+    {
+      "crate": "hive-setup-support",
+      "path": "setup-support/src/compatibility/registry.json",
+      "test": "compatibility::compatibility_registry_matches_contract_inventory"
+    },
+    {
+      "crate": "hive-install",
+      "path": "installer/src/compatibility/registry.json",
+      "test": "compatibility::compatibility_registry_matches_contract_inventory"
+    }
+  ],
+  "contracts": [
+    {
+      "crate": "hive",
+      "name": "state",
+      "artifacts": [
+        {
+          "id": "sqlite_objects",
+          "path": "src/compatibility/contracts/runtime-schema.json",
+          "encoding": "json",
+          "test": "runtime::store::schema::tests::compatibility_schema_matches_native_object_contract"
+        },
+        {
+          "id": "root_marker",
+          "path": "src/compatibility/contracts/state-marker.json",
+          "encoding": "json",
+          "test": "state::format::tests::current_marker_is_published_only_for_new_or_empty_roots"
+        },
+        {
+          "id": "sqlite_marker",
+          "path": "src/compatibility/contracts/database-marker.json",
+          "encoding": "json",
+          "test": "runtime::store::schema::tests::database_identity_requires_current_application_and_format"
+        }
+      ],
+      "remaining_coverage": [
+        "Exhaustive persisted JSON row variants and root recovery records."
+      ]
+    },
+    {
+      "crate": "hive",
+      "name": "collector",
+      "artifacts": [
+        {
+          "id": "envelopes",
+          "path": "src/compatibility/contracts/collector-envelopes.json",
+          "encoding": "json",
+          "test": "runtime::store::collectors::capture::compatibility_collector_envelopes_keep_queued_bytes"
+        }
+      ],
+      "remaining_coverage": [
+        "All evidence record variants and queued replay byte corpus."
+      ]
+    },
+    {
+      "crate": "hive",
+      "name": "controller_export",
+      "artifacts": [
+        {
+          "id": "manifest",
+          "path": "src/compatibility/contracts/controller-export.json",
+          "encoding": "json",
+          "test": "state::controller::export::wire::tests::manifest_report_and_blob_bytes_remain_exact"
+        }
+      ],
+      "remaining_coverage": [
+        "Export row, ownership-evidence and report corpus."
+      ]
+    },
+    {
+      "crate": "comb",
+      "name": "root",
+      "artifacts": [
+        {
+          "id": "identity",
+          "path": "comb/tests/fixtures/contracts/identity.json",
+          "encoding": "json",
+          "test": "disk::golden::durable_record_bytes_come_from_the_real_write_path"
+        },
+        {
+          "id": "receipt",
+          "path": "comb/tests/fixtures/contracts/receipt.json",
+          "encoding": "json",
+          "test": "disk::golden::durable_record_bytes_come_from_the_real_write_path"
+        },
+        {
+          "id": "page_0",
+          "path": "comb/tests/fixtures/contracts/page-0.md",
+          "encoding": "bytes",
+          "test": "golden::page_encodings_and_trust_digests_are_stable"
+        },
+        {
+          "id": "page_1",
+          "path": "comb/tests/fixtures/contracts/page-1.md",
+          "encoding": "bytes",
+          "test": "golden::page_encodings_and_trust_digests_are_stable"
+        },
+        {
+          "id": "page_2",
+          "path": "comb/tests/fixtures/contracts/page-2.md",
+          "encoding": "bytes",
+          "test": "golden::page_encodings_and_trust_digests_are_stable"
+        },
+        {
+          "id": "page_3",
+          "path": "comb/tests/fixtures/contracts/page-3.md",
+          "encoding": "bytes",
+          "test": "golden::page_encodings_and_trust_digests_are_stable"
+        },
+        {
+          "id": "page_4",
+          "path": "comb/tests/fixtures/contracts/page-4.md",
+          "encoding": "bytes",
+          "test": "golden::page_encodings_and_trust_digests_are_stable"
+        }
+      ],
+      "remaining_coverage": [
+        "Exhaustive recovery records and mutation receipt variants."
+      ]
+    },
+    {
+      "crate": "comb",
+      "name": "seal",
+      "artifacts": [
+        {
+          "id": "mac_input_0",
+          "path": "comb/tests/fixtures/contracts/seal-input-0.json",
+          "encoding": "bytes",
+          "test": "disk::golden::mac_input_and_seals_preserve_every_actor_encoding"
+        },
+        {
+          "id": "mac_input_1",
+          "path": "comb/tests/fixtures/contracts/seal-input-1.json",
+          "encoding": "bytes",
+          "test": "disk::golden::mac_input_and_seals_preserve_every_actor_encoding"
+        },
+        {
+          "id": "mac_input_2",
+          "path": "comb/tests/fixtures/contracts/seal-input-2.json",
+          "encoding": "bytes",
+          "test": "disk::golden::mac_input_and_seals_preserve_every_actor_encoding"
+        },
+        {
+          "id": "mac_input_3",
+          "path": "comb/tests/fixtures/contracts/seal-input-3.json",
+          "encoding": "bytes",
+          "test": "disk::golden::mac_input_and_seals_preserve_every_actor_encoding"
+        },
+        {
+          "id": "mac_input_4",
+          "path": "comb/tests/fixtures/contracts/seal-input-4.json",
+          "encoding": "bytes",
+          "test": "disk::golden::mac_input_and_seals_preserve_every_actor_encoding"
+        }
+      ],
+      "remaining_coverage": [
+        "Historical seal verifier corpus."
+      ]
+    },
+    {
+      "crate": "comb",
+      "name": "index",
+      "artifacts": [
+        {
+          "id": "sqlite_objects",
+          "path": "comb/tests/fixtures/contracts/index.sqlite-schema.json",
+          "encoding": "json",
+          "test": "index::schema::tests::compatibility_schemas_match_native_object_contracts"
+        }
+      ],
+      "remaining_coverage": []
+    },
+    {
+      "crate": "comb",
+      "name": "vectors",
+      "artifacts": [
+        {
+          "id": "sqlite_objects",
+          "path": "comb/tests/fixtures/contracts/vectors.sqlite-schema.json",
+          "encoding": "json",
+          "test": "index::schema::tests::compatibility_schemas_match_native_object_contracts"
+        },
+        {
+          "id": "embedding_space",
+          "path": "comb/tests/fixtures/contracts/space-http-default.json",
+          "encoding": "json",
+          "test": "golden::spaces::http_space_fingerprints_include_transport_and_tokenizer_policies"
+        }
+      ],
+      "remaining_coverage": [
+        "All embedding-space identities and equivalence corpus."
+      ]
+    },
+    {
+      "crate": "comb-protocol",
+      "name": "connection",
+      "artifacts": [
+        {
+          "id": "connection",
+          "path": "comb/tests/fixtures/contracts/connection.json",
+          "encoding": "bytes",
+          "test": "comb:service::auth::golden::registry_and_connection_bytes_preserve_credentials"
+        }
+      ],
+      "remaining_coverage": []
+    },
+    {
+      "crate": "hive-setup-support",
+      "name": "maintenance",
+      "artifacts": [
+        {
+          "id": "plan",
+          "path": "setup-support/src/compatibility/maintenance.json",
+          "encoding": "json",
+          "test": "compatibility::compatibility_shared_record_contracts_require_current_markers"
+        }
+      ],
+      "remaining_coverage": [
+        "All product-specific details and populated removal/object records."
+      ]
+    },
+    {
+      "crate": "hive-setup-support",
+      "name": "service",
+      "artifacts": [
+        {
+          "id": "spec",
+          "path": "setup-support/src/compatibility/service.json",
+          "encoding": "json",
+          "test": "compatibility::compatibility_shared_record_contracts_require_current_markers"
+        }
+      ],
+      "remaining_coverage": [
+        "Both platform renderings, refresh journal and optional-field variants."
+      ]
+    },
+    {
+      "crate": "hive-install",
+      "name": "installation",
+      "artifacts": [
+        {
+          "id": "manifest",
+          "path": "installer/src/compatibility/manifest.json",
+          "encoding": "json",
+          "test": "compatibility::compatibility_manifest_contract_validates_and_requires_its_marker"
+        }
+      ],
+      "remaining_coverage": [
+        "Installed generation, service journal, purge receipt and populated recovery corpus."
+      ]
+    },
+    {
+      "crate": "hive",
+      "name": "control_protocol",
+      "artifacts": [
+        {
+          "id": "envelope",
+          "path": "src/compatibility/contracts/control-envelope.json",
+          "encoding": "json",
+          "test": "runtime::client::compatibility_control_request_contract"
+        },
+        {
+          "id": "live",
+          "path": "src/compatibility/contracts/control-live.json",
+          "encoding": "json",
+          "test": "runtime::client::compatibility_live_control_contract"
+        },
+        {
+          "id": "synthetic_transcripts",
+          "path": "compat/synthetic-0/transcripts.json",
+          "encoding": "json",
+          "test": "runtime:compatibility::transcripts::synthetic_release_control_transcript_refuses_skew_before_dispatch"
+        }
+      ],
+      "remaining_coverage": [
+        "All successful operation and response variants, including receipt and progress metadata."
+      ]
+    },
+    {
+      "crate": "hive",
+      "name": "shell_protocol",
+      "artifacts": [
+        {
+          "id": "envelope",
+          "path": "src/compatibility/contracts/shell-envelope.json",
+          "encoding": "json",
+          "test": "shell::compatibility_shell_envelope_contract_is_strict"
+        }
+      ],
+      "remaining_coverage": [
+        "Full transcripts and tool catalog variants."
+      ]
+    },
+    {
+      "crate": "hive",
+      "name": "agent_catalog",
+      "artifacts": [
+        {
+          "id": "envelope",
+          "path": "src/compatibility/contracts/agent-catalog.json",
+          "encoding": "json",
+          "test": "runtime::tool_registry::saved_catalog_is_required_and_unsupported_catalogs_are_not_rebound"
+        }
+      ],
+      "remaining_coverage": [
+        "Full transcripts and tool catalog variants."
+      ]
+    },
+    {
+      "crate": "comb-protocol",
+      "name": "service_protocol",
+      "artifacts": [
+        {
+          "id": "envelope",
+          "path": "comb-protocol/src/compatibility/service-envelope.json",
+          "encoding": "json",
+          "test": "service::client::tests::compatibility_service_contract"
+        },
+        {
+          "id": "synthetic_transcripts",
+          "path": "compat/synthetic-0/transcripts.json",
+          "encoding": "json",
+          "test": "comb:service::tests::compatibility::synthetic_release_service_and_mcp_transcripts"
+        }
+      ],
+      "remaining_coverage": [
+        "All successful operation and response variants, including receipt and progress metadata."
+      ]
+    }
+  ]
+}

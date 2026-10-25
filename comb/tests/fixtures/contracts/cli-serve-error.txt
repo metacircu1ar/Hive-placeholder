@@ -1,0 +1,2 @@
+exit=2
+{"error":{"code":"invalid_value","message":"Invalid command input.","field":"--embedding-config","expected":"configuration field url: an HTTPS endpoint or loopback HTTP URL without user-info, query or fragment; normalized http:URL identity at most 4096 bytes","examples":["comb --root /private/knowledge serve"]}}

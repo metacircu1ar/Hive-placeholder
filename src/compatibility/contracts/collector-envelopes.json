@@ -1,0 +1,26 @@
+[
+  {
+    "event": 3,
+    "format": 1,
+    "installation": "12345678-1234-4234-8234-123456789abc",
+    "record": {
+      "actor": "agent",
+      "evidence": {
+        "outcome": "completed"
+      },
+      "execution": "execution",
+      "role": "writer",
+      "source": "task_completed",
+      "turn": "turn"
+    }
+  },
+  {
+    "destination": "knowledge",
+    "first_event": 4,
+    "format": 1,
+    "installation": "12345678-1234-4234-8234-123456789abc",
+    "kind": "collection_gap",
+    "last_event": 5,
+    "skipped_count": 2
+  }
+]

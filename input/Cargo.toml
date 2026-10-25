@@ -1,0 +1,20 @@
+[package]
+name = "hive-input"
+version.workspace = true
+edition = "2024"
+license = "MIT"
+rust-version = "1.89"
+description = "Shared input validation and private error rendering for Hive tools"
+publish = false
+
+[features]
+clap = ["dep:clap"]
+
+[dependencies]
+clap = { version = "4.5", optional = true }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = "1"
+
+[lints]
+workspace = true

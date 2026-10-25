@@ -1,0 +1,16 @@
+[
+  {
+    "name": "connection",
+    "current": 1,
+    "minimum": 1,
+    "maximum": 1,
+    "released": []
+  },
+  {
+    "name": "service_protocol",
+    "current": 1,
+    "minimum": 1,
+    "maximum": 1,
+    "released": []
+  }
+]

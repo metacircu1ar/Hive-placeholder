@@ -1,0 +1,2 @@
+exit=2
+{"error":{"code":"invalid_value","message":"Invalid argument value.","field":"QUERY","expected":"a nonblank query of at most 4096 UTF-8 bytes","examples":["comb search WriterLoop --mode text --limit 10"]}}

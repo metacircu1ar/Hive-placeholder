@@ -1,0 +1,26 @@
+# Replace private paths and choose a model returned by `hivectl models --auth codex-main`.
+auth_profiles:
+  codex-main: {provider: codex, method: subscription}
+comb:
+  credential_file: /absolute/private/comb-bridge.json
+comb_collectors:
+  project:
+    credential_file: /absolute/private/comb-bridge.json
+    sources: [review, correction, task_completed, turn_failed, approval_answer]
+roles:
+  curator:
+    provider: codex
+    auth: codex-main
+    model: YOUR_MODEL_ID
+    effort: low
+    lifetime: independent
+    instructions: ../skills/comb-curator/SKILL.md
+  comb-reviewer:
+    provider: codex
+    auth: codex-main
+    model: YOUR_MODEL_ID
+    effort: high
+    lifetime: independent
+    comb:
+      credential_file: /absolute/private/comb-bridge.json
+      reviewer: true

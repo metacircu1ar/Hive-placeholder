@@ -1,0 +1,7 @@
+{
+  "type": "manifest",
+  "source": "/retired",
+  "consistent_snapshot": true,
+  "format": 1,
+  "encoding": "ndjson"
+}
