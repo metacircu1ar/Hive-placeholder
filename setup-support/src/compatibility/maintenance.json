@@ -1,0 +1,13 @@
+{
+  "format": 1,
+  "product": "Hive",
+  "scope": {
+    "config": "/config.yaml",
+    "state": "/state",
+    "root": null,
+    "bridge": null
+  },
+  "retained": [],
+  "removals": [],
+  "details": {"config_digest": null, "runtime_admitted": false}
+}

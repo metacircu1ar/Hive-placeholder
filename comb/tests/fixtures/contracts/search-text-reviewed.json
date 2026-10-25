@@ -1,0 +1,27 @@
+{
+  "results": [
+    {
+      "slug": "concepts/promoted",
+      "title": "Promoted writer",
+      "type": "note",
+      "score": 0.01639344262295082,
+      "matched_by": "text",
+      "snippet": "reviewedproof: measured writer durability.",
+      "highlights": [
+        [
+          0,
+          13
+        ]
+      ],
+      "heading": "",
+      "zone": "timeline",
+      "evidence": "keyword_exact",
+      "create_safety": "probable",
+      "unverified": false,
+      "page_unverified": false
+    }
+  ],
+  "mode": "text",
+  "fallback": null,
+  "coverage": null
+}

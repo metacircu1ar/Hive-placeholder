@@ -1,0 +1,1805 @@
+[
+  {
+    "format": "json",
+    "name": "http-defaults",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"model\",\"revision\":\"revision\",\"url\":\"https://example.test/embeddings\",\"dimensions\":3,\"document_prefix\":\"\",\"query_prefix\":\"\",\"api_key_env\":null,\"timeout_seconds\":30,\"request_dimensions\":false,\"tokenizer\":null,\"max_tokens\":null}",
+      "yaml": "backend: http\nmodel: model\nrevision: revision\nurl: https://example.test/embeddings\ndimensions: 3\ndocument_prefix: ''\nquery_prefix: ''\napi_key_env: null\ntimeout_seconds: 30\nrequest_dimensions: false\ntokenizer: null\nmax_tokens: null\n"
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "http-defaults",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"model\",\"revision\":\"revision\",\"url\":\"https://example.test/embeddings\",\"dimensions\":3,\"document_prefix\":\"\",\"query_prefix\":\"\",\"api_key_env\":null,\"timeout_seconds\":30,\"request_dimensions\":false,\"tokenizer\":null,\"max_tokens\":null}",
+      "yaml": "backend: http\nmodel: model\nrevision: revision\nurl: https://example.test/embeddings\ndimensions: 3\ndocument_prefix: ''\nquery_prefix: ''\napi_key_env: null\ntimeout_seconds: 30\nrequest_dimensions: false\ntokenizer: null\nmax_tokens: null\n"
+    }
+  },
+  {
+    "format": "json",
+    "name": "http-full",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"model\",\"revision\":\"revision\",\"url\":\"https://example.test/embeddings\",\"dimensions\":3,\"document_prefix\":\"document: \",\"query_prefix\":\"query:\\n\",\"api_key_env\":\"EMBEDDING_KEY\",\"timeout_seconds\":7,\"request_dimensions\":true,\"tokenizer\":\"assets/tokenizer.json\",\"max_tokens\":42}",
+      "yaml": "backend: http\nmodel: model\nrevision: revision\nurl: https://example.test/embeddings\ndimensions: 3\ndocument_prefix: 'document: '\nquery_prefix: |\n  query:\napi_key_env: EMBEDDING_KEY\ntimeout_seconds: 7\nrequest_dimensions: true\ntokenizer: assets/tokenizer.json\nmax_tokens: 42\n"
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "http-full",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"model\",\"revision\":\"revision\",\"url\":\"https://example.test/embeddings\",\"dimensions\":3,\"document_prefix\":\"document: \",\"query_prefix\":\"query:\\n\",\"api_key_env\":\"EMBEDDING_KEY\",\"timeout_seconds\":7,\"request_dimensions\":true,\"tokenizer\":\"assets/tokenizer.json\",\"max_tokens\":42}",
+      "yaml": "backend: http\nmodel: model\nrevision: revision\nurl: https://example.test/embeddings\ndimensions: 3\ndocument_prefix: 'document: '\nquery_prefix: |\n  query:\napi_key_env: EMBEDDING_KEY\ntimeout_seconds: 7\nrequest_dimensions: true\ntokenizer: assets/tokenizer.json\nmax_tokens: 42\n"
+    }
+  },
+  {
+    "format": "json",
+    "name": "http-explicit-null-optionals",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"model\",\"revision\":\"revision\",\"url\":\"https://example.test/embeddings\",\"dimensions\":3,\"document_prefix\":\"\",\"query_prefix\":\"\",\"api_key_env\":null,\"timeout_seconds\":30,\"request_dimensions\":false,\"tokenizer\":null,\"max_tokens\":null}",
+      "yaml": "backend: http\nmodel: model\nrevision: revision\nurl: https://example.test/embeddings\ndimensions: 3\ndocument_prefix: ''\nquery_prefix: ''\napi_key_env: null\ntimeout_seconds: 30\nrequest_dimensions: false\ntokenizer: null\nmax_tokens: null\n"
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "http-explicit-null-optionals",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"model\",\"revision\":\"revision\",\"url\":\"https://example.test/embeddings\",\"dimensions\":3,\"document_prefix\":\"\",\"query_prefix\":\"\",\"api_key_env\":null,\"timeout_seconds\":30,\"request_dimensions\":false,\"tokenizer\":null,\"max_tokens\":null}",
+      "yaml": "backend: http\nmodel: model\nrevision: revision\nurl: https://example.test/embeddings\ndimensions: 3\ndocument_prefix: ''\nquery_prefix: ''\napi_key_env: null\ntimeout_seconds: 30\nrequest_dimensions: false\ntokenizer: null\nmax_tokens: null\n"
+    }
+  },
+  {
+    "format": "json",
+    "name": "http-deferred-validation",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"\",\"revision\":\"\",\"url\":\"not a URL\",\"dimensions\":0,\"document_prefix\":\"\",\"query_prefix\":\"\",\"api_key_env\":null,\"timeout_seconds\":0,\"request_dimensions\":false,\"tokenizer\":\"missing\",\"max_tokens\":0}",
+      "yaml": "backend: http\nmodel: ''\nrevision: ''\nurl: not a URL\ndimensions: 0\ndocument_prefix: ''\nquery_prefix: ''\napi_key_env: null\ntimeout_seconds: 0\nrequest_dimensions: false\ntokenizer: missing\nmax_tokens: 0\n"
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "http-deferred-validation",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"\",\"revision\":\"\",\"url\":\"not a URL\",\"dimensions\":0,\"document_prefix\":\"\",\"query_prefix\":\"\",\"api_key_env\":null,\"timeout_seconds\":0,\"request_dimensions\":false,\"tokenizer\":\"missing\",\"max_tokens\":0}",
+      "yaml": "backend: http\nmodel: ''\nrevision: ''\nurl: not a URL\ndimensions: 0\ndocument_prefix: ''\nquery_prefix: ''\napi_key_env: null\ntimeout_seconds: 0\nrequest_dimensions: false\ntokenizer: missing\nmax_tokens: 0\n"
+    }
+  },
+  {
+    "format": "json",
+    "name": "removed-local-backend",
+    "outcome": {
+      "category": "Data",
+      "column": 18,
+      "error": "unknown variant `local`, expected `http` at line 1 column 18",
+      "line": 1,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 1, column 18)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "removed-local-backend",
+    "outcome": {
+      "error": "backend: unknown variant `local`, expected `http` at line 1 column 12",
+      "location": {
+        "column": 12,
+        "index": 11,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 12)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "empty-map",
+    "outcome": {
+      "category": "Data",
+      "column": 2,
+      "error": "missing field `backend` at line 1 column 2",
+      "line": 1,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 1, column 2)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "empty-map",
+    "outcome": {
+      "error": "missing field `backend`",
+      "location": {
+        "column": 1,
+        "index": 0,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 1)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "null",
+    "outcome": {
+      "category": "Data",
+      "column": 4,
+      "error": "invalid type: null, expected internally tagged enum Config at line 1 column 4",
+      "line": 1,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 1, column 4)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "null",
+    "outcome": {
+      "error": "invalid type: unit value, expected internally tagged enum Config",
+      "location": {
+        "column": 1,
+        "index": 0,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 1)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "sequence",
+    "outcome": {
+      "category": "Data",
+      "column": 2,
+      "error": "missing field `backend` at line 1 column 2",
+      "line": 1,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 1, column 2)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "sequence",
+    "outcome": {
+      "error": "missing field `backend`",
+      "location": {
+        "column": 1,
+        "index": 0,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 1)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "scalar",
+    "outcome": {
+      "category": "Data",
+      "column": 6,
+      "error": "invalid type: string \"http\", expected internally tagged enum Config at line 1 column 6",
+      "line": 1,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 1, column 6)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "scalar",
+    "outcome": {
+      "error": "invalid type: string \"http\", expected internally tagged enum Config",
+      "location": {
+        "column": 1,
+        "index": 0,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 1)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "missing-backend",
+    "outcome": {
+      "category": "Data",
+      "column": 17,
+      "error": "missing field `backend` at line 1 column 17",
+      "line": 1,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 1, column 17)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "missing-backend",
+    "outcome": {
+      "error": "missing field `backend`",
+      "location": {
+        "column": 1,
+        "index": 0,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 1)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "unknown-backend",
+    "outcome": {
+      "category": "Data",
+      "column": 20,
+      "error": "unknown variant `unknown`, expected `http` at line 1 column 20",
+      "line": 1,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 1, column 20)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "unknown-backend",
+    "outcome": {
+      "error": "backend: unknown variant `unknown`, expected `http` at line 1 column 12",
+      "location": {
+        "column": 12,
+        "index": 11,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 12)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "null-backend",
+    "outcome": {
+      "category": "Data",
+      "column": 15,
+      "error": "invalid type: null, expected variant identifier at line 1 column 15",
+      "line": 1,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 1, column 15)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "null-backend",
+    "outcome": {
+      "error": "backend: unknown variant `null`, expected `http` at line 1 column 12",
+      "location": {
+        "column": 12,
+        "index": 11,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 12)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "numeric-backend",
+    "outcome": {
+      "category": "Data",
+      "column": 12,
+      "error": "invalid type: integer `3`, expected variant identifier at line 1 column 12",
+      "line": 1,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 1, column 12)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "numeric-backend",
+    "outcome": {
+      "error": "backend: unknown variant `3`, expected `http` at line 1 column 12",
+      "location": {
+        "column": 12,
+        "index": 11,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 12)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "backend-only",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "missing field `model`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "backend-only",
+    "outcome": {
+      "error": "missing field `model`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "duplicate-backend",
+    "outcome": {
+      "category": "Data",
+      "column": 120,
+      "error": "duplicate field `backend` at line 1 column 120",
+      "line": 1,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 1, column 120)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "duplicate-backend",
+    "outcome": {
+      "error": "duplicate field `backend`",
+      "location": {
+        "column": 1,
+        "index": 0,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 1)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "conflicting-backend",
+    "outcome": {
+      "category": "Data",
+      "column": 120,
+      "error": "duplicate field `backend` at line 1 column 120",
+      "line": 1,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 1, column 120)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "conflicting-backend",
+    "outcome": {
+      "error": "duplicate field `backend`",
+      "location": {
+        "column": 1,
+        "index": 0,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 1)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "missing-model",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "missing field `model`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "missing-model",
+    "outcome": {
+      "error": "missing field `model`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "missing-revision",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "missing field `revision`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "missing-revision",
+    "outcome": {
+      "error": "missing field `revision`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "missing-url",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "missing field `url`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "missing-url",
+    "outcome": {
+      "error": "missing field `url`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "missing-dimensions",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "missing field `dimensions`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "missing-dimensions",
+    "outcome": {
+      "error": "missing field `dimensions`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "wrong-model",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: null, expected a string",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "wrong-model",
+    "outcome": {
+      "error": "invalid type: unit value, expected a string",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "wrong-revision",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: integer `7`, expected a string",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "wrong-revision",
+    "outcome": {
+      "error": "invalid type: integer `7`, expected a string",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "wrong-url",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: sequence, expected a string",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "wrong-url",
+    "outcome": {
+      "error": "invalid type: sequence, expected a string",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "wrong-dimensions",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: string \"3\", expected usize",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "wrong-dimensions",
+    "outcome": {
+      "error": "invalid type: string \"3\", expected usize",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "wrong-document_prefix",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: null, expected a string",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "wrong-document_prefix",
+    "outcome": {
+      "error": "invalid type: unit value, expected a string",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "wrong-query_prefix",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: null, expected a string",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "wrong-query_prefix",
+    "outcome": {
+      "error": "invalid type: unit value, expected a string",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "wrong-api_key_env",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: integer `7`, expected a string",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "wrong-api_key_env",
+    "outcome": {
+      "error": "invalid type: integer `7`, expected a string",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "wrong-timeout_seconds",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: null, expected u64",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "wrong-timeout_seconds",
+    "outcome": {
+      "error": "invalid type: unit value, expected u64",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "wrong-request_dimensions",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: null, expected a boolean",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "wrong-request_dimensions",
+    "outcome": {
+      "error": "invalid type: unit value, expected a boolean",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "wrong-tokenizer",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: map, expected path string",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "wrong-tokenizer",
+    "outcome": {
+      "error": "invalid type: map, expected path string",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "wrong-max_tokens",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: floating point `1.5`, expected usize",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "wrong-max_tokens",
+    "outcome": {
+      "error": "invalid type: floating point `1.5`, expected usize",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "negative-dimensions",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid value: integer `-1`, expected usize",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "negative-dimensions",
+    "outcome": {
+      "error": "invalid value: integer `-1`, expected usize",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "fractional-dimensions",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: floating point `1.5`, expected usize",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "fractional-dimensions",
+    "outcome": {
+      "error": "invalid type: floating point `1.5`, expected usize",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "overflow-dimensions",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: floating point `1.8446744073709552e+19`, expected usize",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "overflow-dimensions",
+    "outcome": {
+      "error": "dimensions: invalid type: integer `18446744073709551616` as u128, expected any value at line 1 column 110",
+      "location": {
+        "column": 110,
+        "index": 109,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 110)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "negative-timeout",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid value: integer `-1`, expected u64",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "negative-timeout",
+    "outcome": {
+      "error": "invalid value: integer `-1`, expected u64",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "overflow-timeout",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: floating point `1.8446744073709552e+19`, expected u64",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "overflow-timeout",
+    "outcome": {
+      "error": "timeout_seconds: invalid type: integer `18446744073709551616` as u128, expected any value at line 1 column 130",
+      "location": {
+        "column": 130,
+        "index": 129,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 130)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "boolean-timeout",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: boolean `true`, expected u64",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "boolean-timeout",
+    "outcome": {
+      "error": "invalid type: boolean `true`, expected u64",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "string-flag",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: string \"true\", expected a boolean",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "string-flag",
+    "outcome": {
+      "error": "invalid type: string \"true\", expected a boolean",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "negative-max-tokens",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid value: integer `-1`, expected usize",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "negative-max-tokens",
+    "outcome": {
+      "error": "invalid value: integer `-1`, expected usize",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "unknown-first",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "unknown field `unknown`, expected one of `model`, `revision`, `url`, `dimensions`, `document_prefix`, `query_prefix`, `api_key_env`, `timeout_seconds`, `request_dimensions`, `tokenizer`, `max_tokens`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "unknown-first",
+    "outcome": {
+      "error": "unknown field `unknown`, expected one of `model`, `revision`, `url`, `dimensions`, `document_prefix`, `query_prefix`, `api_key_env`, `timeout_seconds`, `request_dimensions`, `tokenizer`, `max_tokens`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "unknown-last",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "unknown field `unknown`, expected one of `model`, `revision`, `url`, `dimensions`, `document_prefix`, `query_prefix`, `api_key_env`, `timeout_seconds`, `request_dimensions`, `tokenizer`, `max_tokens`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "unknown-last",
+    "outcome": {
+      "error": "unknown field `unknown`, expected one of `model`, `revision`, `url`, `dimensions`, `document_prefix`, `query_prefix`, `api_key_env`, `timeout_seconds`, `request_dimensions`, `tokenizer`, `max_tokens`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "unknown-and-missing",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "unknown field `unknown`, expected one of `model`, `revision`, `url`, `dimensions`, `document_prefix`, `query_prefix`, `api_key_env`, `timeout_seconds`, `request_dimensions`, `tokenizer`, `max_tokens`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "unknown-and-missing",
+    "outcome": {
+      "error": "unknown field `unknown`, expected one of `model`, `revision`, `url`, `dimensions`, `document_prefix`, `query_prefix`, `api_key_env`, `timeout_seconds`, `request_dimensions`, `tokenizer`, `max_tokens`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "invalid-then-unknown",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: integer `7`, expected a string",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "invalid-then-unknown",
+    "outcome": {
+      "error": "invalid type: integer `7`, expected a string",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "unknown-then-invalid",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "unknown field `unknown`, expected one of `model`, `revision`, `url`, `dimensions`, `document_prefix`, `query_prefix`, `api_key_env`, `timeout_seconds`, `request_dimensions`, `tokenizer`, `max_tokens`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "unknown-then-invalid",
+    "outcome": {
+      "error": "unknown field `unknown`, expected one of `model`, `revision`, `url`, `dimensions`, `document_prefix`, `query_prefix`, `api_key_env`, `timeout_seconds`, `request_dimensions`, `tokenizer`, `max_tokens`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "missing-and-invalid",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: string \"bad\", expected usize",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "missing-and-invalid",
+    "outcome": {
+      "error": "invalid type: string \"bad\", expected usize",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "duplicate-model",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "duplicate field `model`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "duplicate-model",
+    "outcome": {
+      "error": "duplicate field `model`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "duplicate-invalid-model",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "duplicate field `model`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "duplicate-invalid-model",
+    "outcome": {
+      "error": "duplicate field `model`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "invalid-first-duplicate-model",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: integer `7`, expected a string",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "invalid-first-duplicate-model",
+    "outcome": {
+      "error": "invalid type: integer `7`, expected a string",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "duplicate-prefix",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "duplicate field `query_prefix`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "duplicate-prefix",
+    "outcome": {
+      "error": "duplicate field `query_prefix`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "duplicate-null-optional",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "duplicate field `api_key_env`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "duplicate-null-optional",
+    "outcome": {
+      "error": "duplicate field `api_key_env`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "duplicate-max-tokens",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "duplicate field `max_tokens`",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "duplicate-max-tokens",
+    "outcome": {
+      "error": "duplicate field `max_tokens`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "truncated",
+    "outcome": {
+      "category": "Eof",
+      "column": 26,
+      "error": "EOF while parsing a value at line 1 column 26",
+      "line": 1,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Eof, line 1, column 26)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "truncated",
+    "outcome": {
+      "error": "did not find expected node content at line 2 column 1, while parsing a flow node",
+      "location": {
+        "column": 1,
+        "index": 26,
+        "line": 2
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 2, column 1)."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "trailing-input",
+    "outcome": {
+      "category": "Syntax",
+      "column": 113,
+      "error": "trailing characters at line 1 column 113",
+      "line": 1,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Syntax, line 1, column 113)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "trailing-input",
+    "outcome": {
+      "error": "deserializing from YAML containing more than one document is not supported",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "http-sequence-tag-only",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid length 0, expected struct variant Config::Http with 11 elements",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "http-sequence-tag-only",
+    "outcome": {
+      "error": "invalid length 0, expected struct variant Config::Http with 11 elements",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "http-sequence-short",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid length 1, expected struct variant Config::Http with 11 elements",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "http-sequence-short",
+    "outcome": {
+      "error": "invalid length 1, expected struct variant Config::Http with 11 elements",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "http-sequence-defaults",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"model\",\"revision\":\"revision\",\"url\":\"https://example.test/embeddings\",\"dimensions\":3,\"document_prefix\":\"\",\"query_prefix\":\"\",\"api_key_env\":null,\"timeout_seconds\":30,\"request_dimensions\":false,\"tokenizer\":null,\"max_tokens\":null}",
+      "yaml": "backend: http\nmodel: model\nrevision: revision\nurl: https://example.test/embeddings\ndimensions: 3\ndocument_prefix: ''\nquery_prefix: ''\napi_key_env: null\ntimeout_seconds: 30\nrequest_dimensions: false\ntokenizer: null\nmax_tokens: null\n"
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "http-sequence-defaults",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"model\",\"revision\":\"revision\",\"url\":\"https://example.test/embeddings\",\"dimensions\":3,\"document_prefix\":\"\",\"query_prefix\":\"\",\"api_key_env\":null,\"timeout_seconds\":30,\"request_dimensions\":false,\"tokenizer\":null,\"max_tokens\":null}",
+      "yaml": "backend: http\nmodel: model\nrevision: revision\nurl: https://example.test/embeddings\ndimensions: 3\ndocument_prefix: ''\nquery_prefix: ''\napi_key_env: null\ntimeout_seconds: 30\nrequest_dimensions: false\ntokenizer: null\nmax_tokens: null\n"
+    }
+  },
+  {
+    "format": "json",
+    "name": "http-sequence-full",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"model\",\"revision\":\"revision\",\"url\":\"https://example.test/embeddings\",\"dimensions\":3,\"document_prefix\":\"\",\"query_prefix\":\"\",\"api_key_env\":null,\"timeout_seconds\":30,\"request_dimensions\":false,\"tokenizer\":null,\"max_tokens\":null}",
+      "yaml": "backend: http\nmodel: model\nrevision: revision\nurl: https://example.test/embeddings\ndimensions: 3\ndocument_prefix: ''\nquery_prefix: ''\napi_key_env: null\ntimeout_seconds: 30\nrequest_dimensions: false\ntokenizer: null\nmax_tokens: null\n"
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "http-sequence-full",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"model\",\"revision\":\"revision\",\"url\":\"https://example.test/embeddings\",\"dimensions\":3,\"document_prefix\":\"\",\"query_prefix\":\"\",\"api_key_env\":null,\"timeout_seconds\":30,\"request_dimensions\":false,\"tokenizer\":null,\"max_tokens\":null}",
+      "yaml": "backend: http\nmodel: model\nrevision: revision\nurl: https://example.test/embeddings\ndimensions: 3\ndocument_prefix: ''\nquery_prefix: ''\napi_key_env: null\ntimeout_seconds: 30\nrequest_dimensions: false\ntokenizer: null\nmax_tokens: null\n"
+    }
+  },
+  {
+    "format": "json",
+    "name": "http-sequence-extra",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid length 12, expected 11 elements in sequence",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "http-sequence-extra",
+    "outcome": {
+      "error": "invalid length 12, expected 11 elements in sequence",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "json",
+    "name": "http-sequence-map",
+    "outcome": {
+      "category": "Data",
+      "column": 0,
+      "error": "invalid type: map, expected a string",
+      "line": 0,
+      "public": {
+        "code": "invalid_json",
+        "file_committed": false,
+        "message": "Invalid JSON (Data, line 0, column 0)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "http-sequence-map",
+    "outcome": {
+      "error": "invalid type: map, expected a string",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "yaml-http-defaults",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"model\",\"revision\":\"revision\",\"url\":\"https://example.test/embeddings\",\"dimensions\":3,\"document_prefix\":\"\",\"query_prefix\":\"\",\"api_key_env\":null,\"timeout_seconds\":30,\"request_dimensions\":false,\"tokenizer\":null,\"max_tokens\":null}",
+      "yaml": "backend: http\nmodel: model\nrevision: revision\nurl: https://example.test/embeddings\ndimensions: 3\ndocument_prefix: ''\nquery_prefix: ''\napi_key_env: null\ntimeout_seconds: 30\nrequest_dimensions: false\ntokenizer: null\nmax_tokens: null\n"
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "yaml-invalid-dimensions",
+    "outcome": {
+      "error": "invalid type: string \"wrong\", expected usize",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "yaml-unknown-before-invalid",
+    "outcome": {
+      "error": "unknown field `unknown`, expected one of `model`, `revision`, `url`, `dimensions`, `document_prefix`, `query_prefix`, `api_key_env`, `timeout_seconds`, `request_dimensions`, `tokenizer`, `max_tokens`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "yaml-invalid-before-unknown",
+    "outcome": {
+      "error": "invalid type: sequence, expected a string",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "yaml-duplicate-model",
+    "outcome": {
+      "error": "duplicate field `model`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "yaml-duplicate-backend",
+    "outcome": {
+      "error": "duplicate field `backend`",
+      "location": {
+        "column": 1,
+        "index": 0,
+        "line": 1
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 1, column 1)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "yaml-null-prefix",
+    "outcome": {
+      "error": "invalid type: unit value, expected a string",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "yaml-wrong-optional",
+    "outcome": {
+      "error": "invalid type: sequence, expected a string",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "yaml-broken-sequence",
+    "outcome": {
+      "error": "did not find expected ',' or ']' at line 3 column 1, while parsing a flow sequence at line 2 column 8",
+      "location": {
+        "column": 1,
+        "index": 29,
+        "line": 3
+      },
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML (line 3, column 1)."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "yaml-multiple-documents",
+    "outcome": {
+      "error": "deserializing from YAML containing more than one document is not supported",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "yaml-alias",
+    "outcome": {
+      "json": "{\"backend\":\"http\",\"model\":\"model\",\"revision\":\"model\",\"url\":\"https://example.test/embeddings\",\"dimensions\":3,\"document_prefix\":\"\",\"query_prefix\":\"\",\"api_key_env\":null,\"timeout_seconds\":30,\"request_dimensions\":false,\"tokenizer\":null,\"max_tokens\":null}",
+      "yaml": "backend: http\nmodel: model\nrevision: model\nurl: https://example.test/embeddings\ndimensions: 3\ndocument_prefix: ''\nquery_prefix: ''\napi_key_env: null\ntimeout_seconds: 30\nrequest_dimensions: false\ntokenizer: null\nmax_tokens: null\n"
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "yaml-merge-key",
+    "outcome": {
+      "error": "unknown field `<<`, expected one of `model`, `revision`, `url`, `dimensions`, `document_prefix`, `query_prefix`, `api_key_env`, `timeout_seconds`, `request_dimensions`, `tokenizer`, `max_tokens`",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  },
+  {
+    "format": "yaml",
+    "name": "yaml-nonfinite-dimensions",
+    "outcome": {
+      "error": "invalid type: floating point `NaN`, expected usize",
+      "location": null,
+      "public": {
+        "code": "invalid_frontmatter",
+        "file_committed": false,
+        "message": "Invalid YAML."
+      }
+    }
+  }
+]

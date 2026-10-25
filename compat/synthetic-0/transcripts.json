@@ -1,0 +1,16 @@
+{
+  "control": [
+    {"request":{"protocol":1,"id":"corpus-list","args":{"op":"agents"}},"expect":{"/agents":[]}},
+    {"request":{"protocol":4294967295,"id":"corpus-skew","args":{"op":"spawn","role":"implementor","body":"must not run"}},"expect":{"/error/code":"incompatible_protocol"}},
+    {"request":{"id":"corpus-missing","args":{"op":"agents"}},"expect":{"/error/code":"invalid_request"}}
+  ],
+  "service": [
+    {"protocol":1,"operation":{"op":"capabilities"},"expect":{"/status":"ok","/result/protocols":{"minimum":1,"maximum":1}}},
+    {"protocol":4294967295,"operation":{"op":"capture","text":"must not persist","request_id":"corpus-skew"},"expect":{"/status":"error","/error/code":"incompatible_protocol"}}
+  ],
+  "mcp": [
+    {"offer":"2024-11-05","selected":"2025-11-25"},
+    {"offer":"2025-11-25","selected":"2025-11-25"},
+    {"offer":"2099-01-01","selected":"2025-11-25"}
+  ]
+}

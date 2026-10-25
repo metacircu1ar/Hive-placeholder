@@ -1,0 +1,76 @@
+{
+  "provider": "codex",
+  "provider_version": "0.161.0",
+  "provenance": "Reconstructed regression frames for the version named in retained native acceptance results. Original native frame captures were not retained; this is not a recorded live transcript.",
+  "frames": [
+    {
+      "name": "initialize",
+      "frame": {
+        "id": 1,
+        "result": {}
+      },
+      "active": "turn",
+      "route": "response"
+    },
+    {
+      "name": "account",
+      "frame": {
+        "id": 1,
+        "result": {
+          "requiresOpenaiAuth": true,
+          "account": {
+            "type": "chatgpt"
+          }
+        }
+      },
+      "active": "turn",
+      "route": "response"
+    },
+    {
+      "name": "runtime_models",
+      "frame": {
+        "id": 1,
+        "result": {
+          "data": [
+            {
+              "model": "gpt-5.6-terra",
+              "supportedReasoningEfforts": [
+                {
+                  "reasoningEffort": "high"
+                },
+                {
+                  "reasoningEffort": "medium"
+                }
+              ]
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "supportedReasoningEfforts": [
+                {
+                  "reasoningEffort": "high"
+                },
+                {
+                  "reasoningEffort": "medium"
+                }
+              ]
+            },
+            {
+              "model": "gpt-5.6-luna",
+              "supportedReasoningEfforts": [
+                {
+                  "reasoningEffort": "high"
+                },
+                {
+                  "reasoningEffort": "medium"
+                }
+              ]
+            }
+          ],
+          "nextCursor": null
+        }
+      },
+      "active": "turn",
+      "route": "response"
+    }
+  ]
+}

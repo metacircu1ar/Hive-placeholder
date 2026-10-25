@@ -1,0 +1,394 @@
+[
+  {
+    "name": "agent_image_usage",
+    "sql": "CREATE TABLE agent_image_usage(\n    agent TEXT PRIMARY KEY REFERENCES agents(id) ON DELETE CASCADE,\n    bytes INTEGER NOT NULL CHECK(bytes >= 0 AND bytes <= 8388608),\n    images INTEGER NOT NULL CHECK(images >= 0 AND images <= 20)\n)"
+  },
+  {
+    "name": "agent_instructions",
+    "sql": "CREATE TABLE agent_instructions(\n    agent TEXT PRIMARY KEY REFERENCES agents(id),\n    snapshot INTEGER NOT NULL REFERENCES instruction_snapshots(id)\n)"
+  },
+  {
+    "name": "agent_instructions_snapshot",
+    "sql": "CREATE INDEX agent_instructions_snapshot\nON agent_instructions(snapshot)"
+  },
+  {
+    "name": "agent_records",
+    "sql": "CREATE VIEW agent_records AS\nSELECT listing_seq AS seq, id, json_set(data, '$.branch_hold', branch_hold, '$.branch_phase',\n        branch_gate, '$.ended_at', ended_at, '$.parent_id', parent_id, '$.auth', auth, '$.auth_group',\n        auth_group, '$.auth_checked_revision', auth_checked_revision, '$.waiting_reason', waiting_reason,\n        '$.quota_wait_until', quota_wait_until, '$.lifetime', lifetime, '$.state', state, '$.task_outcome',\n        task_outcome, '$.paused', json(CASE paused\n        WHEN 1 THEN 'true'\n        ELSE 'false'\n        END), '$.expired', json(CASE expired\n        WHEN 1 THEN 'true'\n        ELSE 'false'\n        END), '$.thread_id', thread_id, '$.execution_id', execution_id, '$.turn_id', turn_id,\n        '$.control', control, '$.completion_pending', completion_pending, '$.result', result,\n        '$.error', error, '$.provider_id', provider_id, '$.provider_pid', provider_pid, '$.provider_spawn_before',\n        provider_spawn_before, '$.provider_spawn_after', provider_spawn_after) AS data\nFROM agents"
+  },
+  {
+    "name": "agents",
+    "sql": "CREATE TABLE agents(\n    id TEXT PRIMARY KEY,\n    data TEXT NOT NULL,\n    process_options TEXT NOT NULL,\n    reserved_process_options TEXT,\n    comb_bound INTEGER GENERATED ALWAYS AS (json_extract(data, '$.comb') IS NOT NULL) VIRTUAL,\n    parent_id TEXT,\n    auth TEXT,\n    auth_group TEXT,\n    auth_checked_revision INTEGER NOT NULL,\n    waiting_reason TEXT,\n    quota_wait_until INTEGER,\n    waiting INTEGER GENERATED ALWAYS AS (waiting_reason IS NOT NULL) VIRTUAL,\n    lifetime TEXT,\n    state TEXT,\n    task_outcome TEXT,\n    paused INTEGER,\n    expired INTEGER,\n    thread_id TEXT,\n    execution_id TEXT,\n    turn_id TEXT,\n    control TEXT,\n    completion_pending TEXT,\n    result TEXT,\n    error TEXT,\n    provider_id TEXT,\n    provider_pid INTEGER,\n    provider_spawn_before INTEGER,\n    provider_spawn_after INTEGER,\n    listing_seq INTEGER,\n    ended_at INTEGER CHECK (ended_at IS NULL\n            OR (typeof(ended_at) = 'integer'\n                AND ended_at >= 0)),\n    branch_hold INTEGER NOT NULL DEFAULT 0 CHECK (branch_hold >= 0),\n    branch_gate TEXT CHECK (branch_gate IS NULL\n            OR branch_gate IN ('waiting_for_source', 'ready_to_fork', 'forking', 'bound', 'failed',\n                'uncertain')),\n    branch_priority INTEGER NOT NULL DEFAULT 1 CHECK (branch_priority IN (0, 1)),\n    coordinator INTEGER NOT NULL DEFAULT 0,\n    claimed INTEGER NOT NULL DEFAULT 0,\n    blocked INTEGER NOT NULL DEFAULT 0,\n    pending_count INTEGER NOT NULL DEFAULT 0,\n    mail_count INTEGER NOT NULL DEFAULT 0,\n    pending_seq INTEGER,\n    head_startup INTEGER,\n    priority INTEGER GENERATED ALWAYS AS (CASE\n        WHEN coordinator = 1 THEN 0\n        WHEN mail_count > 0 THEN 1\n        ELSE 2\n        END) VIRTUAL,\n    admission_class INTEGER GENERATED ALWAYS AS (CASE\n        WHEN branch_gate = 'ready_to_fork' THEN branch_priority\n        WHEN head_startup = 0 THEN CASE\n        WHEN coordinator = 1 THEN 0\n        ELSE 1\n        END\n        WHEN parent_id IS NOT NULL THEN 2\n        ELSE 3\n        END) VIRTUAL,\n    runnable INTEGER GENERATED ALWAYS AS (branch_hold = 0\n            AND (branch_gate IS NULL\n                OR branch_gate IN ('bound', 'ready_to_fork'))\n            AND claimed = 0\n            AND blocked = 0\n            AND waiting = 0\n            AND paused = 0\n            AND expired = 0\n            AND task_outcome NOT IN ('completed', 'cancelled')\n            AND state IN ('starting', 'idle', 'stopped')\n            AND control IS NULL\n            AND completion_pending IS NULL\n            AND (pending_count > 0\n                OR state = 'starting')) VIRTUAL,\n    CHECK (((task_outcome IN ('completed', 'cancelled')\n                    OR expired = 1) = (ended_at IS NOT NULL)) IS TRUE),\n    CHECK ((pending_seq IS NULL\n                AND head_startup IS NULL)\n            OR (pending_seq IS NOT NULL\n                AND head_startup IS NOT NULL\n                AND head_startup IN (0, 1)))\n)"
+  },
+  {
+    "name": "agents_auth",
+    "sql": "CREATE INDEX agents_auth\nON agents(auth)"
+  },
+  {
+    "name": "agents_auth_active",
+    "sql": "CREATE INDEX agents_auth_active\nON agents(auth)\nWHERE turn_id IS NOT NULL"
+  },
+  {
+    "name": "agents_controls",
+    "sql": "CREATE INDEX agents_controls\nON agents(id)\nWHERE claimed = 0\n    AND (control = 'stop'\n        OR completion_pending IS NOT NULL)"
+  },
+  {
+    "name": "agents_count_delete",
+    "sql": "CREATE TRIGGER agents_count_delete AFTER DELETE ON agents BEGIN\n    UPDATE runtime_counts\n    SET active = active - (NOT(old.task_outcome IN ('completed', 'cancelled') OR old.expired = 1) OR old.state != 'stopped')\n    WHERE id = 1;\nEND"
+  },
+  {
+    "name": "agents_count_insert",
+    "sql": "CREATE TRIGGER agents_count_insert AFTER INSERT ON agents BEGIN\n    UPDATE runtime_counts\n    SET last_agent_seq = max(last_agent_seq, coalesce(new.listing_seq, last_agent_seq + 1))\n    WHERE id = 1;\n    UPDATE agents\n    SET listing_seq = (\n        SELECT last_agent_seq\n        FROM runtime_counts\n        WHERE id = 1)\n    WHERE id = new.id\n        AND listing_seq IS NULL;\n    UPDATE runtime_counts\n    SET active = active + (NOT(new.task_outcome IN ('completed', 'cancelled') OR new.expired = 1) OR new.state != 'stopped')\n    WHERE id = 1;\n    UPDATE agents\n    SET coordinator = 1\n    WHERE id = new.parent_id\n        AND coordinator != 1;\n    UPDATE agents\n    SET coordinator = 1\n    WHERE id = new.id\n        AND new.parent_id IS NULL\n        AND coordinator != 1;\nEND"
+  },
+  {
+    "name": "agents_count_update",
+    "sql": "CREATE TRIGGER agents_count_update AFTER UPDATE OF state, task_outcome, expired ON agents\nWHEN ((NOT(new.task_outcome IN ('completed', 'cancelled') OR new.expired = 1) OR new.state != 'stopped') = (NOT(old.task_outcome IN ('completed', 'cancelled') OR old.expired = 1) OR old.state != 'stopped')) IS NOT TRUE BEGIN\n    UPDATE runtime_counts\n    SET active = active + (NOT(new.task_outcome IN ('completed', 'cancelled') OR new.expired = 1) OR new.state != 'stopped') - (NOT(old.task_outcome IN ('completed', 'cancelled') OR old.expired = 1) OR old.state != 'stopped')\n    WHERE id = 1;\nEND"
+  },
+  {
+    "name": "agents_dependents",
+    "sql": "CREATE INDEX agents_dependents\nON agents(parent_id, listing_seq)\nWHERE lifetime = 'with_parent'\n    AND expired = 0"
+  },
+  {
+    "name": "agents_end_immutable",
+    "sql": "CREATE TRIGGER agents_end_immutable BEFORE UPDATE OF ended_at ON agents\nWHEN old.ended_at IS NOT NULL\n    AND new.ended_at IS NOT old.ended_at BEGIN\n    SELECT RAISE(ABORT, 'Agent ending timestamp is immutable');\nEND"
+  },
+  {
+    "name": "agents_ended",
+    "sql": "CREATE INDEX agents_ended\nON agents(ended_at, id)\nWHERE ended_at IS NOT NULL"
+  },
+  {
+    "name": "agents_listing",
+    "sql": "CREATE UNIQUE INDEX agents_listing\nON agents(listing_seq)"
+  },
+  {
+    "name": "agents_load_delete",
+    "sql": "CREATE TRIGGER agents_load_delete AFTER DELETE ON agents\nWHEN old.ended_at IS NULL BEGIN\n    DELETE FROM auth_load WHERE profile = old.auth AND bound_agents = 1;\n    UPDATE auth_load SET bound_agents = bound_agents - 1 WHERE profile = old.auth;\nEND"
+  },
+  {
+    "name": "agents_load_insert",
+    "sql": "CREATE TRIGGER agents_load_insert AFTER INSERT ON agents\nWHEN new.ended_at IS NULL BEGIN\n    INSERT INTO auth_load VALUES(new.auth, 1)\n        ON CONFLICT(profile) DO UPDATE SET bound_agents = bound_agents + 1;\nEND"
+  },
+  {
+    "name": "agents_load_update",
+    "sql": "CREATE TRIGGER agents_load_update AFTER UPDATE OF auth, ended_at ON agents\nWHEN old.auth IS NOT new.auth OR old.ended_at IS NOT new.ended_at BEGIN\n    DELETE FROM auth_load WHERE old.ended_at IS NULL AND profile = old.auth AND bound_agents = 1;\n    UPDATE auth_load SET bound_agents = bound_agents - 1\n        WHERE old.ended_at IS NULL AND profile = old.auth;\n    INSERT INTO auth_load SELECT new.auth, 1 WHERE new.ended_at IS NULL\n        ON CONFLICT(profile) DO UPDATE SET bound_agents = bound_agents + 1;\nEND"
+  },
+  {
+    "name": "agents_no_reuse",
+    "sql": "CREATE TRIGGER agents_no_reuse BEFORE INSERT ON agents\nWHEN EXISTS (\n    SELECT 1\n    FROM purged_agents\n    WHERE id = new.id) BEGIN\n    SELECT RAISE(ABORT, 'Purged agent identities cannot be reused');\nEND"
+  },
+  {
+    "name": "agents_parent",
+    "sql": "CREATE INDEX agents_parent\nON agents(parent_id, lifetime)"
+  },
+  {
+    "name": "agents_provider",
+    "sql": "CREATE INDEX agents_provider\nON agents(provider_id)"
+  },
+  {
+    "name": "agents_ready",
+    "sql": "CREATE INDEX agents_ready\nON agents(admission_class, pending_seq, id)\nWHERE runnable = 1"
+  },
+  {
+    "name": "agents_variant_delete",
+    "sql": "CREATE TRIGGER agents_variant_delete AFTER DELETE ON agents\nWHEN old.ended_at IS NULL BEGIN\n    UPDATE process_variants SET refs = refs - 1\n        WHERE auth = old.auth AND process_options = old.process_options;\n    UPDATE process_variants SET refs = refs - 1\n        WHERE auth = old.auth AND process_options = old.reserved_process_options;\n    DELETE FROM process_variants WHERE refs = 0;\nEND"
+  },
+  {
+    "name": "agents_variant_insert",
+    "sql": "CREATE TRIGGER agents_variant_insert AFTER INSERT ON agents\nWHEN new.ended_at IS NULL BEGIN\n    INSERT INTO process_variants VALUES(new.auth, new.process_options, 1)\n        ON CONFLICT(auth, process_options) DO UPDATE SET refs = refs + 1;\n    INSERT INTO process_variants SELECT new.auth, new.reserved_process_options, 1\n        WHERE new.reserved_process_options IS NOT NULL\n        ON CONFLICT(auth, process_options) DO UPDATE SET refs = refs + 1;\nEND"
+  },
+  {
+    "name": "agents_variant_update",
+    "sql": "CREATE TRIGGER agents_variant_update AFTER UPDATE OF auth, process_options, reserved_process_options, ended_at ON agents\nWHEN old.auth IS NOT new.auth OR old.process_options IS NOT new.process_options\n    OR old.reserved_process_options IS NOT new.reserved_process_options\n    OR old.ended_at IS NOT new.ended_at BEGIN\n    UPDATE process_variants SET refs = refs - 1\n        WHERE old.ended_at IS NULL AND auth = old.auth AND process_options = old.process_options;\n    UPDATE process_variants SET refs = refs - 1\n        WHERE old.ended_at IS NULL AND auth = old.auth AND process_options = old.reserved_process_options;\n    DELETE FROM process_variants WHERE refs = 0;\n    INSERT INTO process_variants SELECT new.auth, new.process_options, 1 WHERE new.ended_at IS NULL\n        ON CONFLICT(auth, process_options) DO UPDATE SET refs = refs + 1;\n    INSERT INTO process_variants SELECT new.auth, new.reserved_process_options, 1\n        WHERE new.ended_at IS NULL AND new.reserved_process_options IS NOT NULL\n        ON CONFLICT(auth, process_options) DO UPDATE SET refs = refs + 1;\nEND"
+  },
+  {
+    "name": "agents_waiting",
+    "sql": "CREATE INDEX agents_waiting\nON agents(waiting_reason, quota_wait_until, id)\nWHERE waiting = 1"
+  },
+  {
+    "name": "approvals",
+    "sql": "CREATE TABLE approvals(\n    id TEXT PRIMARY KEY,\n    agent TEXT NOT NULL REFERENCES agents(id),\n    execution TEXT NOT NULL,\n    turn TEXT NOT NULL,\n    title TEXT,\n    message TEXT NOT NULL,\n    schema TEXT,\n    destructive INTEGER NOT NULL CHECK (destructive IN (0, 1)),\n    state TEXT NOT NULL CHECK (state IN ('pending', 'answered', 'superseded', 'withdrawn')),\n    action TEXT CHECK (action IN ('accept', 'decline', 'cancel')),\n    content TEXT,\n    reason TEXT,\n    created_at INTEGER NOT NULL CHECK (created_at >= 0),\n    closed_at INTEGER,\n    response_message TEXT,\n    CHECK ((state = 'pending'\n                AND closed_at IS NULL\n                AND action IS NULL\n                AND content IS NULL\n                AND reason IS NULL\n                AND response_message IS NULL)\n            OR (state = 'answered'\n                AND closed_at IS NOT NULL\n                AND action IS NOT NULL\n                AND response_message IS NOT NULL\n                AND (action = 'accept'\n                    OR content IS NULL)\n                AND (action = 'decline'\n                    OR reason IS NULL))\n            OR (state IN ('superseded', 'withdrawn')\n                AND closed_at IS NOT NULL\n                AND action IS NULL\n                AND content IS NULL\n                AND reason IS NULL\n                AND response_message IS NULL))\n)"
+  },
+  {
+    "name": "approvals_agent_history",
+    "sql": "CREATE INDEX approvals_agent_history\nON approvals(agent, created_at, id)"
+  },
+  {
+    "name": "approvals_history",
+    "sql": "CREATE INDEX approvals_history\nON approvals(created_at, id)"
+  },
+  {
+    "name": "approvals_listing",
+    "sql": "CREATE INDEX approvals_listing\nON approvals(created_at, id)\nWHERE state = 'pending'"
+  },
+  {
+    "name": "approvals_pending",
+    "sql": "CREATE UNIQUE INDEX approvals_pending\nON approvals(agent)\nWHERE state = 'pending'"
+  },
+  {
+    "name": "artifact_deletions",
+    "sql": "CREATE TABLE artifact_deletions(\n    id TEXT PRIMARY KEY\n)"
+  },
+  {
+    "name": "artifacts",
+    "sql": "CREATE TABLE artifacts(\n    id TEXT PRIMARY KEY,\n    bytes INTEGER NOT NULL,\n    created_at INTEGER NOT NULL,\n    agent TEXT REFERENCES agents(id),\n    join_id TEXT REFERENCES joins(id),\n    CHECK (agent IS NOT NULL OR join_id IS NOT NULL)\n)"
+  },
+  {
+    "name": "artifacts_agent",
+    "sql": "CREATE INDEX artifacts_agent\nON artifacts(agent)"
+  },
+  {
+    "name": "artifacts_join",
+    "sql": "CREATE INDEX artifacts_join ON artifacts(join_id) WHERE join_id IS NOT NULL"
+  },
+  {
+    "name": "artifacts_no_pending_reuse",
+    "sql": "CREATE TRIGGER artifacts_no_pending_reuse BEFORE INSERT ON artifacts\nWHEN EXISTS (\n    SELECT 1\n    FROM artifact_deletions\n    WHERE id = new.id) BEGIN\n    SELECT RAISE(ABORT, 'Artifact identity is pending deletion');\nEND"
+  },
+  {
+    "name": "attachment_blobs",
+    "sql": "CREATE TABLE attachment_blobs(\n    key TEXT PRIMARY KEY CHECK (length(key) = 64),\n    filename TEXT NOT NULL,\n    bytes INTEGER NOT NULL CHECK (bytes >= 0 AND bytes <= 20971520)\n)"
+  },
+  {
+    "name": "attachment_last_reference",
+    "sql": "CREATE TRIGGER attachment_last_reference AFTER DELETE ON message_attachments\nWHEN OLD.snapshot_key IS NOT NULL BEGIN\n    INSERT OR IGNORE INTO pending_attachment_deletions(key)\n    SELECT OLD.snapshot_key\n    WHERE NOT EXISTS (SELECT 1 FROM message_attachments WHERE snapshot_key = OLD.snapshot_key);\nEND"
+  },
+  {
+    "name": "attachment_reference_insert",
+    "sql": "CREATE TRIGGER attachment_reference_insert AFTER INSERT ON message_attachments BEGIN\n    DELETE FROM pending_attachment_deletions WHERE key = NEW.snapshot_key;\n    UPDATE messages SET has_attachments = 1 WHERE id = NEW.message_id AND has_attachments = 0;\nEND"
+  },
+  {
+    "name": "auth_load",
+    "sql": "CREATE TABLE auth_load(\n    profile TEXT NOT NULL PRIMARY KEY,\n    bound_agents INTEGER NOT NULL CHECK(bound_agents > 0)\n)"
+  },
+  {
+    "name": "branches",
+    "sql": "CREATE TABLE branches(\n    agent TEXT PRIMARY KEY REFERENCES agents(id),\n    source TEXT NOT NULL,\n    source_thread TEXT NOT NULL,\n    source_execution TEXT NOT NULL,\n    source_turn TEXT NOT NULL,\n    phase TEXT NOT NULL CHECK (phase IN ('waiting_for_source', 'ready_to_fork', 'forking', 'bound',\n                'failed', 'uncertain')),\n    deadline INTEGER,\n    holding INTEGER NOT NULL DEFAULT 1 CHECK (holding IN (0, 1)),\n    source_outcome TEXT,\n    source_handoff TEXT,\n    native_thread TEXT,\n    error TEXT,\n    CHECK (deadline IS NULL\n            OR (typeof(deadline) = 'integer'\n                AND deadline >= 0))\n)"
+  },
+  {
+    "name": "branches_deadline",
+    "sql": "CREATE INDEX branches_deadline\nON branches(deadline, agent)\nWHERE holding = 1\n    AND deadline IS NOT NULL"
+  },
+  {
+    "name": "branches_delete",
+    "sql": "CREATE TRIGGER branches_delete AFTER DELETE ON branches BEGIN\n    UPDATE agents\n    SET branch_hold = branch_hold - old.holding\n    WHERE id = old.source;\nEND"
+  },
+  {
+    "name": "branches_insert",
+    "sql": "CREATE TRIGGER branches_insert AFTER INSERT ON branches BEGIN\n    UPDATE agents\n    SET branch_hold = branch_hold + new.holding\n    WHERE id = new.source;\n    UPDATE agents\n    SET branch_gate = new.phase\n    WHERE id = new.agent;\nEND"
+  },
+  {
+    "name": "branches_phase",
+    "sql": "CREATE INDEX branches_phase\nON branches(phase, agent)"
+  },
+  {
+    "name": "branches_source",
+    "sql": "CREATE INDEX branches_source\nON branches(source, agent)\nWHERE holding = 1"
+  },
+  {
+    "name": "branches_update",
+    "sql": "CREATE TRIGGER branches_update AFTER UPDATE OF phase, holding ON branches BEGIN\n    UPDATE agents\n    SET branch_hold = branch_hold + new.holding - old.holding\n    WHERE id = new.source;\n    UPDATE agents\n    SET branch_gate = new.phase\n    WHERE id = new.agent;\nEND"
+  },
+  {
+    "name": "call_results",
+    "sql": "CREATE TABLE call_results(\n    message_id TEXT PRIMARY KEY REFERENCES deliveries(message_id),\n    accepted_at INTEGER NOT NULL,\n    start_seq INTEGER,\n    output TEXT,\n    output_final INTEGER NOT NULL DEFAULT 0 CHECK (output_final IN (0, 1))\n)"
+  },
+  {
+    "name": "comb_collectors",
+    "sql": "CREATE TABLE comb_collectors(\n    name TEXT PRIMARY KEY,\n    credential_file TEXT NOT NULL,\n    sources TEXT NOT NULL,\n    enabled INTEGER NOT NULL CHECK(enabled IN (0, 1)),\n    comb_id TEXT,\n    credential_id TEXT,\n    revision INTEGER NOT NULL DEFAULT 0,\n    paused INTEGER NOT NULL DEFAULT 0 CHECK(paused IN (0, 1)),\n    last_error TEXT,\n    retry_at INTEGER NOT NULL DEFAULT 0,\n    gap_count INTEGER NOT NULL DEFAULT 0,\n    gap_first INTEGER,\n    gap_last INTEGER,\n    pending INTEGER NOT NULL DEFAULT 0 CHECK(pending BETWEEN 0 AND 1024),\n    bytes INTEGER NOT NULL DEFAULT 0 CHECK(bytes BETWEEN 0 AND 16777216)\n)"
+  },
+  {
+    "name": "comb_outbox",
+    "sql": "CREATE TABLE comb_outbox(\n    id TEXT PRIMARY KEY,\n    destination TEXT NOT NULL REFERENCES comb_collectors(name),\n    sequence INTEGER NOT NULL,\n    body TEXT NOT NULL,\n    bytes INTEGER NOT NULL,\n    generation INTEGER NOT NULL DEFAULT 0,\n    comb_id TEXT,\n    credential_id TEXT,\n    retry_at INTEGER NOT NULL DEFAULT 0,\n    last_error TEXT,\n    CHECK((comb_id IS NULL) = (credential_id IS NULL))\n)"
+  },
+  {
+    "name": "comb_outbox_delete",
+    "sql": "CREATE TRIGGER comb_outbox_delete AFTER DELETE ON comb_outbox BEGIN\n    UPDATE comb_collectors SET pending = pending - 1, bytes = bytes - OLD.bytes WHERE name = OLD.destination;\nEND"
+  },
+  {
+    "name": "comb_outbox_delivery",
+    "sql": "CREATE INDEX comb_outbox_delivery ON comb_outbox(destination, retry_at, sequence)"
+  },
+  {
+    "name": "comb_outbox_insert",
+    "sql": "CREATE TRIGGER comb_outbox_insert AFTER INSERT ON comb_outbox BEGIN\n    UPDATE comb_collectors SET pending = pending + 1, bytes = bytes + NEW.bytes WHERE name = NEW.destination;\nEND"
+  },
+  {
+    "name": "deliveries",
+    "sql": "CREATE TABLE deliveries(\n    message_id TEXT PRIMARY KEY,\n    sender_turn TEXT,\n    recipient_turn TEXT,\n    execution TEXT,\n    provider TEXT,\n    thread TEXT,\n    status TEXT NOT NULL DEFAULT 'accepted',\n    error TEXT,\n    call_expired INTEGER NOT NULL DEFAULT 0 CHECK (call_expired IN (0, 1))\n)"
+  },
+  {
+    "name": "delivery_state",
+    "sql": "CREATE TRIGGER delivery_state AFTER UPDATE OF state ON messages BEGIN\n    UPDATE deliveries\n    SET status = new.state, error = CASE\n    WHEN new.state = 'stale_turn' THEN 'stale_turn'\n    ELSE error\n    END\n    WHERE message_id = new.id;\nEND"
+  },
+  {
+    "name": "event_retention",
+    "sql": "CREATE TABLE event_retention(\n    agent TEXT PRIMARY KEY,\n    pruned_through INTEGER NOT NULL\n)"
+  },
+  {
+    "name": "events",
+    "sql": "CREATE TABLE events(\n    seq INTEGER PRIMARY KEY AUTOINCREMENT,\n    agent TEXT NOT NULL,\n    execution TEXT,\n    at INTEGER NOT NULL,\n    kind TEXT NOT NULL CHECK (kind IN ('auth_switched', 'auth_switch_requested', 'auth_switch_deferred',\n                'member_skipped', 'continuation_queued', 'approval_requested', 'approval_closed',\n                'assistant_message', 'completion_requested', 'control_requested', 'execution_failed',\n                'execution_starting', 'execution_stopped', 'lifetime_expired', 'message_accepted',\n                'message_promoted', 'message_schedule_failed', 'redirect_accepted', 'steering_submitted',\n                'steering_rejected', 'steering_uncertain', 'model_rerouted', 'options_changed',\n                'provider_error', 'provider_session_released', 'provider_shutdown', 'provider_started',\n                'session_quarantined', 'session_ready', 'spawned', 'join_requested', 'join_completed', 'join_cancelled', 'join_deadline_passed', 'branch_requested', 'branch_ready',\n                'branch_failed', 'branch_context_dropped', 'task_completed', 'termination_requested',\n                'terminal_cleanup_observed', 'thread_bound', 'tool_completed', 'turn_finished',\n                'turn_started', 'evidence_submitted', 'collector_overflow')),\n    data TEXT NOT NULL\n)"
+  },
+  {
+    "name": "events_agent_sequence",
+    "sql": "CREATE INDEX events_agent_sequence\nON events(agent, seq)"
+  },
+  {
+    "name": "events_time",
+    "sql": "CREATE INDEX events_time\nON events(at, seq)"
+  },
+  {
+    "name": "instruction_snapshots",
+    "sql": "CREATE TABLE instruction_snapshots(\n    id INTEGER PRIMARY KEY,\n    body TEXT NOT NULL UNIQUE\n)"
+  },
+  {
+    "name": "join_artifact_owner",
+    "sql": "CREATE TRIGGER join_artifact_owner BEFORE INSERT ON artifacts\nWHEN new.join_id IS NOT NULL AND NOT EXISTS (\n    SELECT 1 FROM joins WHERE id = new.join_id AND requester = coalesce(new.agent, 'human')) BEGIN\n    SELECT RAISE(ABORT, 'Join artifact ownership mismatch');\nEND"
+  },
+  {
+    "name": "join_members",
+    "sql": "CREATE TABLE join_members(\n    join_id TEXT NOT NULL,\n    requester TEXT NOT NULL,\n    position INTEGER NOT NULL CHECK (position BETWEEN 0 AND 63),\n    message_id TEXT NOT NULL UNIQUE,\n    target TEXT NOT NULL,\n    outcome TEXT NOT NULL CHECK (outcome IN ('pending', 'completed', 'failed', 'interrupted', 'undeliverable', 'uncertain')),\n    output TEXT,\n    output_final INTEGER NOT NULL DEFAULT 0 CHECK (output_final IN (0, 1)),\n    task_completed TEXT,\n    delivered INTEGER NOT NULL DEFAULT 0 CHECK (delivered IN (0, 1)),\n    PRIMARY KEY(join_id, position),\n    FOREIGN KEY(join_id, requester) REFERENCES joins(id, requester)\n)"
+  },
+  {
+    "name": "join_members_requester",
+    "sql": "CREATE INDEX join_members_requester ON join_members(requester)"
+  },
+  {
+    "name": "join_message_finished",
+    "sql": "CREATE TRIGGER join_message_finished AFTER UPDATE OF state ON messages\nWHEN new.join_id IS NOT NULL AND new.state IN ('completed', 'failed', 'interrupted', 'undeliverable', 'uncertain') BEGIN\n    UPDATE join_members SET outcome = new.state\n    WHERE message_id = new.id AND outcome = 'pending'\n        AND EXISTS (SELECT 1 FROM joins WHERE id = new.join_id AND state IN ('collecting', 'deadline_passed'));\n    UPDATE joins SET dirty = 1 WHERE id = new.join_id AND state IN ('collecting', 'deadline_passed');\nEND"
+  },
+  {
+    "name": "join_message_terminal_insert",
+    "sql": "CREATE TRIGGER join_message_terminal_insert AFTER INSERT ON messages\nWHEN new.join_id IS NOT NULL AND new.state IN ('completed', 'failed', 'interrupted', 'undeliverable', 'uncertain') BEGIN\n    UPDATE join_members SET outcome = new.state\n    WHERE message_id = new.id AND outcome = 'pending'\n        AND EXISTS (SELECT 1 FROM joins WHERE id = new.join_id AND state IN ('collecting', 'deadline_passed'));\n    UPDATE joins SET dirty = 1 WHERE id = new.join_id AND state IN ('collecting', 'deadline_passed');\nEND"
+  },
+  {
+    "name": "join_requester_ended",
+    "sql": "CREATE TRIGGER join_requester_ended AFTER UPDATE OF task_outcome, expired ON agents\nWHEN new.task_outcome IN ('completed', 'cancelled') OR new.expired = 1 BEGIN\n    UPDATE joins SET dirty = 1 WHERE requester = new.id AND state IN ('collecting', 'deadline_passed');\nEND"
+  },
+  {
+    "name": "joins",
+    "sql": "CREATE TABLE joins(\n    id TEXT PRIMARY KEY,\n    requester TEXT NOT NULL,\n    request_id TEXT NOT NULL,\n    created_at INTEGER NOT NULL CHECK (created_at >= 0),\n    deadline INTEGER CHECK (deadline IS NULL OR deadline >= created_at),\n    state TEXT NOT NULL CHECK (state IN ('collecting', 'deadline_passed', 'completed', 'cancelled')),\n    dirty INTEGER NOT NULL DEFAULT 1 CHECK (dirty IN (0, 1)),\n    UNIQUE(requester, request_id),\n    UNIQUE(id, requester)\n)"
+  },
+  {
+    "name": "joins_deadline",
+    "sql": "CREATE INDEX joins_deadline ON joins(deadline, id)\nWHERE state = 'collecting' AND deadline IS NOT NULL"
+  },
+  {
+    "name": "joins_dirty",
+    "sql": "CREATE INDEX joins_dirty ON joins(id) WHERE dirty = 1"
+  },
+  {
+    "name": "joins_open_requester",
+    "sql": "CREATE INDEX joins_open_requester ON joins(requester, id)\nWHERE state IN ('collecting', 'deadline_passed')"
+  },
+  {
+    "name": "login_availability",
+    "sql": "CREATE TABLE login_availability(\n    profile TEXT NOT NULL,\n    generation TEXT NOT NULL,\n    revision INTEGER NOT NULL,\n    key_authority TEXT CHECK (key_authority IS NULL OR json_valid(key_authority)),\n    state TEXT NOT NULL CHECK (state IN ('available', 'limited', 'unavailable')),\n    until INTEGER,\n    retry_at INTEGER,\n    probe_id TEXT,\n    probe_agent TEXT,\n    probe_message TEXT,\n    probe_deadline INTEGER,\n    probe_error TEXT,\n    window TEXT,\n    reason TEXT,\n    confirmed_at INTEGER,\n    updated_at INTEGER NOT NULL,\n    PRIMARY KEY(profile, generation),\n    CHECK ((probe_id IS NULL\n                AND probe_agent IS NULL\n                AND probe_message IS NULL\n                AND probe_deadline IS NULL\n                AND probe_error IS NULL)\n            OR (probe_id IS NOT NULL\n                AND probe_agent IS NOT NULL\n                AND probe_message IS NOT NULL\n                AND probe_deadline IS NOT NULL))\n)"
+  },
+  {
+    "name": "login_deadline",
+    "sql": "CREATE INDEX login_deadline\nON login_availability(coalesce(until, retry_at))\nWHERE state = 'limited'\n    AND probe_error IS NULL"
+  },
+  {
+    "name": "login_probe_deadline",
+    "sql": "CREATE INDEX login_probe_deadline\nON login_availability(probe_deadline)\nWHERE probe_id IS NOT NULL\n    AND probe_error IS NULL"
+  },
+  {
+    "name": "message_attachment_snapshot",
+    "sql": "CREATE INDEX message_attachment_snapshot ON message_attachments(snapshot_key)\nWHERE snapshot_key IS NOT NULL"
+  },
+  {
+    "name": "message_attachments",
+    "sql": "CREATE TABLE message_attachments(\n    message_id TEXT NOT NULL REFERENCES messages(id) ON DELETE CASCADE,\n    position INTEGER NOT NULL CHECK (position >= 0 AND position < 10),\n    snapshot_key TEXT REFERENCES attachment_blobs(key),\n    data TEXT NOT NULL CHECK (json_valid(data)),\n    PRIMARY KEY(message_id, position)\n)"
+  },
+  {
+    "name": "messages",
+    "sql": "CREATE TABLE messages(\n    seq INTEGER PRIMARY KEY AUTOINCREMENT,\n    id TEXT NOT NULL,\n    sender TEXT NOT NULL,\n    recipient TEXT NOT NULL REFERENCES agents(id),\n    body TEXT NOT NULL,\n    has_attachments INTEGER NOT NULL DEFAULT 0 CHECK (has_attachments IN (0, 1)),\n    state TEXT NOT NULL,\n    startup INTEGER NOT NULL DEFAULT 0 CHECK (startup IN (0, 1)),\n    mode TEXT NOT NULL DEFAULT 'next-turn',\n    redirect INTEGER NOT NULL DEFAULT 0 CHECK (redirect IN (0, 1)),\n    kind TEXT CHECK (kind IS NULL\n            OR kind IN ('approval_answer', 'continuation', 'join_result')),\n    join_id TEXT REFERENCES joins(id) ON DELETE SET NULL,\n    continuation_root TEXT,\n    continuation_attempt INTEGER,\n    not_before INTEGER CHECK (not_before IS NULL\n            OR (typeof(not_before) = 'integer'\n                AND not_before >= 0)),\n    schedule_integrity TEXT CHECK (schedule_integrity IS NULL\n            OR (schedule_integrity = 'invalid_delivery_proof'\n                AND not_before IS NOT NULL\n                AND state IN ('failed', 'uncertain'))),\n    CHECK ((kind IS 'continuation'\n                AND continuation_root IS NOT NULL\n                AND typeof(continuation_attempt) = 'integer'\n                AND continuation_attempt > 0)\n            OR (kind IS NOT 'continuation'\n                AND continuation_root IS NULL\n                AND continuation_attempt IS NULL)),\n    CHECK (state != 'scheduled'\n            OR (not_before IS NOT NULL\n                AND mode = 'next-turn'\n                AND startup = 0\n                AND redirect = 0\n                AND kind IS NULL\n                AND schedule_integrity IS NULL)),\n    UNIQUE(id)\n)"
+  },
+  {
+    "name": "messages_inbox",
+    "sql": "CREATE INDEX messages_inbox\nON messages(recipient, state, mode, seq)"
+  },
+  {
+    "name": "messages_join",
+    "sql": "CREATE INDEX messages_join ON messages(join_id) WHERE join_id IS NOT NULL"
+  },
+  {
+    "name": "messages_pending",
+    "sql": "CREATE INDEX messages_pending\nON messages(recipient, mode, startup DESC, redirect DESC, seq)\nWHERE state = 'accepted'"
+  },
+  {
+    "name": "messages_ready_delete",
+    "sql": "CREATE TRIGGER messages_ready_delete AFTER DELETE ON messages\nWHEN (old.state = 'accepted' AND old.mode = 'next-turn') IS NOT FALSE BEGIN\n    UPDATE agents\n    SET pending_count = pending_count - (old.state = 'accepted' AND old.mode = 'next-turn'), mail_count = mail_count - (old.state = 'accepted' AND old.startup = 0 AND old.mode = 'next-turn'),\n        pending_seq = (\nSELECT min(seq)\nFROM messages\nWHERE recipient = old.recipient AND state = 'accepted' AND mode = 'next-turn'\n), head_startup = (\nSELECT startup\nFROM messages\nWHERE recipient = old.recipient AND state = 'accepted' AND mode = 'next-turn'\nORDER BY startup DESC, redirect DESC, seq\nLIMIT 1\n)\n    WHERE id = old.recipient;\nEND"
+  },
+  {
+    "name": "messages_ready_insert",
+    "sql": "CREATE TRIGGER messages_ready_insert AFTER INSERT ON messages\nWHEN (new.state = 'accepted' AND new.mode = 'next-turn') IS NOT FALSE BEGIN\n    UPDATE agents\n    SET pending_count = pending_count + (new.state = 'accepted' AND new.mode = 'next-turn'), mail_count = mail_count + (new.state = 'accepted' AND new.startup = 0 AND new.mode = 'next-turn'),\n        pending_seq = (\nSELECT min(seq)\nFROM messages\nWHERE recipient = new.recipient AND state = 'accepted' AND mode = 'next-turn'\n), head_startup = (\nSELECT startup\nFROM messages\nWHERE recipient = new.recipient AND state = 'accepted' AND mode = 'next-turn'\nORDER BY startup DESC, redirect DESC, seq\nLIMIT 1\n)\n    WHERE id = new.recipient;\nEND"
+  },
+  {
+    "name": "messages_ready_move",
+    "sql": "CREATE TRIGGER messages_ready_move AFTER UPDATE OF state, startup, recipient, mode, redirect ON messages\nWHEN old.recipient != new.recipient BEGIN\n    UPDATE agents\n    SET pending_count = pending_count - (old.state = 'accepted' AND old.mode = 'next-turn'), mail_count = mail_count - (old.state = 'accepted' AND old.startup = 0 AND old.mode = 'next-turn'),\n        pending_seq = (\nSELECT min(seq)\nFROM messages\nWHERE recipient = old.recipient AND state = 'accepted' AND mode = 'next-turn'\n), head_startup = (\nSELECT startup\nFROM messages\nWHERE recipient = old.recipient AND state = 'accepted' AND mode = 'next-turn'\nORDER BY startup DESC, redirect DESC, seq\nLIMIT 1\n)\n    WHERE id = old.recipient\n        AND (old.state = 'accepted' AND old.mode = 'next-turn') IS NOT FALSE;\n    UPDATE agents\n    SET pending_count = pending_count + (new.state = 'accepted' AND new.mode = 'next-turn'), mail_count = mail_count + (new.state = 'accepted' AND new.startup = 0 AND new.mode = 'next-turn'),\n        pending_seq = (\nSELECT min(seq)\nFROM messages\nWHERE recipient = new.recipient AND state = 'accepted' AND mode = 'next-turn'\n), head_startup = (\nSELECT startup\nFROM messages\nWHERE recipient = new.recipient AND state = 'accepted' AND mode = 'next-turn'\nORDER BY startup DESC, redirect DESC, seq\nLIMIT 1\n)\n    WHERE id = new.recipient\n        AND (new.state = 'accepted' AND new.mode = 'next-turn') IS NOT FALSE;\nEND"
+  },
+  {
+    "name": "messages_ready_update",
+    "sql": "CREATE TRIGGER messages_ready_update AFTER UPDATE OF state, startup, recipient, mode, redirect ON messages\nWHEN old.recipient = new.recipient\n    AND ((old.state = 'accepted' AND old.mode = 'next-turn') = (new.state = 'accepted' AND new.mode = 'next-turn')\n        AND (old.state = 'accepted' AND old.startup = 0 AND old.mode = 'next-turn') = (new.state = 'accepted' AND new.startup = 0 AND new.mode = 'next-turn')\n        AND (old.redirect = new.redirect\n            OR (new.state = 'accepted' AND new.mode = 'next-turn') = 0)) IS NOT TRUE BEGIN\n    UPDATE agents\n    SET pending_count = pending_count + (new.state = 'accepted' AND new.mode = 'next-turn') - (old.state = 'accepted' AND old.mode = 'next-turn'), mail_count = mail_count + (new.state = 'accepted' AND new.startup = 0 AND new.mode = 'next-turn') - (old.state = 'accepted' AND old.startup = 0 AND old.mode = 'next-turn'),\n        pending_seq = (\nSELECT min(seq)\nFROM messages\nWHERE recipient = new.recipient AND state = 'accepted' AND mode = 'next-turn'\n), head_startup = (\nSELECT startup\nFROM messages\nWHERE recipient = new.recipient AND state = 'accepted' AND mode = 'next-turn'\nORDER BY startup DESC, redirect DESC, seq\nLIMIT 1\n)\n    WHERE id = new.recipient;\nEND"
+  },
+  {
+    "name": "messages_recipient_history",
+    "sql": "CREATE INDEX messages_recipient_history\nON messages(recipient, seq)"
+  },
+  {
+    "name": "messages_scheduled",
+    "sql": "CREATE INDEX messages_scheduled\nON messages(not_before, seq)\nWHERE state = 'scheduled'"
+  },
+  {
+    "name": "messages_sender_history",
+    "sql": "CREATE INDEX messages_sender_history\nON messages(sender, seq)"
+  },
+  {
+    "name": "messages_steering",
+    "sql": "CREATE INDEX messages_steering\nON messages(recipient, state)\nWHERE mode = 'steer'"
+  },
+  {
+    "name": "pending_attachment_deletions",
+    "sql": "CREATE TABLE pending_attachment_deletions(\n    key TEXT PRIMARY KEY REFERENCES attachment_blobs(key)\n)"
+  },
+  {
+    "name": "process_variants",
+    "sql": "CREATE TABLE process_variants(\n    auth TEXT NOT NULL,\n    process_options TEXT NOT NULL,\n    refs INTEGER NOT NULL CHECK(refs >= 0),\n    PRIMARY KEY(auth, process_options)\n)"
+  },
+  {
+    "name": "provider_events",
+    "sql": "CREATE TABLE provider_events(\n    seq INTEGER PRIMARY KEY AUTOINCREMENT,\n    provider TEXT NOT NULL,\n    at INTEGER NOT NULL,\n    kind TEXT NOT NULL,\n    data TEXT NOT NULL\n)"
+  },
+  {
+    "name": "provider_events_sequence",
+    "sql": "CREATE INDEX provider_events_sequence\nON provider_events(provider, seq)"
+  },
+  {
+    "name": "purged_agents",
+    "sql": "CREATE TABLE purged_agents(\n    id TEXT PRIMARY KEY,\n    parent_id TEXT\n)"
+  },
+  {
+    "name": "purged_agents_parent",
+    "sql": "CREATE INDEX purged_agents_parent\nON purged_agents(parent_id)"
+  },
+  {
+    "name": "redirect_agent",
+    "sql": "CREATE INDEX redirect_agent\nON redirect_interrupts(agent, state)"
+  },
+  {
+    "name": "redirect_interrupts",
+    "sql": "CREATE TABLE redirect_interrupts(\n    agent TEXT NOT NULL REFERENCES agents(id),\n    execution TEXT NOT NULL,\n    input_message TEXT NOT NULL,\n    turn TEXT,\n    state TEXT NOT NULL CHECK (state IN ('pending', 'sent', 'resolved', 'target_lost')),\n    PRIMARY KEY(execution, input_message)\n)"
+  },
+  {
+    "name": "requests",
+    "sql": "CREATE TABLE requests(\n    sender TEXT NOT NULL,\n    id TEXT NOT NULL,\n    body TEXT NOT NULL,\n    response TEXT NOT NULL,\n    protocol INTEGER NOT NULL CHECK (typeof(protocol) = 'integer' AND protocol > 0 AND protocol <= 4294967295),\n    PRIMARY KEY(sender, id)\n)"
+  },
+  {
+    "name": "runtime_counts",
+    "sql": "CREATE TABLE runtime_counts(\n    id INTEGER PRIMARY KEY CHECK (id = 1),\n    active INTEGER NOT NULL,\n    last_agent_seq INTEGER NOT NULL CHECK (typeof(last_agent_seq) = 'integer'\n            AND last_agent_seq >= 0)\n)"
+  },
+  {
+    "name": "runtime_identity",
+    "sql": "CREATE TABLE runtime_identity(id INTEGER PRIMARY KEY CHECK(id = 1), identity TEXT NOT NULL)"
+  }
+]

@@ -1,0 +1,2 @@
+exit=0
+{"batch_id":"<uuid>","completed":["concepts/note"],"state":"completed","total":1}

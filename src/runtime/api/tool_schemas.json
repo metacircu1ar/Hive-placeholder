@@ -1,0 +1,698 @@
+[
+  {
+    "description": "Ask the human an advisory question and receive approval_id immediately. message is required; optional schema is a flat MCP elicitation form object (at most 16 fields, 64 choices per field, 16 KiB schema). No schema means plain accept/decline/cancel confirmation. message is limited to 16 KiB; title to 256 bytes. destructive is a presentation hint, not enforcement. Never request passwords, tokens, API keys or other secrets. A new ask supersedes your pending question. Use a new request_id for every new question; reuse it only to retry the same call, never for a later question. Replays return the original result even after closure. After asking, finish your current provider turn; do not call hive_complete, which ends your task and withdraws the question. The human's answer arrives as a new input. Example: {\"name\":\"hive_ask\",\"arguments\":{\"message\":\"May I publish the reviewed change?\",\"request_id\":\"ask-1\"}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "destructive": {
+          "description": "Presentation hint, default false; not permission or enforcement.",
+          "type": "boolean"
+        },
+        "message": {
+          "description": "Question for the human, 1..16384 UTF-8 bytes; never request secrets.",
+          "type": "string"
+        },
+        "request_id": {
+          "description": "Stable retry identity: 1..128 UTF-8 bytes, no control characters.",
+          "type": "string"
+        },
+        "schema": {
+          "additionalProperties": true,
+          "description": "Optional flat elicitation form: at most 16 fields, 64 choices per field and 16384 JSON bytes.",
+          "type": "object"
+        },
+        "title": {
+          "description": "Optional nonempty display title, at most 256 UTF-8 bytes.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message",
+        "request_id"
+      ],
+      "type": "object"
+    },
+    "name": "hive_ask",
+    "type": "function"
+  },
+  {
+    "description": "Atomically accept up to 64 spawn/send/terminate operations. Each operation needs its own stable request_id. Commit before acknowledgement; reuse identical IDs when retrying. Optional join:{} collects each message turn's final answer into one new input; deadline_seconds emits a partial result then continues collecting. Join sends must be next-turn to other agents, with fresh operation IDs. Ask recipients to answer in their final output, not send a separate reply. End your turn after acceptance; do not complete your task or wait in a tool. Read retained results with hive_read target=join:ID. Example: {\"name\":\"hive_batch\",\"arguments\":{\"operations\":[{\"op\":\"send\",\"target\":\"AGENT_ID\",\"body\":\"Review the work.\",\"request_id\":\"member-1\"}],\"request_id\":\"batch-1\"}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "join": {
+          "additionalProperties": false,
+          "description": "Optional reply collection; an empty object collects without a deadline.",
+          "properties": {
+            "deadline_seconds": {
+              "description": "Positive seconds; current Unix time plus this value must fit 9223372036854775807.",
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "operations": {
+          "description": "1..64 spawn/send/terminate operations, each with its own stable `request_id`.",
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "api_fallback": {
+                "description": "Permit configured API fallback credentials, default from role/config.",
+                "type": "boolean"
+              },
+              "attachments": {
+                "description": "Up to 10 ordered absolute source paths; private `Hive` state is refused.",
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 10,
+                "type": "array"
+              },
+              "auth": {
+                "description": "Login profile or fallback group; branches retain the source login.",
+                "type": "string"
+              },
+              "body": {
+                "description": "Message text, 1..65536 UTF-8 bytes.",
+                "type": "string"
+              },
+              "config": {
+                "description": "Native overlay text; snapshotted, never interpreted as a path.",
+                "type": "string"
+              },
+              "cwd": {
+                "description": "Absolute workspace directory; ordinary hosted spawns inherit the caller directory.",
+                "type": "string"
+              },
+              "delay_seconds": {
+                "description": "Schedule next-turn input 1..604800 seconds from now; omit for immediate acceptance.",
+                "minimum": 1,
+                "type": "integer"
+              },
+              "effort": {
+                "description": "Reasoning effort supported by the chosen model; defaults from role/config or source.",
+                "type": "string"
+              },
+              "from_agent": {
+                "description": "Branch from this agent's native conversation after its current turn finishes.",
+                "type": "string"
+              },
+              "instructions": {
+                "description": "Role instruction override, at most 65536 UTF-8 bytes; empty clears role instructions.",
+                "type": "string"
+              },
+              "lifetime": {
+                "description": "Defaults to role: independent survives parent end; `with_parent` expires with the parent.",
+                "enum": [
+                  "independent",
+                  "with_parent"
+                ],
+                "type": "string"
+              },
+              "mode": {
+                "description": "next-turn (default), steer at a supported boundary, or redirect to interrupt and queue first.",
+                "enum": [
+                  "next-turn",
+                  "steer",
+                  "redirect"
+                ],
+                "type": "string"
+              },
+              "model": {
+                "description": "Provider model token; defaults from role/config or branch source.",
+                "type": "string"
+              },
+              "name": {
+                "description": "Optional display name, 1..64 UTF-8 bytes; not unique and never a target.",
+                "type": "string"
+              },
+              "op": {
+                "description": "Operation to accept: spawn, send or terminate.",
+                "enum": [
+                  "spawn",
+                  "send",
+                  "terminate"
+                ],
+                "type": "string"
+              },
+              "options": {
+                "additionalProperties": true,
+                "description": "Typed catalog options; optional null clears an inherited spawn setting.",
+                "type": "object"
+              },
+              "preset": {
+                "description": "Configured role selected as a preset; mutually exclusive with role.",
+                "type": "string"
+              },
+              "provider": {
+                "description": "Codex or Claude; defaults from role/config and must match the selected login.",
+                "enum": [
+                  "codex",
+                  "claude"
+                ],
+                "type": "string"
+              },
+              "request_id": {
+                "description": "Stable retry identity: 1..128 UTF-8 bytes, no control characters.",
+                "type": "string"
+              },
+              "role": {
+                "description": "Optional configured role providing default settings.",
+                "type": "string"
+              },
+              "sandbox": {
+                "description": "Native sandbox mode; defaults from role/config.",
+                "enum": [
+                  "read-only",
+                  "workspace-write",
+                  "full-access"
+                ],
+                "type": "string"
+              },
+              "target": {
+                "description": "Agent ID for send or terminate, or @parent / @child (exactly one retained direct child).",
+                "type": "string"
+              }
+            },
+            "required": [
+              "op",
+              "request_id"
+            ],
+            "type": "object"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "type": "array"
+        },
+        "request_id": {
+          "description": "Stable retry identity: 1..128 UTF-8 bytes, no control characters.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operations",
+        "request_id"
+      ],
+      "type": "object"
+    },
+    "name": "hive_batch",
+    "type": "function"
+  },
+  {
+    "description": "Launch a new Hive agent with a separate conversation. Optional from_agent inherits that agent's native history through its current turn, or latest finished turn when idle. It returns immediately; finish your turn when branching yourself. The source continues independently and the workspace is shared unless cwd changes. The new agent uses the same provider and login. It becomes your child. Prefer a configured role when it fits; otherwise provider defaults and explicit overrides choose the settings. Empty instructions clears role instructions. lifetime defaults to the role: independent survives your end; with_parent expires when you complete, terminate or expire. sandbox accepts read-only, workspace-write or full-access; wider children require runtime.allow_spawn_widening=true in the daemon configuration. Branches retain their source sandbox. Submit this turn's batch of independent work, then end your turn; replies activate your next turn. A joined startup captures the first turn's final answer as its reply. Never use built-in provider delegation tools. Example: {\"name\":\"hive_spawn\",\"arguments\":{\"role\":\"reviewer\",\"body\":\"Review the work.\",\"request_id\":\"spawn-1\"}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "api_fallback": {
+          "description": "Permit configured API fallback credentials, default from role/config.",
+          "type": "boolean"
+        },
+        "attachments": {
+          "description": "Up to 10 ordered absolute source paths; private `Hive` state is refused.",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 10,
+          "type": "array"
+        },
+        "auth": {
+          "description": "Login profile or fallback group; branches retain the source login.",
+          "type": "string"
+        },
+        "body": {
+          "description": "Initial task, 1..65536 UTF-8 bytes.",
+          "type": "string"
+        },
+        "config": {
+          "description": "Native overlay text; snapshotted, never interpreted as a path.",
+          "type": "string"
+        },
+        "cwd": {
+          "description": "Absolute workspace directory; ordinary hosted spawns inherit the caller directory.",
+          "type": "string"
+        },
+        "effort": {
+          "description": "Reasoning effort supported by the chosen model; defaults from role/config or source.",
+          "type": "string"
+        },
+        "from_agent": {
+          "description": "Branch from this agent's native conversation after its current turn finishes.",
+          "type": "string"
+        },
+        "instructions": {
+          "description": "Role instruction override, at most 65536 UTF-8 bytes; empty clears role instructions.",
+          "type": "string"
+        },
+        "lifetime": {
+          "description": "Defaults to role: independent survives parent end; `with_parent` expires with the parent.",
+          "enum": [
+            "independent",
+            "with_parent"
+          ],
+          "type": "string"
+        },
+        "model": {
+          "description": "Provider model token; defaults from role/config or branch source.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Optional display name, 1..64 UTF-8 bytes; not unique and never a target.",
+          "type": "string"
+        },
+        "options": {
+          "additionalProperties": true,
+          "description": "Typed catalog options; optional null clears an inherited spawn setting.",
+          "type": "object"
+        },
+        "preset": {
+          "description": "Configured role selected as a preset; mutually exclusive with role.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Codex or Claude; defaults from role/config and must match the selected login.",
+          "enum": [
+            "codex",
+            "claude"
+          ],
+          "type": "string"
+        },
+        "request_id": {
+          "description": "Stable retry identity: 1..128 UTF-8 bytes, no control characters.",
+          "type": "string"
+        },
+        "role": {
+          "description": "Optional configured role providing default settings.",
+          "type": "string"
+        },
+        "sandbox": {
+          "description": "Native sandbox mode; defaults from role/config.",
+          "enum": [
+            "read-only",
+            "workspace-write",
+            "full-access"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "body",
+        "request_id"
+      ],
+      "type": "object"
+    },
+    "name": "hive_spawn",
+    "type": "function"
+  },
+  {
+    "description": "Send durable input to an existing agent. target accepts an agent ID, @parent, or @child when you have exactly one retained direct child (including ended children). mode defaults to next-turn; steer guides its active turn without starting a new turn; redirect interrupts the current turn and puts guidance before ordinary queued input on the same conversation. delay_seconds schedules next-turn input in 1 to 604800 seconds (7 days); end your turn afterwards. Startup stays first. Acceptance is not provider delivery. Reuse the same reviewer ID for later rounds. After handing work off, end your turn; replies automatically start your next turn. Joined requests collect the consuming turn's final answer; an explicit send back is separate. Example: {\"name\":\"hive_send\",\"arguments\":{\"target\":\"AGENT_ID\",\"body\":\"Review the fix.\",\"request_id\":\"send-1\"}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "attachments": {
+          "description": "Up to 10 ordered absolute source paths; private `Hive` state is refused.",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 10,
+          "type": "array"
+        },
+        "body": {
+          "description": "Message text, 1..65536 UTF-8 bytes.",
+          "type": "string"
+        },
+        "delay_seconds": {
+          "description": "Schedule next-turn input 1..604800 seconds from now; omit for immediate acceptance.",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "mode": {
+          "description": "next-turn (default), steer at a supported boundary, or redirect to interrupt and queue first.",
+          "enum": [
+            "next-turn",
+            "steer",
+            "redirect"
+          ],
+          "type": "string"
+        },
+        "request_id": {
+          "description": "Stable retry identity: 1..128 UTF-8 bytes, no control characters.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Recipient agent ID, or @parent / @child for hosted callers (exactly one retained direct child).",
+          "type": "string"
+        }
+      },
+      "required": [
+        "body",
+        "request_id",
+        "target"
+      ],
+      "type": "object"
+    },
+    "name": "hive_send",
+    "type": "function"
+  },
+  {
+    "description": "Persist a subscription/API-key profile or fallback group for the next turn boundary. Keeps the agent identity and mailbox; a different login uses a fresh conversation with a bounded handoff. Does not interrupt the current turn. Reuse request_id for retries. Example: {\"name\":\"hive_set_auth\",\"arguments\":{\"target\":\"AGENT_ID\",\"auth\":\"codex-main\",\"request_id\":\"auth-1\"}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "auth": {
+          "description": "Subscription login profile or fallback group for the same provider.",
+          "type": "string"
+        },
+        "request_id": {
+          "description": "Stable retry identity: 1..128 UTF-8 bytes, no control characters.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Agent ID whose future login to change.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "auth",
+        "request_id",
+        "target"
+      ],
+      "type": "object"
+    },
+    "name": "hive_set_auth",
+    "type": "function"
+  },
+  {
+    "description": "Persist a partial catalog options map for future turns. Null resets to the frozen spawn value. Model and effort are ordinary option keys. Applies only at a turn boundary, never mid-turn or through steer; it does not send input or resume a paused agent. Use hive_options_catalog for supported keys. Optional config is strict native text up to 64 KiB; model/effort and Hive-owned keys are refused there. Native values stay private. Omitted config retains the overlay, supplied config replaces it, and empty TOML or {} clears it. Reuse request_id with identical input for retries. Example: {\"name\":\"hive_set_options\",\"arguments\":{\"target\":\"AGENT_ID\",\"options\":{\"model\":\"sonnet\",\"effort\":\"low\"},\"request_id\":\"options-1\"}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "config": {
+          "description": "Native overlay text, snapshotted by `Hive`; not a filesystem path.",
+          "type": "string"
+        },
+        "options": {
+          "additionalProperties": true,
+          "description": "Partial catalog map. Null resets a key to the frozen spawn value.",
+          "type": "object"
+        },
+        "request_id": {
+          "description": "Stable retry identity: 1..128 UTF-8 bytes, no control characters.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Agent whose desired settings will change at its next turn boundary.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "request_id",
+        "target"
+      ],
+      "type": "object"
+    },
+    "name": "hive_set_options",
+    "type": "function"
+  },
+  {
+    "description": "Change an agent's display name at once, or remove it with clear: true. Names label agents for people: they are not unique and never select an agent, so keep using agent IDs as targets. Reuse request_id for retries. Example: {\"name\":\"hive_set_name\",\"arguments\":{\"target\":\"AGENT_ID\",\"name\":\"reviewer\",\"request_id\":\"name-1\"}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "clear": {
+          "description": "true removes the display name; omit it with name.",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "New display name, 1..64 UTF-8 bytes without control characters or surrounding spaces; not unique, and never selects an agent. Omit it with clear.",
+          "type": "string"
+        },
+        "request_id": {
+          "description": "Stable retry identity: 1..128 UTF-8 bytes, no control characters.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Agent ID whose display name changes at once.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "request_id",
+        "target"
+      ],
+      "type": "object"
+    },
+    "name": "hive_set_name",
+    "type": "function"
+  },
+  {
+    "description": "Permanently cancel one agent; target accepts an agent ID, @parent, or @child when you have exactly one retained direct child (including ended children). Discard queued input and request asynchronous session cleanup. It cannot resume. Recursively expire with_parent descendants; independent children and their subtrees survive. Shared Codex processes may remain for other conversations or their linger period; Claude uses one process per conversation. Acceptance does not confirm process exit. Example: {\"name\":\"hive_terminate\",\"arguments\":{\"target\":\"AGENT_ID\",\"request_id\":\"terminate-1\"}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "description": "Stable retry identity: 1..128 UTF-8 bytes, no control characters.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Agent ID to terminate permanently, or @parent / @child for hosted callers (exactly one retained direct child).",
+          "type": "string"
+        }
+      },
+      "required": [
+        "request_id",
+        "target"
+      ],
+      "type": "object"
+    },
+    "name": "hive_terminate",
+    "type": "function"
+  },
+  {
+    "description": "Submit explicitly public review evidence to configured Comb collectors. Supply kind=review, verdict=findings|no_findings, summary, relative files and optional commit. Corrections are human-only. No secrets or private paths. Reuse request_id for retries; admission reports queued/full/disabled/not_selected destinations. Example: {\"name\":\"hive_evidence\",\"arguments\":{\"kind\":\"review\",\"summary\":\"Input validation is missing.\",\"verdict\":\"findings\",\"request_id\":\"evidence-1\"}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "commit": {
+          "description": "Optional hexadecimal commit, 7 to 64 ASCII characters.",
+          "type": "string"
+        },
+        "files": {
+          "description": "At most 64 nonempty public relative labels, each at most 512 bytes; no filesystem access.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "description": "Evidence category; hosted agents submit review, while correction is human-only.",
+          "enum": [
+            "review",
+            "correction"
+          ],
+          "type": "string"
+        },
+        "request_id": {
+          "description": "Stable retry identity: 1..128 UTF-8 bytes, no control characters.",
+          "type": "string"
+        },
+        "summary": {
+          "description": "Explicitly public, nonblank UTF-8 text, at most 8192 bytes; no NUL or private markers.",
+          "type": "string"
+        },
+        "verdict": {
+          "description": "Required for review, forbidden for human-only correction.",
+          "enum": [
+            "findings",
+            "no_findings"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "request_id",
+        "summary"
+      ],
+      "type": "object"
+    },
+    "name": "hive_evidence",
+    "type": "function"
+  },
+  {
+    "description": "Explicitly complete your task only after required work and review are finished. Completion occurs when this turn ends successfully. Give the result and validation evidence. Refused while a join you requested is collecting before its deadline or its result is unread: end your turn instead; the result arrives as new input. Example: {\"name\":\"hive_complete\",\"arguments\":{\"body\":\"Implemented and validated.\",\"request_id\":\"done-1\"}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "body": {
+          "description": "Final result and validation evidence, 1..65536 UTF-8 bytes.",
+          "type": "string"
+        },
+        "request_id": {
+          "description": "Stable retry identity: 1..128 UTF-8 bytes, no control characters.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "body",
+        "request_id"
+      ],
+      "type": "object"
+    },
+    "name": "hive_complete",
+    "type": "function"
+  },
+  {
+    "description": "List per-agent option keys, types, scopes, defaults, model constraints and native mappings. Use this before selecting options or supplying a native overlay. Example: {\"name\":\"hive_options_catalog\",\"arguments\":{\"provider\":\"codex\"}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "description": "Optional resolved model token for recorded capability filtering.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Optional provider filter; omit to list both provider catalogs.",
+          "enum": [
+            "codex",
+            "claude"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "name": "hive_options_catalog",
+    "type": "function"
+  },
+  {
+    "description": "Inspect any Hive agent's process and task state. Example: {\"name\":\"hive_status\",\"arguments\":{\"target\":\"AGENT_ID\"}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "target": {
+          "description": "ID of the agent to inspect.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "type": "object"
+    },
+    "name": "hive_status",
+    "type": "function"
+  },
+  {
+    "description": "List compact agent summaries. Page with next_after as after until the page is empty. Flat visibility; optional parent/auth filters. stalled_seconds instead lists whole quiet live groups with empty mailboxes and no pending approvals or auth waits. Default 100 groups, max 200. Page with next_cursor as stalled_after until null; cannot combine stalled mode with after/parent/auth. Example: {\"name\":\"hive_agents\",\"arguments\":{\"limit\":100}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "after": {
+          "description": "Agent-list sequence cursor, default 0; use `next_after` for the next page.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "auth": {
+          "description": "Filter by current bound login profile or assigned fallback group, not a pending switch.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum returned rows/groups, 1..200; default 200 agents or 100 stalled groups.",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "parent": {
+          "description": "Filter by delegating parent agent ID.",
+          "type": "string"
+        },
+        "stalled_after": {
+          "additionalProperties": false,
+          "description": "Cursor from `next_cursor` in the previous stalled-group page.",
+          "properties": {
+            "idle_since": {
+              "description": "Unix second from the previous page cursor, 0..9223372036854775807.",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "root_id": {
+              "description": "Root agent ID from the previous page cursor, 1..128 UTF-8 bytes.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "idle_since",
+            "root_id"
+          ],
+          "type": "object"
+        },
+        "stalled_seconds": {
+          "description": "List quiet live groups after this many seconds; cannot combine with after, parent or auth.",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "name": "hive_agents",
+    "type": "function"
+  },
+  {
+    "description": "Read events by cursor (limit 1..200 rows, default 100), or a retained join snapshot with target=join:ID and no after/limit. For a large event artifact, use its read_target with after=byte offset and limit 4..65536 bytes (default 65536); follow next_offset until eof. Example: {\"name\":\"hive_read\",\"arguments\":{\"target\":\"AGENT_ID\",\"after\":0,\"limit\":100}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "after": {
+          "description": "Event sequence cursor or artifact byte offset, default 0; omit for joins.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "limit": {
+          "description": "1..200 event rows (default 100) or 4..65536 artifact bytes (default 65536); omit for joins.",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "target": {
+          "description": "Agent ID, artifact:ID for large output, or join:ID for a retained join snapshot.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "type": "object"
+    },
+    "name": "hive_read",
+    "type": "function"
+  },
+  {
+    "description": "Read messages to/from an agent, newest first. To read older pages, pass next_before as before until messages is empty. Default limit 100; maximum 200. Example: {\"name\":\"hive_messages\",\"arguments\":{\"target\":\"AGENT_ID\",\"limit\":100}}",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "before": {
+          "description": "Read messages older than this sequence; use `next_before` for older pages.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "limit": {
+          "description": "Maximum messages, 1..200; default 100.",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "target": {
+          "description": "Agent ID whose sent and received messages to read.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "type": "object"
+    },
+    "name": "hive_messages",
+    "type": "function"
+  }
+]

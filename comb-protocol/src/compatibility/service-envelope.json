@@ -1,0 +1,21 @@
+{
+  "request": {
+    "protocol": 1,
+    "credential": {
+      "comb_id": "00000000-0000-4000-8000-000000000001",
+      "id": "human",
+      "secret": "fixture-secret"
+    },
+    "claim": null,
+    "operation": {
+      "op": "health"
+    }
+  },
+  "reply": {
+    "protocol": 1,
+    "status": "ok",
+    "result": {
+      "ready": true
+    }
+  }
+}

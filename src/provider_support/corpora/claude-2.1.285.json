@@ -1,0 +1,217 @@
+{
+  "provider": "claude",
+  "provider_version": "2.1.285",
+  "provenance": "Existing synthetic Claude boundary fixtures; original native frame captures are unavailable.",
+  "cases": [
+    {
+      "name": "unknown_control_reply",
+      "kind": "preinput",
+      "provenance": "Literal regression from claude/tests.rs::preinput_cleanup_requires_no_execution_evidence_and_no_submitted_input; synthetic shell output.",
+      "raw": "{\"type\":\"control_response\",\"response\":{\"subtype\":\"success\",\"request_id\":\"unknown\",\"response\":{}}}",
+      "metadata": true
+    },
+    {
+      "name": "mcp_initialize",
+      "kind": "preinput",
+      "provenance": "Synthetic regression shape from tests/fixtures/claude_provider.py and claude/tests.rs; no retained native capture.",
+      "raw": "{\"type\":\"control_request\",\"request_id\":\"control\",\"request\":{\"subtype\":\"mcp_message\",\"server_name\":\"hive\",\"message\":{\"jsonrpc\":\"2.0\",\"id\":\"opaque\",\"method\":\"initialize\",\"params\":{}}}}",
+      "metadata": true
+    },
+    {
+      "name": "mcp_ping",
+      "kind": "preinput",
+      "provenance": "Synthetic regression shape from tests/fixtures/claude_provider.py and claude/tests.rs; no retained native capture.",
+      "raw": "{\"type\":\"control_request\",\"request_id\":\"control\",\"request\":{\"subtype\":\"mcp_message\",\"server_name\":\"hive\",\"message\":{\"jsonrpc\":\"2.0\",\"id\":\"opaque\",\"method\":\"ping\",\"params\":{}}}}",
+      "metadata": true
+    },
+    {
+      "name": "mcp_tools/list",
+      "kind": "preinput",
+      "provenance": "Synthetic regression shape from tests/fixtures/claude_provider.py and claude/tests.rs; no retained native capture.",
+      "raw": "{\"type\":\"control_request\",\"request_id\":\"control\",\"request\":{\"subtype\":\"mcp_message\",\"server_name\":\"hive\",\"message\":{\"jsonrpc\":\"2.0\",\"id\":\"opaque\",\"method\":\"tools/list\",\"params\":{}}}}",
+      "metadata": true
+    },
+    {
+      "name": "mcp_notifications/initialized",
+      "kind": "preinput",
+      "provenance": "Synthetic regression shape from tests/fixtures/claude_provider.py and claude/tests.rs; no retained native capture.",
+      "raw": "{\"type\":\"control_request\",\"request_id\":\"control\",\"request\":{\"subtype\":\"mcp_message\",\"server_name\":\"hive\",\"message\":{\"jsonrpc\":\"2.0\",\"id\":\"opaque\",\"method\":\"notifications/initialized\",\"params\":{}}}}",
+      "metadata": true
+    },
+    {
+      "name": "mcp_tools/call",
+      "kind": "preinput",
+      "provenance": "Synthetic regression shape from tests/fixtures/claude_provider.py and claude/tests.rs; no retained native capture.",
+      "raw": "{\"type\":\"control_request\",\"request_id\":\"control\",\"request\":{\"subtype\":\"mcp_message\",\"server_name\":\"hive\",\"message\":{\"jsonrpc\":\"2.0\",\"id\":\"opaque\",\"method\":\"tools/call\",\"params\":{}}}}",
+      "metadata": false
+    },
+    {
+      "name": "mcp_future/method",
+      "kind": "preinput",
+      "provenance": "Synthetic regression shape from tests/fixtures/claude_provider.py and claude/tests.rs; no retained native capture.",
+      "raw": "{\"type\":\"control_request\",\"request_id\":\"control\",\"request\":{\"subtype\":\"mcp_message\",\"server_name\":\"hive\",\"message\":{\"jsonrpc\":\"2.0\",\"id\":\"opaque\",\"method\":\"future/method\",\"params\":{}}}}",
+      "metadata": false
+    },
+    {
+      "name": "startup_rejection",
+      "kind": "preinput",
+      "provenance": "Synthetic emitted shape copied from tests/fixtures/claude_provider.py missing-session rejection.",
+      "raw": "{\"type\":\"result\",\"session_id\":\"native-startup-id\",\"subtype\":\"error_during_execution\",\"is_error\":true,\"num_turns\":0}",
+      "metadata": true
+    },
+    {
+      "name": "startup_origin_8",
+      "kind": "preinput",
+      "provenance": "Synthetic mutation of startup_rejection for field-local compatibility; not a native recording.",
+      "raw": "{\"type\":\"result\",\"session_id\":\"native-startup-id\",\"subtype\":\"error_during_execution\",\"is_error\":true,\"num_turns\":0,\"origin\":null}",
+      "metadata": true
+    },
+    {
+      "name": "startup_origin_9",
+      "kind": "preinput",
+      "provenance": "Synthetic mutation of startup_rejection for field-local compatibility; not a native recording.",
+      "raw": "{\"type\":\"result\",\"session_id\":\"native-startup-id\",\"subtype\":\"error_during_execution\",\"is_error\":true,\"num_turns\":0,\"origin\":{\"kind\":\"human\",\"future\":[1,2]}}",
+      "metadata": true
+    },
+    {
+      "name": "startup_origin_10",
+      "kind": "preinput",
+      "provenance": "Synthetic mutation of startup_rejection for field-local compatibility; not a native recording.",
+      "raw": "{\"type\":\"result\",\"session_id\":\"native-startup-id\",\"subtype\":\"error_during_execution\",\"is_error\":true,\"num_turns\":0,\"origin\":{\"kind\":\"peer\"}}",
+      "metadata": false
+    },
+    {
+      "name": "startup_origin_11",
+      "kind": "preinput",
+      "provenance": "Synthetic mutation of startup_rejection for field-local compatibility; not a native recording.",
+      "raw": "{\"type\":\"result\",\"session_id\":\"native-startup-id\",\"subtype\":\"error_during_execution\",\"is_error\":true,\"num_turns\":0,\"origin\":{}}",
+      "metadata": false
+    },
+    {
+      "name": "startup_origin_12",
+      "kind": "preinput",
+      "provenance": "Synthetic mutation of startup_rejection for field-local compatibility; not a native recording.",
+      "raw": "{\"type\":\"result\",\"session_id\":\"native-startup-id\",\"subtype\":\"error_during_execution\",\"is_error\":true,\"num_turns\":0,\"origin\":[\"human\"]}",
+      "metadata": false
+    },
+    {
+      "name": "startup_origin_13",
+      "kind": "preinput",
+      "provenance": "Synthetic mutation of startup_rejection for field-local compatibility; not a native recording.",
+      "raw": "{\"type\":\"result\",\"session_id\":\"native-startup-id\",\"subtype\":\"error_during_execution\",\"is_error\":true,\"num_turns\":0,\"origin\":\"human\"}",
+      "metadata": false
+    },
+    {
+      "name": "startup_num_turns_14",
+      "kind": "preinput",
+      "provenance": "Synthetic mutation of startup_rejection for field-local compatibility; not a native recording.",
+      "raw": "{\"type\":\"result\",\"session_id\":\"native-startup-id\",\"subtype\":\"error_during_execution\",\"is_error\":true,\"num_turns\":0.0}",
+      "metadata": false
+    },
+    {
+      "name": "startup_num_turns_15",
+      "kind": "preinput",
+      "provenance": "Synthetic mutation of startup_rejection for field-local compatibility; not a native recording.",
+      "raw": "{\"type\":\"result\",\"session_id\":\"native-startup-id\",\"subtype\":\"error_during_execution\",\"is_error\":true,\"num_turns\":false}",
+      "metadata": false
+    },
+    {
+      "name": "startup_user_message_uuid_16",
+      "kind": "preinput",
+      "provenance": "Synthetic mutation of startup_rejection for field-local compatibility; not a native recording.",
+      "raw": "{\"type\":\"result\",\"session_id\":\"native-startup-id\",\"subtype\":\"error_during_execution\",\"is_error\":true,\"num_turns\":0,\"user_message_uuid\":null}",
+      "metadata": true
+    },
+    {
+      "name": "startup_user_message_uuid_17",
+      "kind": "preinput",
+      "provenance": "Synthetic mutation of startup_rejection for field-local compatibility; not a native recording.",
+      "raw": "{\"type\":\"result\",\"session_id\":\"native-startup-id\",\"subtype\":\"error_during_execution\",\"is_error\":true,\"num_turns\":0,\"user_message_uuid\":17}",
+      "metadata": false
+    },
+    {
+      "name": "startup_terminal_reason_18",
+      "kind": "preinput",
+      "provenance": "Synthetic mutation of startup_rejection for field-local compatibility; not a native recording.",
+      "raw": "{\"type\":\"result\",\"session_id\":\"native-startup-id\",\"subtype\":\"error_during_execution\",\"is_error\":true,\"num_turns\":0,\"terminal_reason\":false}",
+      "metadata": false
+    },
+    {
+      "name": "control_response_array",
+      "kind": "preinput",
+      "provenance": "Synthetic malformed-sibling mutation of unknown_control_reply.",
+      "raw": "{\"type\":\"control_response\",\"response\":[]}",
+      "metadata": true
+    },
+    {
+      "name": "control_request_array",
+      "kind": "preinput",
+      "provenance": "Synthetic positional-array mutation; must not become an object projection.",
+      "raw": "{\"type\":\"control_request\",\"request\":[\"mcp_message\",\"hive\",{\"method\":\"ping\"}]}",
+      "metadata": false
+    },
+    {
+      "name": "future_work",
+      "kind": "preinput",
+      "provenance": "Synthetic regression copied from claude/tests.rs::unknown_preinput_frames_veto_ordinary_and_exceptional_cleanup.",
+      "raw": "{\"type\":\"future_native_work\"}",
+      "metadata": false
+    },
+    {
+      "name": "tool_result",
+      "kind": "user",
+      "provenance": "Synthetic source: claude/tests/steering.rs::guidance_is_fifo_once_and_tool_ownership_survives_tool_result; explicit mutations preserve raw tool-result fields.",
+      "raw": "{\"type\":\"user\",\"session_id\":\"00000000-0000-0000-0000-000000000001\",\"message\":{\"content\":[{\"type\":\"tool_result\",\"tool_use_id\":\"tool-1\",\"content\":\"fixed\"}]}}",
+      "notices": [
+        0
+      ],
+      "error": false
+    },
+    {
+      "name": "opaque_tool_result",
+      "kind": "user",
+      "provenance": "Synthetic source: claude/tests/steering.rs::guidance_is_fifo_once_and_tool_ownership_survives_tool_result; explicit mutations preserve raw tool-result fields.",
+      "raw": "{\"type\":\"user\",\"session_id\":\"00000000-0000-0000-0000-000000000001\",\"message\":{\"content\":[{\"type\":\"tool_result\",\"tool_use_id\":\"tool-1\",\"content\":[{\"future\":[null,true,17]}],\"unknown\":{\"nested\":\"preserve\"}}]}}",
+      "notices": [
+        0
+      ],
+      "error": false
+    },
+    {
+      "name": "string_content",
+      "kind": "user",
+      "provenance": "Synthetic source: claude/tests/steering.rs::guidance_is_fifo_once_and_tool_ownership_survives_tool_result; explicit mutations preserve raw tool-result fields.",
+      "raw": "{\"type\":\"user\",\"session_id\":\"00000000-0000-0000-0000-000000000001\",\"message\":{\"content\":\"human text\"}}",
+      "notices": [],
+      "error": false
+    },
+    {
+      "name": "mixed_blocks",
+      "kind": "user",
+      "provenance": "Synthetic source: claude/tests/steering.rs::guidance_is_fifo_once_and_tool_ownership_survives_tool_result; explicit mutations preserve raw tool-result fields.",
+      "raw": "{\"type\":\"user\",\"session_id\":\"00000000-0000-0000-0000-000000000001\",\"message\":{\"content\":[null,17,[],{\"type\":\"future\"},{\"type\":\"tool_result\",\"tool_use_id\":\"tool-1\"}]}}",
+      "notices": [
+        4
+      ],
+      "error": false
+    },
+    {
+      "name": "malformed_result_id",
+      "kind": "user",
+      "provenance": "Synthetic source: claude/tests/steering.rs::guidance_is_fifo_once_and_tool_ownership_survives_tool_result; explicit mutations preserve raw tool-result fields.",
+      "raw": "{\"type\":\"user\",\"session_id\":\"00000000-0000-0000-0000-000000000001\",\"message\":{\"content\":[{\"type\":\"tool_result\",\"tool_use_id\":17}]}}",
+      "notices": [],
+      "error": true
+    },
+    {
+      "name": "prefix_before_malformed",
+      "kind": "user",
+      "provenance": "Synthetic source: claude/tests/steering.rs::guidance_is_fifo_once_and_tool_ownership_survives_tool_result; explicit mutations preserve raw tool-result fields.",
+      "raw": "{\"type\":\"user\",\"session_id\":\"00000000-0000-0000-0000-000000000001\",\"message\":{\"content\":[{\"type\":\"tool_result\",\"tool_use_id\":\"tool-1\",\"content\":\"first\"},{\"type\":\"tool_result\"}]}}",
+      "notices": [
+        0
+      ],
+      "error": true
+    }
+  ]
+}

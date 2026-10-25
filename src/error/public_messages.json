@@ -1,0 +1,478 @@
+{
+  "agent_busy": [
+    "Wait for the current transition before resuming."
+  ],
+  "agent_completed": [
+    "Completed, cancelled or lifetime-expired agents cannot accept work."
+  ],
+  "agent_limit": [
+    "Configured nonterminal or draining agent capacity is exhausted."
+  ],
+  "agent_purged": [
+    "This agent was permanently purged."
+  ],
+  "approval_closed": [
+    "This approval is no longer pending."
+  ],
+  "artifact_unavailable": [
+    "Artifact length or requested offset is invalid."
+  ],
+  "attachment_invalid": [
+    "A message accepts at most 10 attachments."
+  ],
+  "authentication_required": [
+    "A compatible Codex subscription login is required."
+  ],
+  "binding_conflict": [
+    "A branch must retain its source sandbox mode.",
+    "A child cannot have a wider sandbox mode than its spawning agent. Choose the same or a narrower sandbox.",
+    "Agent's saved auth profile changed.",
+    "Registered profile fields changed. Use a new profile name."
+  ],
+  "cancelled": [
+    "Auth operation was cancelled.",
+    "Login was cancelled; saved credentials were retained."
+  ],
+  "codex_browser_login_busy": [
+    "Another Codex browser login owns this state directory's callback lock. Retry after it finishes."
+  ],
+  "completion_pending": [
+    "Completion is already pending the turn boundary.",
+    "Completion is pending the turn boundary; a join started now would be cancelled."
+  ],
+  "config_invalid": [
+    "Invalid configuration; use unique profile names and supported auth fields.",
+    "HIVE_LOG must be off, error, warn, info, debug or trace.",
+    "HIVE_BARRIER_DELAY_MS must be a whole number of milliseconds from 0 to 1000.",
+    "Invalid tui.toml; its settings are prefix, a string, and mouse, a boolean.",
+    "Invalid tui.toml prefix; use ctrl- with a letter, ], ^, _ or backslash, except ctrl-c, h, i, j, m and r."
+  ],
+  "config_unavailable": [
+    "Cannot read the configuration file.",
+    "Cannot read tui.toml beside the configuration file."
+  ],
+  "daemon_binary_mismatch": [
+    "The running daemon uses a different executable. Run hivectl daemon restart to use the selected build."
+  ],
+  "daemon_busy": [
+    "A daemon or its surviving provider owns this state directory.",
+    "A daemon owns this state directory.",
+    "Stop the daemon before pruning credential generations."
+  ],
+  "daemon_protocol_error": [
+    "Invalid daemon response.",
+    "Invalid live cursor.",
+    "Attach returned no cursor."
+  ],
+  "daemon_start_failed": [
+    "Daemon exited; inspect runtime/logs/hive-daemon.jsonl and runtime/daemon.log in the state directory."
+  ],
+  "daemon_start_timeout": [
+    "Daemon has not become ready; inspect its log before retrying."
+  ],
+  "daemon_stopping": [
+    "Daemon is shutting down.",
+    "Runtime store is unavailable.",
+    "Turn scheduler stopped.",
+    "The daemon is stopping; reconnect after it restarts."
+  ],
+  "daemon_unavailable": [
+    "Start the Hive daemon for this state directory first."
+  ],
+  "database_error": [
+    "Cannot access the runtime database.",
+    "Cannot compact runtime storage.",
+    "Cannot restore provider reservations.",
+    "Invalid hot field.",
+    "Invalid saved agent record.",
+    "Invalid saved event data.",
+    "Invalid saved request response.",
+    "Missing database directory.",
+    "No transaction.",
+    "Runtime numeric value is out of range.",
+    "Saved request response is not its original canonical encoding."
+  ],
+  "effort_mismatch": [
+    "Provider selected a different reasoning effort; execution refused."
+  ],
+  "history_expired": [
+    "Requested event history was compacted."
+  ],
+  "incompatible_protocol": [
+    "Unsupported control protocol; this build supports protocol 1."
+  ],
+  "instructions_unavailable": [
+    "Cannot read a configured instruction file."
+  ],
+  "interactive_terminal_required": [
+    "Subscription login requires a terminal for stdin and stdout.",
+    "Subscription repair requires a terminal for stdin and stdout.",
+    "hivectl attach needs a terminal for stdin and stdout; use hivectl live for scripts.",
+    "hivectl panes needs a terminal for stdin and stdout; run it in a zellij or tmux pane.",
+    "hivectl tui needs a terminal for stdin and stdout; use hivectl live for scripts."
+  ],
+  "internal_error": [
+    "Invalid tool input metadata.",
+    "Request filesystem preflight facts are missing."
+  ],
+  "interrupt_timeout": [
+    "Provider did not confirm interruption."
+  ],
+  "invalid_artifact": [
+    "Invalid artifact ID."
+  ],
+  "invalid_artifact_offset": [
+    "Offset must start at a UTF-8 boundary."
+  ],
+  "invalid_body": [
+    "Message must contain 1 to 65536 bytes."
+  ],
+  "invalid_cwd": [
+    "Agent working directory must be an existing absolute directory."
+  ],
+  "invalid_executable": [
+    "Provider executable must be an absolute path or a command name."
+  ],
+  "invalid_option": [
+    "--browser is only supported for Codex.",
+    "Profile repair requires a subscription profile and --reauthenticate.",
+    "The --browser option applies only to Codex profiles."
+  ],
+  "invalid_path": [
+    "Claude sandbox paths cannot contain glob metacharacters.",
+    "Claude sandbox paths must be valid UTF-8.",
+    "Claude workspace cannot be inside protected metadata.",
+    "Export must be a new absolute file outside the retired root.",
+    "HOME is unset; pass explicit configuration and state paths.",
+    "HOME must be absolute or use explicit paths.",
+    "Invalid state root.",
+    "Missing database directory.",
+    "Missing database filename.",
+    "Missing replacement parent.",
+    "Replacement controller must be physically separate from the retired root.",
+    "Replacement state directory must be a new absolute path.",
+    "State directory must be absolute.",
+    "XDG paths must be absolute."
+  ],
+  "invalid_request": [
+    "A metadata namespace permits exactly one native probe.",
+    "A standalone metadata probe is required.",
+    "Agent workspace includes private shell control files.",
+    "Batch exceeds 512 KiB.",
+    "Claude credential namespace or Keychain account is unverified; retain it for explicit filesystem inspection.",
+    "Expected a JSON array of operations.",
+    "Generation is pinned by saved agents; inspect their history. Native conversations cannot be rebound.",
+    "Invalid operation or arguments.",
+    "Metadata probes cannot mutate credentials.",
+    "No retired controller is recorded in this root.",
+    "Only an inactive retired generation can be pruned.",
+    "Runtime database is missing."
+  ],
+  "join_open": [
+    "A join you requested is still collecting, or its result is unread. End your turn; the result arrives as new input. Completing now would cancel the join and end its with_parent workers. After a join deadline passes and its partial result is read, completion is allowed."
+  ],
+  "invalid_response": [
+    "Approval response does not match its action, form schema or size limits.",
+    "Approval response exceeds 60 KiB.",
+    "Approval data must be valid JSON."
+  ],
+  "late_activity_after_drain": [
+    "Provider activity resumed after bounded terminal cleanup."
+  ],
+  "login_failed": [
+    "Provider login did not complete with the selected method. For Codex device-login failures, retry with --browser."
+  ],
+  "login_required": [
+    "Agent auth profile is missing.",
+    "Finish profile login first.",
+    "Register this profile with auth login first.",
+    "Run auth login first.",
+    "Run auth login for this profile first."
+  ],
+  "malformed_provider_output": [
+    "Provider status was not recognized; no login was attempted."
+  ],
+  "missing_binary": [
+    "Provider executable is not installed or is not executable."
+  ],
+  "model_mismatch": [
+    "Claude selected a different model.",
+    "Provider selected a different model; execution refused."
+  ],
+  "model_rerouted": [
+    "Provider rerouted the selected model; execution stopped."
+  ],
+  "newer_format": [
+    "This data uses a newer format. The required product release is unknown to this build; keep the data unchanged and use its producing build or a newer supported build."
+  ],
+  "no_active_turn": [
+    "Approval requests require an active provider turn.",
+    "No active turn to interrupt.",
+    "Steering requires an active, unpaused turn.",
+    "The steering target turn has ended."
+  ],
+  "not_applicable": [
+    "API-key profiles use the named environment variable; use auth status to check presence."
+  ],
+  "output_limit": [
+    "Agent event buffer exceeded its byte budget.",
+    "Agent event queue is not being drained.",
+    "Model catalog exceeded the pagination limit.",
+    "Provider frame exceeded the capture limit.",
+    "Provider output exceeded the capture limit.",
+    "Too many pending provider events.",
+    "Too many pending provider replies."
+  ],
+  "pane_backend_unavailable": [
+    "Ghostty did not answer its scripting request; is Ghostty 1.3 or newer running?",
+    "Ghostty did not report this terminal's title; remove Ghostty's title option to use Ghostty panes.",
+    "Ghostty panes must be run from a Ghostty terminal.",
+    "Ghostty panes need Ghostty 1.3 or newer with macos-applescript enabled.",
+    "Ghostty panes need macOS; on Linux, run hivectl panes inside zellij or tmux.",
+    "hivectl panes runs inside zellij or tmux, or in a Ghostty terminal on macOS; elsewhere, use hivectl tui.",
+    "hivectl panes runs inside a zellij session; start zellij, then run it in a pane.",
+    "macOS denied Automation for Ghostty; allow it in System Settings, Privacy & Security, Automation, or use zellij or tmux.",
+    "zellij was not found on PATH; install it or add it to PATH.",
+    "hivectl panes --backend tmux runs inside a tmux session; start tmux, then run it in a pane.",
+    "tmux was not found on PATH; install it or add it to PATH.",
+    "tmux did not answer; is this pane's tmux server still running?"
+  ],
+  "pane_controller_running": [
+    "Another hivectl panes already controls these panes."
+  ],
+  "parent_required": [
+    "This lifetime requires an agent parent."
+  ],
+  "pipe_setup_failed": [
+    "Cannot configure provider pipes."
+  ],
+  "policy_conflict": [
+    "Fresh repair namespace was not verified unauthenticated.",
+    "Provider configuration does not select the required OpenAI authentication.",
+    "The selected authentication method conflicts with native credentials. Correct provider configuration or authenticate an isolated replacement."
+  ],
+  "process_variant_limit": [
+    "Login destination has no capacity for these process settings; resume after capacity changes."
+  ],
+  "process_wait_failed": [
+    "Cannot confirm provider process termination.",
+    "Cannot reap the login helper.",
+    "Cannot reap the provider helper."
+  ],
+  "profile_busy": [
+    "An exclusive operation owns this profile.",
+    "Another auth operation owns this profile. Retry after it finishes.",
+    "Repair still owns this candidate generation."
+  ],
+  "protocol_error": [
+    "Cannot encode provider request."
+  ],
+  "provider_draining": [
+    "Provider cohort is draining; input was not submitted."
+  ],
+  "provider_exited": [
+    "Provider exited before the session was closed."
+  ],
+  "provider_failed": [
+    "Could not remove the allocated Keychain item; the retired generation was retained for retry.",
+    "Provider exited before responding.",
+    "Provider status command failed.",
+    "Provider version probe failed.",
+    "Version probe ownership could not be confirmed; its isolated evidence may be retained. Retry with the verified provider executable."
+  ],
+  "provider_input_required": [
+    "Provider requested input unsupported by this runtime increment."
+  ],
+  "provider_io": [
+    "Cannot read provider output.",
+    "Cannot write provider request.",
+    "Login terminal closed.",
+    "Login terminal output remained blocked.",
+    "Provider input closed."
+  ],
+  "provider_protocol_error": [
+    "Account probe failed; provider details were withheld.",
+    "Cannot exchange a valid provider protocol message.",
+    "Invalid native Claude protocol state.",
+    "Invalid provider protocol state.",
+    "Provider accepted an idle steering capability probe.",
+    "Provider initialization failed.",
+    "Provider reported an untracked active turn during the steering probe.",
+    "Shell supervision failed."
+  ],
+  "provider_request_failed": [
+    "Provider rejected steering input.",
+    "Provider rejected the request; check selected model, permissions and account access."
+  ],
+  "provider_shutdown_forced": [
+    "Provider shutdown exceeded its grace period; the captured account result was retained."
+  ],
+  "provider_timeout": [
+    "Provider did not acknowledge the request in time.",
+    "Provider request tombstones are full; cohort cleanup is required.",
+    "Provider stopped reading its input.",
+    "Steering delivery did not settle within 30 seconds.",
+    "Terminal cleanup was not confirmed in time.",
+    "Terminal cleanup did not reach observed quiet in time."
+  ],
+  "provider_unavailable": [
+    "Provider connection is unavailable; uncertain input is not retried."
+  ],
+  "purge_cleanup_pending": [
+    "Agent records were purged but output cleanup is incomplete. Retry with the returned request_id."
+  ],
+  "recovery_required": [
+    "Account identity changed; authenticate an isolated replacement generation.",
+    "Agent credential generation is unavailable; inspect its history or create a new agent.",
+    "Credential identity changed while this runtime lease was active; retain its evidence and use an isolated generation.",
+    "Evidence changed during export.",
+    "Login account verification is pending. Retry auth recover or auth login; unresolved writer ownership may require isolated auth repair --reauthenticate.",
+    "Login may have saved credentials, but exclusive verification is pending. Retry auth recover after current credential users exit.",
+    "Login required forced termination. Retry auth recover once its process group is gone; isolated auth repair --reauthenticate remains available. Existing credentials and execution evidence are preserved.",
+    "Login required forced termination. Run auth repair --reauthenticate to use an isolated credential generation; existing credentials and evidence are preserved.",
+    "Login verification is incomplete. Retry auth recover or auth login after the provider becomes available; the original credential namespace and evidence were retained.",
+    "Login verification is pending. Retry auth recover; credentials and evidence were retained.",
+    "Native account identity changed for this credential generation. Authenticate an isolated replacement; this execution cannot continue.",
+    "Old credential namespace metadata is unreadable. Claude replacement needs filesystem repair of that metadata to exclude Keychain collisions. Codex can use auth repair --reauthenticate --new-state-dir with a fresh root. No reboot is required.",
+    "Provider cleanup could not be confirmed.",
+    "Retired Claude namespace metadata is unavailable. This controller can serve Codex. After repairing the original root's metadata, run auth repair --reauthenticate --new-state-dir from that original root to create another controller for Claude. This controller's saved exclusion fence is retained.",
+    "Runtime database is missing or empty but sidecar evidence remains; use a fresh state directory and retain this history.",
+    "Runtime history changed during inspection; retry when it is idle. No source files or locks were modified.",
+    "Runtime history has an unresolved rollback journal; retain it and use a fresh state directory.",
+    "Runtime shutdown could not be fully localized. Recovery records were retained; stop the daemon and run auth recover for affected profiles.",
+    "The login account changed. Authenticate an isolated replacement with auth repair --reauthenticate.",
+    "The login account identity could not be verified. Retry auth recover; authenticate an isolated replacement if its identity remains unavailable.",
+    "The provider omitted the account identity needed to compare with saved credentials. Retry auth recover; use isolated repair if identity remains unavailable.",
+    "This conversation has unresolved execution or tool cleanup. Fresh agents can use the profile; inspect or terminate this agent, or resume only when its original execution is proven safe. Native conversation rebinding is unsupported.",
+    "This generation's native account changed. Authenticate an isolated replacement with auth repair --reauthenticate.",
+    "This repair candidate retains unresolved verification evidence. Use the reported state_directory with auth repair PROFILE --reauthenticate to try a new candidate; omit --new-state-dir. The retired generation can be pruned after ownership is proven released.",
+    "This retired namespace cannot yet be pruned: its retained evidence does not prove released ownership. Preserve it for inspection. Repair restores availability in a new namespace but cannot establish missing historical proof for this one.",
+    "This superseded login retains unresolved verification evidence. Check auth status for the current profile; auth recover cannot verify the reported retired generation. It can be pruned after ownership is proven released.",
+    "Unresolved credential ownership requires auth recover, or auth repair --reauthenticate into an isolated generation. No reboot is required; evidence and old conversations are retained."
+  ],
+  "registration_incomplete": [
+    "Finish auth login first.",
+    "Registration is incomplete. Retry auth login for this profile.",
+    "Retry auth login to finish registering this profile."
+  ],
+  "replay_unavailable": [
+    "The original request was answered in another protocol; it was not executed again. Use its original protocol to retrieve the reply."
+  ],
+  "request_conflict": [
+    "Request ID was already used with different arguments."
+  ],
+  "result_expired": [
+    "Compaction expired this message's retained output."
+  ],
+  "session_mismatch": [
+    "Claude session changed.",
+    "Missing Claude session reservation.",
+    "Provider did not resume the saved conversation."
+  ],
+  "shard_output_limit": [
+    "Provider event buffers exceeded the shared byte budget."
+  ],
+  "spawn_failed": [
+    "Cannot start Codex App Server.",
+    "Could not start the provider helper."
+  ],
+  "stale_execution": [
+    "Execution no longer owns this agent.",
+    "Tool call belongs to an inactive turn."
+  ],
+  "stale_turn": [
+    "The steering target is no longer the active turn."
+  ],
+  "state_inconsistent": [
+    "Profile index and identity records are inconsistent; no credentials were changed."
+  ],
+  "state_io": [
+    "Cannot safely access Hive state.",
+    "The diagnostic log did not finish draining within its shutdown budget.",
+    "The diagnostic log could not be written at shutdown.",
+    "The diagnostic log writer stopped unexpectedly at shutdown."
+  ],
+  "steering_uncertain": [
+    "Provider could not confirm steering delivery; it will not be replayed."
+  ],
+  "timeout": [
+    "Provider helper exceeded the probe timeout.",
+    "Provider login exceeded the configured login timeout."
+  ],
+  "turn_failed": [
+    "The provider reported a failed turn. Inspect events before retrying."
+  ],
+  "turn_timeout": [
+    "Agent turn exceeded 30 minutes."
+  ],
+  "unknown_agent": [
+    "No agent has this ID."
+  ],
+  "unknown_approval": [
+    "No approval has this ID."
+  ],
+  "unknown_artifact": [
+    "No artifact has this ID."
+  ],
+  "unknown_message": [
+    "No external message has this ID."
+  ],
+  "unknown_model": [
+    "Requested model is absent from the provider catalog."
+  ],
+  "unknown_profile": [
+    "No configured profile has that name."
+  ],
+  "unknown_role": [
+    "No configured role has that name."
+  ],
+  "unsafe_state": [
+    "State must be private, owned by this user, and contain no symlinked managed paths.",
+    "The control socket path is not a socket."
+  ],
+  "unsupported_effort": [
+    "Requested reasoning effort is absent from the model catalog."
+  ],
+  "unsupported_operation": [
+    "This Claude branch could not verify its copied conversation history; the branch was refused.",
+    "Corpus provider has no steering support.",
+    "Delivery mode must be next-turn or steer.",
+    "Operation is not implemented in this runtime increment.",
+    "Provider does not support steering.",
+    "This provider session does not support steering.",
+    "Live viewing is for human viewers only.",
+    "Live viewing requests are direct control requests and cannot be batched.",
+    "Spawn choices are for human viewers only."
+  ],
+  "unsupported_platform": [
+    "Only Linux and macOS auth helpers are supported."
+  ],
+  "unsupported_provider": [
+    "Execution requires a Codex or Claude subscription profile.",
+    "Model discovery currently requires a Codex subscription profile.",
+    "This runtime increment supports Codex subscription profiles only."
+  ],
+  "unsupported_provider_request": [
+    "Provider requested unsupported input or approval. This run uses approvalPolicy never."
+  ],
+  "unsupported_schema": [
+    "Unsupported Hive database format. Use a new state directory; development schemas are not migrated.",
+    "Unsupported credential namespace layout. Use a new state directory; retained ownership evidence was not modified.",
+    "Unsupported development state format. Use a new --state-dir and run auth login again; this directory was not modified.",
+    "Unsupported or damaged Hive database format. Use a new state directory; no automatic upgrade or repair is performed.",
+    "Unsupported development state marker. Use a fresh --state-dir; this directory was not modified.",
+    "Unsupported or inconsistent Hive database identity; no data was modified.",
+    "The state marker and database format disagree. Retain this directory unchanged."
+  ],
+  "unsupported_tool": [
+    "Only Hive coordination tools are supported."
+  ],
+  "version_unrecognized": [
+    "Cannot verify the Claude version for credential reconciliation. Retry the version probe with the selected executable.",
+    "Provider version text was not recognized; authentication was checked separately."
+  ],
+  "watch_capacity": [
+    "Too many agents are being watched; close a viewer and retry.",
+    "Too many viewers are waiting; retry after a short delay."
+  ]
+}

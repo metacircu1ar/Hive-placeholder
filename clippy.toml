@@ -1,0 +1,25 @@
+too-many-lines-threshold = 80
+allow-unwrap-in-tests = true
+allow-expect-in-tests = true
+
+# Raw filesystem writes are audited by the exact write-site gate during conversion.
+disallowed-methods = [
+  { path = "rustix::fs::mkdirat", reason = "Descriptor-relative directory publication requires exact inventory classification" },
+  { path = "std::fs::File::set_len", reason = "Use atomic replacement instead of in-place resizing" },
+  { path = "std::io::Write::write", reason = "Raw writes require exact inventory classification" },
+  { path = "std::io::Write::write_all", reason = "Raw writes require exact inventory classification" },
+  { path = "std::io::Write::write_fmt", reason = "Raw writes require exact inventory classification" },
+  { path = "tempfile::NamedTempFile::persist", reason = "Use shared publication mechanics" },
+  { path = "tempfile::NamedTempFile::persist_noclobber", reason = "Use shared no-replace publication mechanics" },
+  { path = "tempfile::NamedTempFile::keep", reason = "Published names require exact inventory classification" },
+  { path = "std::fs::write", reason = "Use atomic-fs atomic publication; see write-site inventory" },
+  { path = "std::fs::File::create", reason = "Publish complete files through atomic-fs" },
+  { path = "std::fs::File::create_new", reason = "Use atomic-fs create_new" },
+  { path = "std::fs::OpenOptions::write", reason = "Raw writer requires an inventoried justification" },
+  { path = "std::fs::OpenOptions::append", reason = "Use coordinated whole-record append" },
+  { path = "std::fs::OpenOptions::truncate", reason = "Use atomic replacement" },
+  { path = "std::fs::copy", reason = "Copy into staging before publication" },
+  { path = "std::fs::set_permissions", reason = "Set final mode before writing content" },
+  { path = "std::fs::File::set_times", reason = "File metadata writes require exact inventory classification" },
+  { path = "std::fs::File::set_permissions", reason = "Set final mode before writing content" },
+]

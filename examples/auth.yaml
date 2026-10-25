@@ -1,0 +1,32 @@
+auth_profiles:
+  codex-main:
+    provider: codex
+    method: subscription
+  claude-main:
+    provider: claude
+    method: subscription
+  # Optional paid API profiles: register each with `hivectl auth login NAME`.
+  # Supply these variables to the daemon, not just the invoking terminal.
+  # Configure spending limits with the provider. Never put a key in this YAML.
+  codex-api:
+    provider: codex
+    method: api_key
+    api_key_env: OPENAI_API_KEY
+    # Alternatively replace api_key_env with exactly one private file source:
+    # api_key_file: /absolute/private/openai-key
+  claude-api:
+    provider: claude
+    method: api_key
+    api_key_env: ANTHROPIC_API_KEY
+    # Relative api_key_file paths resolve against this configuration directory.
+
+# Optional login groups. A balanced group spreads agents across subscriptions by
+# weight (default 1); an ordered group is a fallback chain. Add another
+# subscription profile, such as codex-team, before using it as a member.
+# The optional paid_tail is used, in order, only after every member is exhausted:
+# auth_groups:
+#   codex-pool:
+#     mode: balanced
+#     members: [codex-main, {profile: codex-team, weight: 2}]
+#     paid_tail: [codex-api]
+# Use spawn --no-api-fallback, or role api_fallback: false, to skip the API tail.

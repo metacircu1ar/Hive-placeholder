@@ -1,0 +1,151 @@
+{
+  "replies": {
+    "attach": {
+      "agent": {},
+      "children": 0,
+      "events": {},
+      "live": {
+        "durable": 2,
+        "epoch": 7,
+        "generation": 1,
+        "seq": 3
+      },
+      "mail": 0,
+      "queued": 0
+    },
+    "attach_history": {
+      "events": [],
+      "history_expired": false,
+      "older": 12,
+      "pruned_through": 0
+    },
+    "live": {
+      "cursor": {
+        "durable": 2,
+        "epoch": 7,
+        "generation": 1,
+        "seq": 3
+      },
+      "durable_changed": true,
+      "items": [],
+      "resync": false
+    },
+    "roles": {
+      "default_provider": null,
+      "groups": [
+        {
+          "name": "plans",
+          "provider": "codex"
+        }
+      ],
+      "profiles": [
+        {
+          "name": "claude-main",
+          "provider": "claude"
+        },
+        {
+          "name": "main",
+          "provider": "codex"
+        }
+      ],
+      "roles": [
+        {
+          "name": "reviewer",
+          "provider": "claude"
+        },
+        {
+          "name": "worker",
+          "provider": "codex"
+        }
+      ]
+    },
+    "tree": {
+      "agents": [],
+      "truncated": false,
+      "version": {
+        "epoch": 7,
+        "revision": 4
+      }
+    },
+    "watch_capacity": {
+      "error": {
+        "code": "watch_capacity",
+        "message": "Too many viewers are waiting; retry after a short delay."
+      }
+    }
+  },
+  "requests": [
+    {
+      "args": {
+        "limit": 100,
+        "op": "attach",
+        "target": "AGENT_ID"
+      },
+      "id": "attach-1",
+      "protocol": 1
+    },
+    {
+      "args": {
+        "after": 40,
+        "op": "attach",
+        "target": "AGENT_ID"
+      },
+      "id": "attach-after-1",
+      "protocol": 1
+    },
+    {
+      "args": {
+        "before": 40,
+        "limit": 50,
+        "op": "attach",
+        "target": "AGENT_ID"
+      },
+      "id": "attach-before-1",
+      "protocol": 1
+    },
+    {
+      "args": {
+        "after": {
+          "durable": 2,
+          "epoch": 7,
+          "generation": 1,
+          "seq": 3
+        },
+        "limit": 512,
+        "op": "live",
+        "target": "AGENT_ID",
+        "wait_ms": 25000
+      },
+      "id": "live-1",
+      "protocol": 1
+    },
+    {
+      "args": {
+        "after": {
+          "epoch": 7,
+          "revision": 4
+        },
+        "op": "tree",
+        "root": "AGENT_ID",
+        "wait_ms": 25000
+      },
+      "id": "tree-1",
+      "protocol": 1
+    },
+    {
+      "args": {
+        "all": true,
+        "op": "tree"
+      },
+      "id": "tree-all-1",
+      "protocol": 1
+    },
+    {
+      "args": {
+        "op": "roles"
+      },
+      "id": "roles-1",
+      "protocol": 1
+    }
+  ]
+}

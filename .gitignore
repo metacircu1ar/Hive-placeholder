@@ -1,0 +1,6 @@
+/target/
+.DS_Store
+/.hive_skills_*
+/scenario-runs/
+__pycache__/
+/dist/

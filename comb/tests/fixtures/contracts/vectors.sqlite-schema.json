@@ -1,0 +1,7 @@
+[
+  [
+    "table",
+    "vectors",
+    "CREATE TABLE vectors (\n fingerprint TEXT NOT NULL, input_hash TEXT NOT NULL, vector BLOB NOT NULL,\n PRIMARY KEY(fingerprint,input_hash)\n) WITHOUT ROWID"
+  ]
+]

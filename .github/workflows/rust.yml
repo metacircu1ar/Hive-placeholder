@@ -1,0 +1,182 @@
+name: Rust
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  check:
+    name: ${{ matrix.variant.name }} (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        # Ubuntu 22.04 builds against the release glibc floor.
+        os: [ubuntu-22.04, macos-15]
+        variant:
+          - {name: hive, package: hive, flags: ''}
+          - {name: hive-core, package: hive, flags: '--no-default-features'}
+          # Measurement build (storage plan P3); never a packaged part.
+          - {name: hive-barrier-delay, package: hive, flags: '--features barrier-delay'}
+          - {name: comb, package: comb, flags: ''}
+          - {name: comb-protocol, package: comb-protocol, flags: ''}
+          - {name: hive-install, package: hive-install, flags: ''}
+          - {name: hive-setup-support, package: hive-setup-support, flags: ''}
+          - {name: hive-log, package: hive-log, flags: ''}
+          - {name: hive-input, package: hive-input, flags: ''}
+          - {name: hive-input-clap, package: hive-input, flags: '--features clap'}
+    runs-on: ${{ matrix.os }}
+    env:
+      # Bound concurrent native fixture starts on both CI platforms.
+      RUST_TEST_THREADS: 4
+      CARGO_BUILD_JOBS: 4
+      HIVE_TEST_RUNNER: env
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.98.1
+          components: rustfmt, clippy
+      - name: Isolate Linux image-purge checks from protected runner processes
+        if: runner.os == 'Linux' && (matrix.variant.package == 'hive-install' || matrix.variant.package == 'hive-setup-support' || matrix.variant.name == 'hive')
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          blocked = 0
+          for path in Path('/proc').iterdir():
+              if not path.name.isdecimal():
+                  continue
+              try:
+                  if path.stat().st_uid == os.geteuid():
+                      os.readlink(path / 'exe')
+              except PermissionError:
+                  blocked += 1
+              except ProcessLookupError:
+                  pass
+              except FileNotFoundError:
+                  pass
+          print(json.dumps({'same_uid_unreadable_images': blocked}))
+          PY
+          sudo apt-get update -qq
+          sudo apt-get install -y tini
+          # The runner owns non-dumpable processes that correctly make a global
+          # image-purge scan refuse. Keep that refusal, and test in a private PID
+          # namespace with a reaper. Drop back to the real runner UID before
+          # executing any test, so filesystem permission checks remain meaningful.
+          cat > "$RUNNER_TEMP/hive-test-runner" <<'SH'
+          #!/bin/sh
+          set -eu
+          exec sudo -n unshare --mount --pid --fork --mount-proc --kill-child \
+            /usr/bin/tini -s -- /usr/bin/setpriv \
+            --reuid="$(id -u)" --regid="$(id -g)" --init-groups \
+            /usr/bin/env HOME="$HOME" PATH="$PATH" \
+            CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}" \
+            RUSTUP_HOME="${RUSTUP_HOME:-$HOME/.rustup}" \
+            CARGO_BUILD_JOBS="$CARGO_BUILD_JOBS" RUST_TEST_THREADS="$RUST_TEST_THREADS" \
+            CARGO_TERM_COLOR="${CARGO_TERM_COLOR:-never}" "$@"
+          SH
+          chmod +x "$RUNNER_TEMP/hive-test-runner"
+          echo "HIVE_TEST_RUNNER=$RUNNER_TEMP/hive-test-runner" >> "$GITHUB_ENV"
+      - run: cargo fmt --all --check
+      - name: Freeze core for the shared-state switch test
+        if: matrix.variant.name == 'hive'
+        run: |
+          cargo build --release --locked -p hive --no-default-features
+          mkdir -p dist/ci-core/release
+          cp target/release/hivectl target/release/hive-daemon dist/ci-core/release/
+      # Never use a workspace-unified build: it would silently re-enable features.
+      - id: release_build
+        run: cargo build --release --locked -p ${{ matrix.variant.package }} ${{ matrix.variant.flags }}
+      - name: Freeze default shipping binaries before test feature unification
+        if: matrix.variant.name == 'hive'
+        run: |
+          mkdir -p dist/ci-hive/release
+          cp target/release/hivectl target/release/hive-daemon dist/ci-hive/release/
+      - run: cargo clippy --release --locked -p ${{ matrix.variant.package }} ${{ matrix.variant.flags }} --all-targets -- -D warnings
+      - run: |
+          test_runner=env
+          case '${{ matrix.variant.package }}' in
+            hive-install|hive-setup-support) test_runner="$HIVE_TEST_RUNNER" ;;
+          esac
+          "$test_runner" cargo test --release --locked -p ${{ matrix.variant.package }} ${{ matrix.variant.flags }} --no-fail-fast -- --skip service::tests::embeddings::deadlines::adaptive::
+      # These elapsed-time contracts include real filesystem publication.
+      - name: Adaptive embedding timing (two tests, serial)
+        if: matrix.variant.package == 'comb'
+        run: |
+          cargo test --release --locked -p comb ${{ matrix.variant.flags }} --lib service::tests::embeddings::deadlines::adaptive:: -- --test-threads=1
+      - name: Preserve declared format fingerprints
+        env:
+          BASELINE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          # Compare the whole change, including multi-commit pushes. Dispatches
+          # and first branch pushes compare with the existing default branch.
+          if [ -z "$BASELINE" ] || [ "$BASELINE" = 0000000000000000000000000000000000000000 ]; then
+            BASELINE="refs/remotes/origin/$DEFAULT_BRANCH"
+          fi
+          # A rewritten root need not be in the checkout's reachable history.
+          # Fetch the exact prior commit instead of silently skipping its checks.
+          if ! git cat-file -e "$BASELINE^{commit}" 2>/dev/null; then
+            git fetch --no-tags origin "$BASELINE"
+          fi
+          PYTHONPATH=scripts python3 -m release.compatibility_gate --baseline "$BASELINE"
+      - name: Capable → core → capable on one state folder
+        if: matrix.variant.name == 'hive'
+        run: |
+          HIVE_DEFAULT_BINARY="$PWD/dist/ci-hive/release/hivectl" \
+          HIVE_CORE_BINARY="$PWD/dist/ci-core/release/hivectl" \
+            cargo test --release --locked -p hive --test runtime capable_core_capable -- --ignored --nocapture
+      - name: Python product checks
+        if: ${{ !cancelled() && matrix.variant.name == 'hive' && steps.release_build.outcome == 'success' }}
+        run: |
+          # cargo test can replace these with dev-dependency-unified executables.
+          cargo build --release --locked -p hive
+          cmp target/release/hivectl dist/ci-hive/release/hivectl
+          cmp target/release/hive-daemon dist/ci-hive/release/hive-daemon
+          PYTHONPATH=scripts python3 -m unittest discover -s scripts/release -t scripts
+          python3 -m unittest discover -s tests -p 'test_release_packaging.py'
+          python3 -m unittest discover -s tests -p 'test_runtime_provider.py'
+      - name: Installer and bootstrap argument contracts
+        if: ${{ !cancelled() && matrix.variant.name == 'hive-install' && steps.release_build.outcome == 'success' }}
+        run: |
+          cargo build --release --locked -p hive-install
+          python3 -m unittest discover -s tests -p 'test_installer_arguments.py'
+      - name: Synthetic corpus and checksum-pinned released binary comparisons
+        if: matrix.variant.name == 'hive'
+        run: |
+          cargo build --release --locked -p hive
+          cargo build --release --locked -p comb
+          python3 scripts/check_compatibility.py --current-dir target/release --output-dir dist/ci-compatibility
+      - name: Assemble and exercise installed native release parts
+        if: matrix.variant.name == 'hive'
+        run: |
+          for part in hive hive-core comb hive-install; do
+            python3 scripts/build_release.py --part "$part" --output-dir "dist/ci-parts/$part"
+            python3 scripts/package_release.py --build-dir "dist/ci-parts/$part" --output-dir dist/ci-assets
+          done
+          "$HIVE_TEST_RUNNER" python3 scripts/check_release_install.py --assets dist/ci-assets --output-dir dist/ci-installed
+      - name: Retain native installation assets
+        if: success() && matrix.variant.name == 'hive'
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-assets-${{ matrix.os }}
+          path: dist/ci-assets/*
+          if-no-files-found: error
+          retention-days: 14
+      - name: Retain compatibility evidence
+        if: always() && matrix.variant.name == 'hive'
+        uses: actions/upload-artifact@v4
+        with:
+          name: compatibility-${{ matrix.os }}
+          path: dist/ci-compatibility/
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Retain installed-release evidence
+        if: always() && matrix.variant.name == 'hive'
+        uses: actions/upload-artifact@v4
+        with:
+          name: installed-release-${{ matrix.os }}
+          path: |
+            dist/ci-parts/*/build.json
+            dist/ci-installed/*.log
+            dist/ci-installed/results.json
+          if-no-files-found: ignore
+          retention-days: 14

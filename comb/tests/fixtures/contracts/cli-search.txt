@@ -1,0 +1,2 @@
+exit=0
+{"coverage":null,"fallback":null,"mode":"text","results":[{"create_safety":"exists","evidence":"exact_title","heading":"","highlights":[[2,8]],"matched_by":"text","page_unverified":true,"score":0.01639344262295082,"slug":"concepts/page","snippet":"A writer retains messages. [[concepts/target]]","title":"Writer","type":"concept","unverified":true,"zone":"compiled"}]}

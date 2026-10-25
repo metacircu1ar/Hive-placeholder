@@ -1,0 +1,2 @@
+exit=1
+{"error":{"code":"embeddings_unavailable","file_committed":false,"message":"No query embedding model is configured."}}

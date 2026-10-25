@@ -1,0 +1,1355 @@
+{
+  "provider": "codex",
+  "entries": [
+    {
+      "key": "model",
+      "value_type": "model",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "turn",
+      "mapping": {
+        "route": "turn_parameter",
+        "key": "model"
+      },
+      "overlay_key": "model",
+      "default": null,
+      "models": "live_catalog",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "turn_acknowledged_session_echo",
+      "reset": "explicit",
+      "reset_value": "spawn_baseline",
+      "description": "Model advertised by the selected login.",
+      "evidence": [
+        "https://developers.openai.com/codex/app-server"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.154.0"
+    },
+    {
+      "key": "effort",
+      "value_type": "effort",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "turn",
+      "mapping": {
+        "route": "turn_parameter",
+        "key": "effort"
+      },
+      "overlay_key": "model_reasoning_effort",
+      "default": "high",
+      "models": "live_efforts",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "turn_acknowledged_session_echo",
+      "reset": "explicit",
+      "reset_value": "spawn_baseline",
+      "description": "Reasoning effort advertised by the selected model.",
+      "evidence": [
+        "https://developers.openai.com/codex/app-server"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.154.0"
+    },
+    {
+      "key": "thinking",
+      "value_type": "thinking",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "turn",
+      "mapping": {
+        "route": "unavailable",
+        "key": "thinking"
+      },
+      "overlay_key": null,
+      "default": null,
+      "models": "any",
+      "owned": false,
+      "available": false,
+      "alternative": "effort",
+      "verification": "acknowledged",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Codex exposes reasoning effort, not a separate thinking switch or token budget.",
+      "evidence": [
+        "https://developers.openai.com/codex/app-server"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.reasoning_summary",
+      "value_type": "enum",
+      "values": [
+        "auto",
+        "concise",
+        "detailed",
+        "none"
+      ],
+      "minimum": null,
+      "maximum": null,
+      "scope": "turn",
+      "mapping": {
+        "route": "turn_parameter",
+        "key": "summary"
+      },
+      "overlay_key": "model_reasoning_summary",
+      "default": null,
+      "models": "any",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "acknowledged",
+      "reset": "explicit",
+      "reset_value": "auto",
+      "description": "Requested reasoning summary detail; the model may omit summaries.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.verbosity",
+      "value_type": "enum",
+      "values": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "thread_config",
+        "key": "model_verbosity"
+      },
+      "overlay_key": "model_verbosity",
+      "default": null,
+      "models": "gpt5",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "acknowledged",
+      "reset": "relaunch",
+      "reset_value": null,
+      "description": "Response verbosity for supported GPT-5 models.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.auto_compact_token_limit",
+      "value_type": "integer",
+      "values": [],
+      "minimum": 1024,
+      "maximum": 2000000,
+      "scope": "session",
+      "mapping": {
+        "route": "thread_config",
+        "key": "model_auto_compact_token_limit"
+      },
+      "overlay_key": "model_auto_compact_token_limit",
+      "default": null,
+      "models": "any",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "acknowledged",
+      "reset": "relaunch",
+      "reset_value": null,
+      "description": "Requested automatic history compaction threshold.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.tool_output_token_limit",
+      "value_type": "integer",
+      "values": [],
+      "minimum": 128,
+      "maximum": 1000000,
+      "scope": "session",
+      "mapping": {
+        "route": "thread_config",
+        "key": "tool_output_token_limit"
+      },
+      "overlay_key": "tool_output_token_limit",
+      "default": null,
+      "models": "any",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "acknowledged",
+      "reset": "relaunch",
+      "reset_value": null,
+      "description": "Maximum tool output tokens retained in native history.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.request_compression",
+      "value_type": "boolean",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "process",
+      "mapping": {
+        "route": "process_config",
+        "key": "features.enable_request_compression"
+      },
+      "overlay_key": "features.enable_request_compression",
+      "default": null,
+      "models": "any",
+      "owned": false,
+      "available": true,
+      "alternative": null,
+      "verification": "acknowledged",
+      "reset": "relaunch",
+      "reset_value": null,
+      "description": "Use compression for supported native streaming requests; isolated by process.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.approval_policy",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "approval_policy"
+      },
+      "overlay_key": "approval_policy",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive approvals",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.approvals_reviewer",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "approvals_reviewer"
+      },
+      "overlay_key": "approvals_reviewer",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive approvals",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.sandbox_mode",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "sandbox_mode"
+      },
+      "overlay_key": "sandbox_mode",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "sandbox",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.sandbox_workspace_write",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "sandbox_workspace_write"
+      },
+      "overlay_key": "sandbox_workspace_write",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "sandbox",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.permissions",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "permissions"
+      },
+      "overlay_key": "permissions",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "sandbox",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.mcp_servers",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "mcp_servers"
+      },
+      "overlay_key": "mcp_servers",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "mcp_servers",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.tools",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "tools"
+      },
+      "overlay_key": "tools",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "mcp_servers",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.hooks",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "hooks"
+      },
+      "overlay_key": "hooks",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive hooks",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.shell_environment_policy",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "shell_environment_policy"
+      },
+      "overlay_key": "shell_environment_policy",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive shell guard",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.shell",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "shell"
+      },
+      "overlay_key": "shell",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive shell guard",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.history",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "history"
+      },
+      "overlay_key": "history",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive state directory",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.sqlite_home",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "sqlite_home"
+      },
+      "overlay_key": "sqlite_home",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive state directory",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.log_dir",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "log_dir"
+      },
+      "overlay_key": "log_dir",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive logging",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.model_provider",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "model_provider"
+      },
+      "overlay_key": "model_provider",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "auth profiles",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.model_providers",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "model_providers"
+      },
+      "overlay_key": "model_providers",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "auth profiles",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.openai_base_url",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "openai_base_url"
+      },
+      "overlay_key": "openai_base_url",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "auth profiles",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.chatgpt_base_url",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "chatgpt_base_url"
+      },
+      "overlay_key": "chatgpt_base_url",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "auth profiles",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.cli_auth_credentials_store",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "cli_auth_credentials_store"
+      },
+      "overlay_key": "cli_auth_credentials_store",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "auth profiles",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.env",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "env"
+      },
+      "overlay_key": "env",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "auth profiles",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.features.multi_agent",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "features.multi_agent"
+      },
+      "overlay_key": "features.multi_agent",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "hive_spawn",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.features.multi_agent_v2",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "features.multi_agent_v2"
+      },
+      "overlay_key": "features.multi_agent_v2",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "hive_spawn",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.features.hooks",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "features.hooks"
+      },
+      "overlay_key": "features.hooks",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive hooks",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.features.apps",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "features.apps"
+      },
+      "overlay_key": "features.apps",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "mcp_servers",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.features.memories",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "features.memories"
+      },
+      "overlay_key": "features.memories",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Comb",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.features.goals",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "features.goals"
+      },
+      "overlay_key": "features.goals",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive lifetime controls",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.agents",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "agents"
+      },
+      "overlay_key": "agents",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "hive_spawn",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.notify",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "notify"
+      },
+      "overlay_key": "notify",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive events",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.otel",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "otel"
+      },
+      "overlay_key": "otel",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive logging",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.analytics",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "analytics"
+      },
+      "overlay_key": "analytics",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive logging",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.model_instructions_file",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "model_instructions_file"
+      },
+      "overlay_key": "model_instructions_file",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "instructions",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.developer_instructions",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "developer_instructions"
+      },
+      "overlay_key": "developer_instructions",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "instructions",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.instructions",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "instructions"
+      },
+      "overlay_key": "instructions",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "instructions",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.skills",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "skills"
+      },
+      "overlay_key": "skills",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive skills",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.profiles",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "profiles"
+      },
+      "overlay_key": "profiles",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "roles",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.profile",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "profile"
+      },
+      "overlay_key": "profile",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "roles",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.model_catalog_json",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "model_catalog_json"
+      },
+      "overlay_key": "model_catalog_json",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "native model discovery",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.web_search",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "web_search"
+      },
+      "overlay_key": "web_search",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "Hive tool policy",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    },
+    {
+      "key": "codex.allow_provider_model_fallback",
+      "value_type": "refused",
+      "values": [],
+      "minimum": null,
+      "maximum": null,
+      "scope": "session",
+      "mapping": {
+        "route": "owned",
+        "key": "allow_provider_model_fallback"
+      },
+      "overlay_key": "allow_provider_model_fallback",
+      "default": null,
+      "models": "any",
+      "owned": true,
+      "available": false,
+      "alternative": "set-options",
+      "verification": "unavailable",
+      "reset": "unavailable",
+      "reset_value": null,
+      "description": "Controlled by Hive.",
+      "evidence": [
+        "https://developers.openai.com/codex/config-reference"
+      ],
+      "verified_versions": [
+        "0.163.0"
+      ],
+      "minimum_version": "0.163.0"
+    }
+  ],
+  "model_rules": {
+    "gpt5": [
+      "gpt-5",
+      "gpt-5-mini",
+      "gpt-5-nano"
+    ]
+  }
+}

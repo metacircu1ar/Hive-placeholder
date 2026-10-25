@@ -1,0 +1,22 @@
+[
+  {
+    "code": "io_error",
+    "message": "I/O operation failed (Other).",
+    "file_committed": false
+  },
+  {
+    "code": "index_error",
+    "message": "Index operation failed (database wrapper error).",
+    "file_committed": false
+  },
+  {
+    "code": "invalid_json",
+    "message": "Invalid JSON (Eof, line 1, column 1).",
+    "file_committed": false
+  },
+  {
+    "code": "invalid_frontmatter",
+    "message": "Invalid YAML (line 1, column 1).",
+    "file_committed": false
+  }
+]

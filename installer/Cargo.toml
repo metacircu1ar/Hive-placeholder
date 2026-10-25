@@ -1,0 +1,25 @@
+[package]
+name = "hive-install"
+version.workspace = true
+edition = "2024"
+license = "MIT"
+publish = false
+
+[dependencies]
+atomic-fs = "0.1"
+hive-input = { path = "../input", features = ["clap"] }
+hive-log = { path = "../logging" }
+hive-setup-support = { path = "../setup-support" }
+tracing = { version = "0.1.44", default-features = false, features = ["std"] }
+clap = { version = "4.5", features = ["derive"] }
+flate2 = "1"
+tar = { version = "0.4", default-features = false }
+rustix = { version = "1.1.5", features = ["fs"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+semver = "1"
+sha2 = "0.10.9"
+tempfile = "3"
+
+[lints]
+workspace = true

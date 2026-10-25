@@ -1,0 +1,10 @@
+{
+  "backend": "http",
+  "model": "qwen3-embedding-8b",
+  "revision": "q8_0-d20ddc71e8a5c4344f2343481e242233a997dc5eaff442427a945836c97b4deb",
+  "url": "http://127.0.0.1:8081/v1/embeddings",
+  "dimensions": 4096,
+  "query_prefix": "Instruct: Given a question about our project, retrieve the knowledge pages that answer it\nQuery: ",
+  "document_prefix": "",
+  "timeout_seconds": 60
+}

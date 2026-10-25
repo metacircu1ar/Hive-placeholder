@@ -1,0 +1,16 @@
+[
+  {
+    "name": "maintenance",
+    "current": 1,
+    "minimum": 1,
+    "maximum": 1,
+    "released": []
+  },
+  {
+    "name": "service",
+    "current": 1,
+    "minimum": 1,
+    "maximum": 1,
+    "released": []
+  }
+]

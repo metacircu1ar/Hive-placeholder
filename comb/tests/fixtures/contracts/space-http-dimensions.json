@@ -1,0 +1,13 @@
+[
+  {
+    "backend": "http:http://127.0.0.1:8081/v1/embeddings",
+    "model": "fixture",
+    "revision": "exact-weights",
+    "dimensions": 2,
+    "document_prefix": "",
+    "query_prefix": "Instruct: Find knowledge\nQuery:",
+    "preprocessing": "{\"composition\":\"title-newline-heading-newline-body;utf8;input-limit-65536\",\"request_dimensions\":true,\"tokenizer_preflight\":null}",
+    "normalization": "l2-f64-accumulate-f32"
+  },
+  "aa9733bca460f3a80a4f01562a45d40810012b9ae023c2eb2f9f5415cf3e4e8f"
+]

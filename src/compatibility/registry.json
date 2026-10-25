@@ -1,0 +1,44 @@
+[
+  {
+    "name": "state",
+    "current": 1,
+    "minimum": 1,
+    "maximum": 1,
+    "released": []
+  },
+  {
+    "name": "collector",
+    "current": 1,
+    "minimum": 1,
+    "maximum": 1,
+    "released": []
+  },
+  {
+    "name": "controller_export",
+    "current": 1,
+    "minimum": 1,
+    "maximum": 1,
+    "released": []
+  },
+  {
+    "name": "control_protocol",
+    "current": 1,
+    "minimum": 1,
+    "maximum": 1,
+    "released": []
+  },
+  {
+    "name": "agent_catalog",
+    "current": 1,
+    "minimum": 1,
+    "maximum": 1,
+    "released": []
+  },
+  {
+    "name": "shell_protocol",
+    "current": 1,
+    "minimum": 1,
+    "maximum": 1,
+    "released": []
+  }
+]

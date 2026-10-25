@@ -1,0 +1,7 @@
+{
+  "args": {
+    "op": "ping"
+  },
+  "id": "request-1",
+  "protocol": 1
+}
